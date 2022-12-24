@@ -1,0 +1,25 @@
+.modal-content{
+  padding: 20px 10px;
+background-color: rgb(39, 31, 31) !important;
+  .modal_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 1rem;
+  b {
+    color: #fff;
+    font-size: 24px;
+  }
+  i {
+    color: #002449;
+    font-size: 22px;
+    font-weight: normal;
+    cursor: pointer;
+  }
+  .close-btn{
+    width: 20px;
+  }
+}
+
+}

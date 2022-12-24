@@ -1,0 +1,62 @@
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+/* @import url('./fonts/SherlockVintage.woff'); */
+
+@font-face {
+  font-family: sherlockVintage;
+  src: url('./fonts/SherlockVintage.woff');
+}
+
+body {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000000 !important;
+  /* background: #1f0b00;
+  background: -webkit-linear-gradient(0deg, #1f0b00 0%, #000000 100%);
+  background: linear-gradient(0deg, #1f0b00 0%, #000000 100%); */
+}
+
+// .d-none{
+//   display: none;
+// }
+
+.input-field{
+  // width: 280px;
+  width: 100%;
+  color: #ff8012 !important;
+  background-color: #000000 !important;
+  outline: none;
+  padding: 10px 10px;
+  font-size: 1rem;
+  border: 1px solid #ff8012 !important;
+  &::placeholder{
+    color: #ff811285;
+  }
+}
+
+.submit-btn{
+  cursor: pointer;
+  text-align: center;
+  background-color: #000000;
+  outline: none;
+  padding: 10px 20px;
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #ff8012;
+  border: 1px solid #ff8012;
+  &:hover{
+    background-color: #ff8012;
+    color: #000000;
+  }
+}
+
+.link{
+  text-decoration: none;
+  color: #fff;
+  &:hover{
+    color: #fff;
+  }
+}
