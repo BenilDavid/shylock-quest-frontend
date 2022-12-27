@@ -1,6 +1,7 @@
 .modal-content{
+  // border: 1px solid #fff !important;
   padding: 20px 10px;
-background-color: rgb(39, 31, 31) !important;
+background-color: #0f0f0f !important;
   .modal_head {
   display: flex;
   justify-content: space-between;
@@ -8,7 +9,7 @@ background-color: rgb(39, 31, 31) !important;
   gap: 10px;
   padding: 10px 1rem;
   b {
-    color: #fff;
+    color: #ff8012;
     font-size: 24px;
   }
   i {

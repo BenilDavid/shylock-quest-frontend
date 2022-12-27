@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal as Modals, ModalBody } from "reactstrap";
 import "./Modal.scss";
-import close from '../../../assets/Images/close.png';
+import close from '../../../Assets/close-icon.png';
 
 const Modal = ({
   children,

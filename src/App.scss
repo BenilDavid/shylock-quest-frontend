@@ -9,10 +9,10 @@
   font-size: calc(10px + 2vmin);
   color: #ff8012;
   /* background-color: #191919; */
-@media (max-width: 978px) {
-  // height: 620px;
-  height: 100%;
-}
+  @media (max-width: 978px) {
+    // height: 620px;
+    height: 100%;
+  }
 
   .app-container {
     z-index: 100;
@@ -36,6 +36,10 @@
       right: 0;
       width: 120px !important;
       height: 120px !important;
+      @media (max-width: 978px) {
+        width: 90px !important;
+        height: 90px !important;
+      }
     }
 
     .logo-container {
@@ -92,7 +96,10 @@
             // height: 80%;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            grid-gap: 5px;
+            // grid-gap: 5px;
+            @media (max-width: 978px) {
+              padding: 0;
+            }
             .days-box {
               // width: 50px;
               height: 50px;
@@ -123,6 +130,7 @@
           }
         }
         .time-box-container {
+          z-index: 100;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -148,8 +156,18 @@
           flex-direction: column;
           align-items: flex-start;
           justify-content: space-evenly;
-          label {
-            font-size: 1rem;
+          .form-group {
+            label {
+              font-size: 1rem;
+              @media (max-width: 978px) {
+                margin: 0 !important;
+              }
+            }
+            .input-field {
+              @media (max-width: 978px) {
+                margin-top: 0 !important;
+              }
+            }
           }
           .submit-btn {
             align-self: center;
@@ -161,6 +179,9 @@
           // .rules-heading{
           //   text-decoration: underline;
           // }
+          @media (max-width: 978px) {
+            padding: 0 !important;
+          }
           .rules {
             text-align: left;
             font-size: 0.85rem;
@@ -195,7 +216,7 @@
   border-radius: 3px;
   background-color: transparent;
 }
-.initiate-btn{
+.initiate-btn {
   @media (max-width: 978px) {
     margin: 178px 0;
   }
@@ -215,6 +236,7 @@
   justify-content: center;
 
   .twitter-btn {
+    z-index: 100;
     width: 40px;
     height: 40px;
     cursor: pointer;
@@ -231,5 +253,26 @@
       left: 10px;
       top: 12px;
     }
+  }
+}
+
+// modal
+
+.login-box {
+  width: 100%;
+  display: flex;
+  color: #ff8012;
+  .metamask-box,
+  .twitter-box {
+    cursor: pointer;
+    width: 100%;
+    background-color: #000;
+    border: 1px solid #ff8012;
+    border-radius: 5px;
+    margin: 5px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

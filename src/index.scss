@@ -38,12 +38,13 @@ body {
 }
 
 .submit-btn{
+  font-weight: 600;
   cursor: pointer;
   text-align: center;
   background-color: #000000;
   outline: none;
-  padding: 10px 20px;
-  margin: 5px 0;
+  padding: 5px 15px;
+  margin: 10px 0;
   font-size: 1rem;
   color: #ff8012;
   border: 1px solid #ff8012;
@@ -59,4 +60,19 @@ body {
   &:hover{
     color: #fff;
   }
+}
+
+.enter-btn{
+  font-size: calc(10px + 1vmin);
+  cursor: pointer;
+  padding: 10px 15px;
+  color: #ff8012;
+  outline: none;
+  border: 1px solid #ff8012;
+  border-radius: 3px;
+  background-color: #000;
+}
+
+.cursor-pointer{
+  cursor: pointer;
 }
