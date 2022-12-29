@@ -4,6 +4,8 @@ import logo from './Assets/Shylock-Festive-Season.png';
 import './App.scss';
 import twitterIcon from './twitter.png';
 import whiteLock from './Assets/white-lock.png';
+import metamaskIcon from './Assets/fox.png';
+import twitterBlueIcon from './Assets/twitter-blue.png';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
 import Bgm from './Audio/shylock-bgm.mp3';
@@ -14,31 +16,42 @@ import 'animate.css';
 import AnalogClock from 'analog-clock-react';
 import Modal from "./components/common/Modal";
 import auth0 from 'auth0-js';
+import { useNavigate } from "react-router-dom";
+import { setCookie, getCookie, deleteCookie } from "./Utils/common";
 
 // import 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 
 function App() {
+  let navigate = useNavigate();
 
   const auth = new auth0.WebAuth({
     domain: 'dev-84b3eyvpgznxxa6w.us.auth0.com',
     clientID: 'mGyVTxXg02pGfgHHT79MW4zTi9b53W5F',
     redirectUri: CLIENT_URL,
     responseType: 'token id_token',
-    scope: 'openid profile email',
+    // scope: 'openid profile email',
     audience: 'https://dev-84b3eyvpgznxxa6w.us.auth0.com/userinfo'
   });
 
-  const [isOpen, setisOpen] = useState(false);
+  // const client = new auth0.Management({
+  //   domain: 'dev-84b3eyvpgznxxa6w.us.auth0.com',
+  //   token: '63860b71e670b24d9067ec59'
+  // });
+
+  const [isOpenLogin, setisOpenLogin] = useState(false);
+  const [isOpenSubmitPopup, setisOpenSubmitPopup] = useState(false);
   const [hideVideo, setHideVideo] = useState(false);
   // const [typingAudio, setTypingAudio] = useState(false);
   // const [bgmAudio, setBgmAudio] = useState(false);
   const [portionCount, setportionCount] = useState(-1);
-const [user, setUser] = useState(null);
-const [metaKey, setMetaKey] = useState("");
+  const [user, setUser] = useState(getCookie("twitterDetails"));
+  const [metaKey, setMetaKey] = useState(getCookie("metamaskId"));
+  const [shake, setShake] = useState(false);
   const [formData, setFormData] = useState({
-    twitter: "",
+    metamaskId: metaKey,
+    twitter: user,
     answer: ""
   });
   const [analogClockTime, setAnalogClockTime] = useState(
@@ -60,16 +73,20 @@ const [metaKey, setMetaKey] = useState("");
       hours: 22
     }
   )
+  // const twitterDetails = JSON.parse(getCookie("twitterDetails"));
 
   useEffect(() => {
+    console.log(user);
     console.log(metaKey);
     auth.parseHash((err, authResult) => {
+      console.log("auth result", authResult);
       if (authResult && authResult.accessToken && authResult.idToken) {
         // Login successful: retrieve user information
         const user = authResult.idTokenPayload;
         window.location.replace(CLIENT_URL);
         console.log(user);
         setUser(user);
+        setCookie("twitterDetails", JSON.stringify(user), 1);
       } else if (err) {
         // Login failed: handle error
         console.error(err);
@@ -155,32 +172,48 @@ const [metaKey, setMetaKey] = useState("");
 
   const handleTwitterLogin = () => {
     auth.authorize({
-        connection: 'twitter',
-      });
-}
+      connection: 'twitter'
+    });
 
-const handleTwitterLogout = () => {
+    // client.patch({
+    //   url: '/organizations/org_8OZayO6vB1h5wk8V',
+    //   body: {
+    //     name: 'shylock'
+    //   }
+    // }, (err, data) => {
+    //   if (err) {
+    //     console.error(err);
+    //   } else {
+    //     console.log(data);
+    //   }
+    // });
+  }
+
+  const handleTwitterLogout = () => {
     auth.logout({
-        client_id: 'mGyVTxXg02pGfgHHT79MW4zTi9b53W5F',
-        returnTo: CLIENT_URL
-      });
-      setUser(null);
-}
+      client_id: 'mGyVTxXg02pGfgHHT79MW4zTi9b53W5F',
+      returnTo: CLIENT_URL
+    });
+    setUser(null);
+    deleteCookie("twitterDetails");
+  }
 
-const handleConnectWallet = async () => {
-  if (typeof window.ethereum !== "undefined") {
+  const handleConnectWallet = async () => {
+    if (typeof window.ethereum !== "undefined") {
       const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
+        method: "eth_requestAccounts",
       });
       console.log(accounts[0]);
       setMetaKey(accounts[0]);
-  } else {
+      setCookie("metamaskId", accounts[0], 1);
+
+    } else {
       console.log("install meta mask");
-  }
-};
+    }
+  };
 
   const Initiation = () => {
-    setisOpen(false);
+    setisOpenLogin(false);
     setportionCount(0);
   }
 
@@ -196,7 +229,8 @@ const handleConnectWallet = async () => {
     console.log(formData);
     try {
       await axios.post(`${URL}/api/submit-form`, formData);
-      setFormData({ ...formData, twitter: "", answer: "" })
+      setFormData({ ...formData, answer: "" });
+      setisOpenSubmitPopup(!isOpenSubmitPopup);
     } catch (error) {
       console.log(error);
     }
@@ -216,11 +250,29 @@ const handleConnectWallet = async () => {
 
   return (
     <div className="App">
+      {/* <BrowserRouter>
+          <Routes>
+            <Route exact path="/quest-puzzle" element={<QuestImagePage />} />
+          </Routes>
+        </BrowserRouter> */}
       <div className="app-container">
 
-        <div className="logo-container">
-          <img src={logo} className="shylock-logo" alt="logo" />
+        <div className="header d-flex">
+          <div className="twitter-id back-btn ms-3">
+            {portionCount === 1 ? <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => setportionCount(0)}>
+            <span>{'<<'}</span>
+            </div> : ""}
+          </div>
+          <div className="logo-container">
+            <img src={logo} className="shylock-logo" alt="logo" onClick={() => {setportionCount(-1)}}/>
+          </div>
+          <div className="metakey me-4">
+            {metaKey
+              ? metaKey.slice(0, 5) + "..." + metaKey.slice(-5)
+              : ""}
+          </div>
         </div>
+
         {/* 
         <TwitterLogin
           loginUrl="http://localhost:3000/api/v1/auth/twitter"
@@ -233,7 +285,7 @@ const handleConnectWallet = async () => {
           Twitter Login
         </TwitterLogin> */}
 
-        <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpen(!isOpen)}>BEGIN</button>
+        <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
 
         {/* <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={Initiation}> ENTER THE SHADES </button> */}
 
@@ -323,23 +375,23 @@ const handleConnectWallet = async () => {
                     </div>
 
                     <div className="row bottom-portion-2">
-                      <div className="col-lg-6 col-md-12 form-box py-2 px-4">
+                      <div className="col-lg-5 col-md-12 form-box py-2 px-4">
 
-                        <div class="form-group row">
-                          <label class="col-sm-2 col-form-label mt-3">Twitter:</label>
-                          <div class="col-sm-10">
-                            <input class="input-field mt-3" type="text" placeholder="@shylocknft" name="twitter" value={formData.twitter} onChange={handleFormData} />
-                          </div>
+                        <div className="form-group w-100 row">
+                          {/* <label className="col-sm-2 col-form-label mt-3">Twitter:</label> */}
+                          {/* <div className="col-sm-10">
+                            <input className="input-field mt-3" type="text" placeholder="@shylocknft" name="twitter" value={formData.twitter} onChange={handleFormData} />
+                          </div> */}
 
-                          <label class="col-sm-2 col-form-label mt-3">Answer:</label>
-                          <div class="col-sm-10">
+                          <label className="col-sm-4 col-form-label mt-3">Answer :</label>
+                          <div className="col-sm-8">
                             <input className="input-field mt-3" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
                           </div>
                         </div>
                         <button className="submit-btn" onClick={() => submitButton()}>Submit</button>
                       </div>
 
-                      <div className="col-lg-6 col-md-12 rules-box">
+                      <div className="col-lg-7 col-md-12 rules-box">
                         <div className="rules-heading">{'<<Rules>>'}</div>
                         <div className="rules">
                           <ul>
@@ -368,22 +420,40 @@ const handleConnectWallet = async () => {
 
       </div>
       <Modal
-        isOpen={isOpen}
-        toggle={() => setisOpen(!isOpen)}
+        isOpen={isOpenLogin}
+        toggle={() => setisOpenLogin(!isOpenLogin)}
         size="md"
         headTitle="LOGIN"
       >
         <div className="login-box">
-          <div className="metamask-box" onClick={handleConnectWallet}>
-            Metamask
+          <div className={`metamask-box ${metaKey ? "border-green" : ""}`} onClick={handleConnectWallet}>
+            {/* Metamask */}
+          <img src={metamaskIcon} alt="" />
+
           </div>
-          <div className="twitter-box" onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
-            Twitter
+          <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
+          <img src={twitterBlueIcon} alt="" />
+            {/* Twitter */}
           </div>
         </div>
-
         <div className="d-flex justify-content-center align-items-center my-3">
-          <button className="enter-btn" onClick={Initiation}> ENTER THE SHADES </button>
+          <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={metaKey && user ? Initiation : () => {
+            setShake(true); setTimeout(() => {
+              setShake(false);
+            }, 500);
+          }}> ENTER THE SHADES </button>
+        </div>
+        {/* {metaKey && user ? "" : <p className="text-center">connections not verified</p>} */}
+      </Modal>
+      <Modal
+        isOpen={isOpenSubmitPopup}
+        toggle={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}
+        size="md"
+        headTitle="SUBMIT"
+      >
+       <div>Collect your puzzle here</div>
+        <div className="d-flex justify-content-center align-items-center my-3">
+          <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={() => navigate("/quest-puzzle")}> Close </button>
         </div>
       </Modal>
     </div>

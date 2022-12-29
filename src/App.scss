@@ -42,15 +42,27 @@
       }
     }
 
-    .logo-container {
-      z-index: 100;
-      .shylock-logo {
-        // margin: 20px 0 0 0;
-        height: 15vmin;
-        pointer-events: none;
+    .header{
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      .twitter-id{
+        width: 110px;
+      }
+      .logo-container {
+        z-index: 100;
+        .shylock-logo {
+          // margin: 20px 0 0 0;
+          height: 15vmin;
+          pointer-events: none;
+        }
+      }
+      .metakey{
+        width: 90px;
+        font-size: 1rem;
       }
     }
-
+    
     .internal-content {
       display: flex;
       align-items: center;
@@ -184,7 +196,7 @@
           }
           .rules {
             text-align: left;
-            font-size: 0.85rem;
+            font-size: 0.92rem;
             ul {
               margin: 5px 0;
               li {
@@ -209,7 +221,7 @@
 .initiate-btn {
   font-size: calc(10px + 1vmin);
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 5px 12px;
   color: #ff8012;
   outline: none;
   border: 1px solid #ff8012;

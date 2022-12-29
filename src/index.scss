@@ -65,7 +65,7 @@ body {
 .enter-btn{
   font-size: calc(10px + 1vmin);
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 5px 12px;
   color: #ff8012;
   outline: none;
   border: 1px solid #ff8012;
@@ -75,4 +75,16 @@ body {
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.border-green{
+  border: 1px solid #377037 !important;
+}
+
+.back-arrow{
+  cursor: pointer;
+  width: fit-content;
+  padding: 0 8px;
+  border-radius: 5px;
+  border: 1px solid #ff8012;
 }
