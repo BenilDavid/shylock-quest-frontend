@@ -77,11 +77,14 @@ body {
 }
 
 .cursor-pointer{
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .border-green{
   border: 1px solid #377037 !important;
+}
+.border-orange{
+  border: 1px solid #ff8012 !important;
 }
 
 .back-arrow{

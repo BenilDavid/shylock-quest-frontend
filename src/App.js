@@ -75,7 +75,7 @@ function App() {
 
   useEffect(() => {
     setFormData((prev) => {
-return {...prev, "metamaskId": metaKey, "twitter": JSON.stringify(user)}
+      return { ...prev, "metamaskId": metaKey, "twitter": JSON.stringify(user) }
     })
     // console.log(portionCount);
   }, [metaKey, user])
@@ -231,10 +231,10 @@ return {...prev, "metamaskId": metaKey, "twitter": JSON.stringify(user)}
               <span>{'<<'}</span>
             </div> : ""}
           </div>
-          <div className="logo-container">
-            <img src={logo} className="shylock-logo" alt="logo" onClick={() => { setportionCount(-1) }} />
+          <div className="logo-container cursor-pointer" onClick={() => { setportionCount(-1) }}>
+            <img src={logo} className="shylock-logo" alt="logo" />
           </div>
-          <div className="metakey me-4">
+          <div className={`metakey me-4 ${metaKey ? "border-orange" : ""}`}>
             {metaKey
               ? metaKey.slice(0, 5) + "..." + metaKey.slice(-5)
               : ""}
@@ -410,10 +410,11 @@ return {...prev, "metamaskId": metaKey, "twitter": JSON.stringify(user)}
         size="md"
         headTitle="SUBMIT"
       >
+        <div className="orange-text text-center mt-2">Your answer is recorded successfully.</div>
+        <div className="orange-text text-center my-2"> Confirm your entry below</div>
         <div className="qr-code-container d-flex align-items-center justify-content-center">
-        <img className="qr-code-image" src={QR_Code} alt="" />
+          <img className="qr-code-image" src={QR_Code} alt="" />
         </div>
-        <div className="orange-text text-center mt-2">Collect your puzzle here</div>
         <div className="d-flex justify-content-center align-items-center my-3">
           <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button>
         </div>
