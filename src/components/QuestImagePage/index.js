@@ -2,7 +2,7 @@ import React from 'react'
 
 const QuestImagePage = () => {
   return (
-    <div>QuestImagePage</div>
+    <div></div>
   )
 }
 

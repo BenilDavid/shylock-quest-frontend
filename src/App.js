@@ -1,44 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import logo from './Assets/Shylock-Festive-Season.png';
 import './App.scss';
+import logo from './shylock-logo.png';
 import twitterIcon from './twitter.png';
 import whiteLock from './Assets/white-lock.png';
 import metamaskIcon from './Assets/fox.png';
 import twitterBlueIcon from './Assets/twitter-blue.png';
+import QR_Code from './Assets/qr-code.jpeg';
+import tickIcon from './Assets/checked.png';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
 import Bgm from './Audio/shylock-bgm.mp3';
-import JasperVoiceWave from './Audio/jasper-wave.webm';
+import JasperVoiceWave from './Audio/audio-wave.webm';
 import question1 from './Audio/questions/question_1.webm';
 import Typewriter from 'typewriter-effect';
 import 'animate.css';
 import AnalogClock from 'analog-clock-react';
 import Modal from "./components/common/Modal";
-import auth0 from 'auth0-js';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { setCookie, getCookie, deleteCookie } from "./Utils/common";
+// firebase
+import { signOut, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
+import { authentication } from './firebase-config';
 
-// import 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 
 function App() {
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
-  const auth = new auth0.WebAuth({
-    domain: 'dev-84b3eyvpgznxxa6w.us.auth0.com',
-    clientID: 'mGyVTxXg02pGfgHHT79MW4zTi9b53W5F',
-    redirectUri: CLIENT_URL,
-    responseType: 'token id_token',
-    // scope: 'openid profile email',
-    audience: 'https://dev-84b3eyvpgznxxa6w.us.auth0.com/userinfo'
-  });
-
-  // const client = new auth0.Management({
-  //   domain: 'dev-84b3eyvpgznxxa6w.us.auth0.com',
-  //   token: '63860b71e670b24d9067ec59'
-  // });
+  const provider = new TwitterAuthProvider();
 
   const [isOpenLogin, setisOpenLogin] = useState(false);
   const [isOpenSubmitPopup, setisOpenSubmitPopup] = useState(false);
@@ -76,23 +67,7 @@ function App() {
   // const twitterDetails = JSON.parse(getCookie("twitterDetails"));
 
   useEffect(() => {
-    console.log(user);
-    console.log(metaKey);
-    auth.parseHash((err, authResult) => {
-      console.log("auth result", authResult);
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        // Login successful: retrieve user information
-        const user = authResult.idTokenPayload;
-        window.location.replace(CLIENT_URL);
-        console.log(user);
-        setUser(user);
-        setCookie("twitterDetails", JSON.stringify(user), 1);
-      } else if (err) {
-        // Login failed: handle error
-        console.error(err);
-      }
-    });
-
+  
     // update clock
     setInterval(() => {
       updateClock();
@@ -171,29 +146,25 @@ function App() {
   ]
 
   const handleTwitterLogin = () => {
-    auth.authorize({
-      connection: 'twitter'
-    });
-
-    // client.patch({
-    //   url: '/organizations/org_8OZayO6vB1h5wk8V',
-    //   body: {
-    //     name: 'shylock'
-    //   }
-    // }, (err, data) => {
-    //   if (err) {
-    //     console.error(err);
-    //   } else {
-    //     console.log(data);
-    //   }
-    // });
+    signInWithPopup(authentication, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(result);
+        setUser(user);
+        setCookie("twitterDetails", JSON.stringify(user), 1);
+      }).catch((error) => {
+        console.log(error);
+      });
   }
 
   const handleTwitterLogout = () => {
-    auth.logout({
-      client_id: 'mGyVTxXg02pGfgHHT79MW4zTi9b53W5F',
-      returnTo: CLIENT_URL
+    signOut(authentication).then(() => {
+      // Sign-out successful.
+    }).catch((error) => {
+      console.log(error);
+      // An error happened.
     });
+
     setUser(null);
     deleteCookie("twitterDetails");
   }
@@ -250,21 +221,16 @@ function App() {
 
   return (
     <div className="App">
-      {/* <BrowserRouter>
-          <Routes>
-            <Route exact path="/quest-puzzle" element={<QuestImagePage />} />
-          </Routes>
-        </BrowserRouter> */}
       <div className="app-container">
 
         <div className="header d-flex">
           <div className="twitter-id back-btn ms-3">
             {portionCount === 1 ? <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => setportionCount(0)}>
-            <span>{'<<'}</span>
+              <span>{'<<'}</span>
             </div> : ""}
           </div>
           <div className="logo-container">
-            <img src={logo} className="shylock-logo" alt="logo" onClick={() => {setportionCount(-1)}}/>
+            <img src={logo} className="shylock-logo" alt="logo" onClick={() => { setportionCount(-1) }} />
           </div>
           <div className="metakey me-4">
             {metaKey
@@ -272,18 +238,6 @@ function App() {
               : ""}
           </div>
         </div>
-
-        {/* 
-        <TwitterLogin
-          loginUrl="http://localhost:3000/api/v1/auth/twitter"
-          onFailure={onFailed}
-          onSuccess={onSuccess}
-          requestTokenUrl="http://localhost:3000/api/v1/auth/twitter/reverse"
-          showIcon={true}
-        // customHeaders={customHeader}
-        >
-          Twitter Login
-        </TwitterLogin> */}
 
         <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
 
@@ -304,13 +258,13 @@ function App() {
                     <Typewriter
                       onInit={(typewriter) => {
                         typewriter
-                          .typeString('Welcome everyone, I will be here with you clarifying the details of Shylock’s Festive season Challenge. Shylock decides to conduct tasks and missions for you and your friends to solve together.')
-                          .pauseFor(400)
-                          .typeString(' At the end of Shylock’s Festive Season Challenge, you and your friends will be rewarded with exciting gifts and present from Detective Shylock.')
-                          .pauseFor(400)
-                          .typeString(' Every participant is considered and rewarded deservingly.')
-                          .pauseFor(800)
-                          .typeString(' When in doubt look out for The Shades.')
+                          .typeString("Welcome to the Mind of Shylock. Shylock's mind is an enigma that is always crammed with thoughts about clues and suspects in his ongoing investigation. Never comes a moment in his life where he lets his mind remain untamed. Despite his intelligence and determination, Shylock is also prone to moments of doubts and insecurity which brings us to you.")
+                          .pauseFor(500)
+                          .typeString(' To become an Agent, you must be able to unravel mysteries with Shylock and help him find ways to solve the investigation.')
+                          // .pauseFor(400)
+                          // .typeString(' Every participant is considered and rewarded deservingly.')
+                          // .pauseFor(800)
+                          // .typeString(' When in doubt look out for The Shades.')
                           // .callFunction(() => {
                           //   setTypingAudio(false);
                           // })
@@ -396,7 +350,7 @@ function App() {
                         <div className="rules">
                           <ul>
                             <li>Participants must provide their accurate Twitter username when participating in the quest. </li>
-                            <li> Follow and Turn on notifications for both the <a className="link" href="https://twitter.com/shylocknft">@shylocknft</a> and <a className="link" href="https://twitter.com/shylockagents">@shylockagents</a>.</li>
+                            <li> Follow and Turn on notifications for both the <a className="link" href="https://twitter.com/shylocknft">@shylocknft</a> and <a className="link" href="https://twitter.com/imjasperai">@imjasperai</a>.</li>
                             <li>Tag atleast 3 potential agents (friends) in their respective tweet after completing the quest.</li>
                             <li>Answers should not contain any NSFW (not safe for work) words.</li>
                             <p>⚠️ Failure to follow any of the above rules will result in disqualification from the quest.</p>
@@ -417,8 +371,8 @@ function App() {
             </a>
           </button>
         </div>
-
       </div>
+
       <Modal
         isOpen={isOpenLogin}
         toggle={() => setisOpenLogin(!isOpenLogin)}
@@ -428,11 +382,13 @@ function App() {
         <div className="login-box">
           <div className={`metamask-box ${metaKey ? "border-green" : ""}`} onClick={handleConnectWallet}>
             {/* Metamask */}
-          <img src={metamaskIcon} alt="" />
+            {metaKey ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
+            <img src={metamaskIcon} alt="" />
 
           </div>
           <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
-          <img src={twitterBlueIcon} alt="" />
+            {user ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
+            <img src={twitterBlueIcon} alt="" />
             {/* Twitter */}
           </div>
         </div>
@@ -441,7 +397,8 @@ function App() {
             setShake(true); setTimeout(() => {
               setShake(false);
             }, 500);
-          }}> ENTER THE SHADES </button>
+
+          }}> THE MIND </button>
         </div>
         {/* {metaKey && user ? "" : <p className="text-center">connections not verified</p>} */}
       </Modal>
@@ -451,9 +408,12 @@ function App() {
         size="md"
         headTitle="SUBMIT"
       >
-       <div>Collect your puzzle here</div>
+        <div className="qr-code-container d-flex align-items-center justify-content-center">
+        <img className="qr-code-image" src={QR_Code} alt="" />
+        </div>
+        <div className="orange-text text-center mt-2">Collect your puzzle here</div>
         <div className="d-flex justify-content-center align-items-center my-3">
-          <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={() => navigate("/quest-lore")}> Close </button>
+          <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button>
         </div>
       </Modal>
     </div>

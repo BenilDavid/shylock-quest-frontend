@@ -52,8 +52,8 @@
       .logo-container {
         z-index: 100;
         .shylock-logo {
-          // margin: 20px 0 0 0;
-          height: 15vmin;
+          margin: 20px 0 0 0;
+          height: 12vmin;
           pointer-events: none;
         }
       }
@@ -286,5 +286,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    .tick-icon{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 20px;
+    }
+  }
+}
+
+.qr-code-container{
+  .qr-code-image{
+    width: 200px;
+    height: 200px;
   }
 }
