@@ -6,7 +6,7 @@ import twitterIcon from './twitter.png';
 import whiteLock from './Assets/white-lock.png';
 import metamaskIcon from './Assets/fox.png';
 import twitterBlueIcon from './Assets/twitter-blue.png';
-import QR_Code from './Assets/qr-code.jpeg';
+import QR_Code from './Assets/qr-code-orange.jpeg';
 import tickIcon from './Assets/checked.png';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
@@ -18,7 +18,7 @@ import 'animate.css';
 import AnalogClock from 'analog-clock-react';
 import Modal from "./components/common/Modal";
 // import { useNavigate } from "react-router-dom";
-import { setCookie, getCookie, deleteCookie } from "./Utils/common";
+// import { setCookie, getCookie, deleteCookie } from "./Utils/common";
 // firebase
 import { signOut, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import { authentication } from './firebase-config';
@@ -37,12 +37,12 @@ function App() {
   // const [typingAudio, setTypingAudio] = useState(false);
   // const [bgmAudio, setBgmAudio] = useState(false);
   const [portionCount, setportionCount] = useState(-1);
-  const [user, setUser] = useState(getCookie("twitterDetails"));
-  const [metaKey, setMetaKey] = useState(getCookie("metamaskId"));
+  const [user, setUser] = useState(null);
+  const [metaKey, setMetaKey] = useState(null);
   const [shake, setShake] = useState(false);
   const [formData, setFormData] = useState({
-    metamaskId: metaKey,
-    twitter: user,
+    metamaskId: "",
+    twitter: null,
     answer: ""
   });
   const [analogClockTime, setAnalogClockTime] = useState(
@@ -67,7 +67,6 @@ function App() {
   // const twitterDetails = JSON.parse(getCookie("twitterDetails"));
 
   useEffect(() => {
-  
     // update clock
     setInterval(() => {
       updateClock();
@@ -75,8 +74,11 @@ function App() {
   }, [])
 
   useEffect(() => {
-    console.log(portionCount);
-  }, [portionCount])
+    setFormData((prev) => {
+return {...prev, "metamaskId": metaKey, "twitter": JSON.stringify(user)}
+    })
+    // console.log(portionCount);
+  }, [metaKey, user])
 
   const updateClock = () => {
     let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
@@ -151,7 +153,7 @@ function App() {
         const user = result.user;
         console.log(result);
         setUser(user);
-        setCookie("twitterDetails", JSON.stringify(user), 1);
+        // setCookie("twitterDetails", JSON.stringify(user), 1);
       }).catch((error) => {
         console.log(error);
       });
@@ -166,7 +168,7 @@ function App() {
     });
 
     setUser(null);
-    deleteCookie("twitterDetails");
+    // deleteCookie("twitterDetails");
   }
 
   const handleConnectWallet = async () => {
@@ -176,7 +178,7 @@ function App() {
       });
       console.log(accounts[0]);
       setMetaKey(accounts[0]);
-      setCookie("metamaskId", accounts[0], 1);
+      // setCookie("metamaskId", accounts[0], 1);
 
     } else {
       console.log("install meta mask");
@@ -197,7 +199,7 @@ function App() {
   }
 
   const submitButton = async () => {
-    console.log(formData);
+    console.log(JSON.stringify(formData));
     try {
       await axios.post(`${URL}/api/submit-form`, formData);
       setFormData({ ...formData, answer: "" });
@@ -350,7 +352,7 @@ function App() {
                         <div className="rules">
                           <ul>
                             <li>Participants must provide their accurate Twitter username when participating in the quest. </li>
-                            <li> Follow and Turn on notifications for both the <a className="link" href="https://twitter.com/shylocknft">@shylocknft</a> and <a className="link" href="https://twitter.com/imjasperai">@imjasperai</a>.</li>
+                            <li> Follow and Turn on notifications for both the <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a>.</li>
                             <li>Tag atleast 3 potential agents (friends) in their respective tweet after completing the quest.</li>
                             <li>Answers should not contain any NSFW (not safe for work) words.</li>
                             <p>⚠️ Failure to follow any of the above rules will result in disqualification from the quest.</p>
