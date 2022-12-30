@@ -15,7 +15,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<App />} />
-        <Route exact path="/quest-puzzle" element={<QuestImagePage />} />
+        <Route exact path="/quest-lore" element={<QuestImagePage />} />
       </Routes>
     </BrowserRouter>
   </>

@@ -453,7 +453,7 @@ function App() {
       >
        <div>Collect your puzzle here</div>
         <div className="d-flex justify-content-center align-items-center my-3">
-          <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={() => navigate("/quest-puzzle")}> Close </button>
+          <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={() => navigate("/quest-lore")}> Close </button>
         </div>
       </Modal>
     </div>
