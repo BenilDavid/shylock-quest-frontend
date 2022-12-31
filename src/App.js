@@ -44,8 +44,8 @@ function App() {
   const [shake, setShake] = useState(false);
   const [shakeSubmit, setShakeSubmit] = useState(false);
   const [formData, setFormData] = useState({
-    metamaskId: "",
     twitter: null,
+    metamaskId: "",
     answer: ""
   });
   const [analogClockTime, setAnalogClockTime] = useState(
