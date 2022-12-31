@@ -85,7 +85,7 @@ function App() {
 
   useEffect(() => {
     setFormData((prev) => {
-      return { ...prev, "metamaskId": metaKey, "twitter": JSON.stringify(user) }
+      return { ...prev, "metamaskId": metaKey, "twitter": user }
     })
     // console.log(portionCount);
   }, [metaKey, user])
