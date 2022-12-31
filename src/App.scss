@@ -231,6 +231,9 @@
 .initiate-btn {
   @media (max-width: 978px) {
     margin: 178px 0;
+  } 
+  @media (max-width: 380px) {
+    margin: 202px 0;
   }
 }
 .intent-tweet-link {
