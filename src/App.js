@@ -210,25 +210,22 @@ function App() {
       setFormData({ ...formData, answer: "" });
       setisOpenSubmitPopup(!isOpenSubmitPopup);
       setLoading(false);
+      getAllRecords();
     } catch (error) {
       console.log(error);
     }
   }
 
   const submitButton = () => {
-
     // eslint-disable-next-line array-callback-return
-    const isRecordedData = allRecords.map(({ metamaskId, twitter: { uid } }) => {
+    const isRecordedData = allRecords.filter(({ metamaskId, twitter: { uid } }) => {
       if (formData.metamaskId === metamaskId && formData.twitter.uid === uid) {
-        return formData;
+        return uid;
       }
     });
 
-    // console.log(isRecordedData);
     if(isRecordedData.length === 0){
       if (formData.answer !== "") {
-        // console.log("new answer");
-  
         setLoading(!loading);
         handleCreateRecord();
       } else {
@@ -239,7 +236,6 @@ function App() {
       }
     }else{
       setIsAllreadyRecordedData(true);
-      // alert("your answer is already recorded");
     }
     
   }
