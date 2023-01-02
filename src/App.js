@@ -424,9 +424,8 @@ function App() {
               </a>
             </button>
           </div>
-        </div>
 
-        <Modal
+          <Modal
           isOpen={isOpenLogin}
           toggle={() => setisOpenLogin(!isOpenLogin)}
           size="md"
@@ -470,6 +469,8 @@ function App() {
             <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button>
           </div>
         </Modal> 
+        </div>
+       
       </div>
     </>
   );

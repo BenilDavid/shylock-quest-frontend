@@ -280,7 +280,12 @@
 }
 
 // modal
-
+.modal-dialog{
+  justify-content: center !important;
+}
+.modal-content{
+  width: 92% !important;
+}
 .login-box {
   width: 100%;
   display: flex;
@@ -298,6 +303,9 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    @media (max-width: 420px) {
+      height: 90px;
+    }
     .tick-icon{
       position: absolute;
       top: 10px;
