@@ -379,7 +379,9 @@ function App() {
                             <label className="col-sm-4 col-form-label mt-3">Answer :</label>
                             <div className="col-sm-8 d-flex align-items-center">
                               <input className="input-field mt-3" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
+                              <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
                               <img className="info-button" src={InfoIcon} alt="info-button" />
+                              </a>
                             </div>
                           </div>
                           <button className={`submit-btn d-flex ${shakeSubmit ? "animate__animated animate__shakeX" : ""}`} onClick={() => submitButton()}>
