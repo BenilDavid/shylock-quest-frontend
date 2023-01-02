@@ -8,6 +8,7 @@ import metamaskIcon from './Assets/fox.png';
 import twitterBlueIcon from './Assets/twitter-blue.png';
 import QR_Code from './Assets/qr-code-orange.jpeg';
 import tickIcon from './Assets/checked.png';
+import InfoIcon from './Assets/information-button.png'
 import ReactPlayer from 'react-player';
 import axios from 'axios';
 import Bgm from './Audio/shylock-bgm.mp3';
@@ -35,6 +36,7 @@ function App() {
   let [loading, setLoading] = useState(false);
   const [isOpenLogin, setisOpenLogin] = useState(false);
   const [isOpenSubmitPopup, setisOpenSubmitPopup] = useState(false);
+  const [isAllreadyRecordedData, setIsAllreadyRecordedData] = useState(false);
   const [hideVideo, setHideVideo] = useState(false);
   // const [typingAudio, setTypingAudio] = useState(false);
   // const [bgmAudio, setBgmAudio] = useState(false);
@@ -48,6 +50,7 @@ function App() {
     metamaskId: "",
     answer: ""
   });
+  const [allRecords, setallRecords] = useState([]);
   const [analogClockTime, setAnalogClockTime] = useState(
     {
       useCustomTime: true,
@@ -77,6 +80,7 @@ function App() {
   // const twitterDetails = JSON.parse(getCookie("twitterDetails"));
 
   useEffect(() => {
+    getAllRecords();
     // update clock
     setInterval(() => {
       updateClock();
@@ -134,27 +138,7 @@ function App() {
       id: 6,
       day: 6,
       isOpen: false,
-    },
-    {
-      id: 7,
-      day: 7,
-      isOpen: false,
-    },
-    {
-      id: 8,
-      day: 8,
-      isOpen: false,
-    },
-    {
-      id: 9,
-      day: 9,
-      isOpen: false,
-    },
-    {
-      id: 10,
-      day: 10,
-      isOpen: false,
-    },
+    }
   ]
 
   const handleTwitterLogin = () => {
@@ -208,27 +192,56 @@ function App() {
     setFormData({ ...formData, [name]: value })
   }
 
-  const submitButton = async () => {
-    if(formData.answer !== "" ){
-      setLoading(!loading);
-      try {
-        await axios.post(`${URL}/api/submit-form`, formData);
-        setFormData({ ...formData, answer: "" });
-        setisOpenSubmitPopup(!isOpenSubmitPopup);
-        setLoading(false);
+  // getAllRecords
+  const getAllRecords = async () => {
+    try {
+      const { data } = await axios.get(`${URL}/api/submit-form/getRecords`);
+      setallRecords(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // createRecord
+  const handleCreateRecord = async () => {
+    try {
+      await axios.post(`${URL}/api/submit-form`, formData);
+      setFormData({ ...formData, answer: "" });
+      setisOpenSubmitPopup(!isOpenSubmitPopup);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const submitButton = () => {
+
+    // eslint-disable-next-line array-callback-return
+    const isRecordedData = allRecords.map(({ metamaskId, twitter: { uid } }) => {
+      if (formData.metamaskId === metamaskId && formData.twitter.uid === uid) {
+        return formData;
+      }
+    });
+
+    // console.log(isRecordedData);
+    if(isRecordedData.length === 0){
+      if (formData.answer !== "") {
+        // console.log("new answer");
   
-      } catch (error) {
-        console.log(error);
+        setLoading(!loading);
+        handleCreateRecord();
+      } else {
+        setShakeSubmit(true);
+        setTimeout(() => {
+          setShakeSubmit(false);
+        }, 500);
       }
     }else{
-      setShakeSubmit(true);
-      setTimeout(() => {
-      setShakeSubmit(false);
-      }, 500);
-      // alert("answer not given");
+      setIsAllreadyRecordedData(true);
+      // alert("your answer is already recorded");
     }
-    console.log(JSON.stringify(formData));
-   
+    
   }
 
   // const EndOfVoice = () => {
@@ -304,11 +317,11 @@ function App() {
                       />
                     </div>
                     <div className="row bottom-portion-1">
-                      <div className="col-lg-2 analog-clock my-3">
+                      <div className="col-lg-3 analog-clock my-3">
                         <AnalogClock {...analogClockTime} />
                       </div>
 
-                      <div className="col-lg-8 days-box-container my-3">
+                      <div className="col-lg-6 days-box-container my-3">
                         <span className="days-heading">Daily Quests</span>
                         <div className="days-container">
                           {daysData.map(({ id, day, isOpen }) => {
@@ -322,7 +335,7 @@ function App() {
                         </div>
                       </div>
 
-                      <div className="col-lg-2 time-box-container my-3">
+                      <div className="col-lg-3 time-box-container my-3">
                         <div>
                           <p>Starting Time: 10:30 AM (EST)</p>
                           <p> Quest Live for 24 hours</p>
@@ -364,8 +377,9 @@ function App() {
                           </div> */}
 
                             <label className="col-sm-4 col-form-label mt-3">Answer :</label>
-                            <div className="col-sm-8">
+                            <div className="col-sm-8 d-flex align-items-center">
                               <input className="input-field mt-3" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
+                              <img className="info-button" src={InfoIcon} alt="info-button" />
                             </div>
                           </div>
                           <button className={`submit-btn d-flex ${shakeSubmit ? "animate__animated animate__shakeX" : ""}`} onClick={() => submitButton()}>
@@ -383,6 +397,7 @@ function App() {
                               data-testid="loader"
                             />
                           </button>
+                         <div className="orange-text align-self-center"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}</div>
                         </div>
 
                         <div className="col-lg-7 col-md-12 rules-box">
@@ -456,7 +471,7 @@ function App() {
           <div className="d-flex justify-content-center align-items-center my-3">
             <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button>
           </div>
-        </Modal>
+        </Modal> 
       </div>
     </>
   );

@@ -107,7 +107,7 @@
             padding: 0 20px;
             // height: 80%;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             // grid-gap: 5px;
             @media (max-width: 978px) {
               padding: 0;
@@ -179,6 +179,13 @@
               @media (max-width: 978px) {
                 margin-top: 0 !important;
               }
+            }
+            .info-button{
+              cursor: pointer;
+              width: 25px;
+              height: 25px;
+              margin-top: 1rem;
+              margin-left: 8px;
             }
           }
           .submit-btn {
