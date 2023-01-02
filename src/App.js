@@ -459,7 +459,7 @@ function App() {
           isOpen={isOpenSubmitPopup}
           toggle={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}
           size="md"
-          headTitle="SUBMIT"
+          headTitle="SCAN FOR CONFIRMATION"
         >
           <div className="orange-text text-center mt-2">Your answer is recorded successfully.</div>
           <div className="orange-text text-center my-2"> Confirm your entry below</div>
