@@ -12,8 +12,8 @@ import InfoIcon from './Assets/information-button.png'
 import ReactPlayer from 'react-player';
 import axios from 'axios';
 import Bgm from './Audio/shylock-bgm.mp3';
-import JasperVoiceWave from './Audio/audio_wave.webm';
-import question1 from './Audio/questions/question_1.webm';
+import JasperVoiceWave from './Audio/audio-wave.webm';
+import question1 from './Audio/questions/question.webm';
 import Typewriter from 'typewriter-effect';
 import 'animate.css';
 import AnalogClock from 'analog-clock-react';
@@ -293,9 +293,9 @@ function App() {
                       <Typewriter
                         onInit={(typewriter) => {
                           typewriter
-                            .typeString("Welcome to the Mind of Shylock. His mind is an enigma that is always crammed with thoughts about clues and suspects in his ongoing investigation. Never comes a moment in his life where he lets his mind remain untamed. Despite his intelligence and determination, he is also prone to moments of doubts and insecurity which brings us to you.")
-                            .pauseFor(500)
-                            .typeString(' To become an Agent, you must be able to unravel the mysteries with Shylock and help him find ways to solve the investigation.')
+                            .typeString("Agents, the time has come. It is not possible for Detective Shylock to visit The Office anytime soon as he seeks your assistance in gathering the photographic evidences about the SERA and their allies. Let’s get to work.")
+                            // .pauseFor(500)
+                            // .typeString(' To become an Agent, you must be able to unravel the mysteries with Shylock and help him find ways to solve the investigation.')
                             // .pauseFor(400)
                             // .typeString(' Every participant is considered and rewarded deservingly.')
                             // .pauseFor(800)
@@ -347,7 +347,7 @@ function App() {
                           <Typewriter
                             onInit={(typewriter) => {
                               typewriter
-                                .typeString("I'm a vital part of Shylock's work, a tool that helps piece together the facts. I'm a shade that's always there, a cool and calm presence in the heat of the case. I guide him down the right path, leading to the truth. What am I?")
+                                .typeString("Agents, you must seek for the hidden clues and enter them down here before getting your hands on the evidence.")
                                 // .callFunction(() => {
                                 //   setTypingAudio(false);
                                 // })
@@ -399,14 +399,14 @@ function App() {
                         </div>
 
                         <div className="col-lg-7 col-md-12 rules-box">
-                          <div className="rules-heading">{'<<Rules>>'}</div>
+                          <div className="rules-heading">{'<<Protocol for The Agents:>>'}</div>
                           <div className="rules">
                             <ul>
-                              <li>Participants must provide their accurate Twitter username when participating in the quest. </li>
-                              <li> Follow and Turn on notifications for both the <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a>.</li>
-                              <li>Tag atleast 3 potential agents (friends) in their respective tweet after completing the quest.</li>
-                              <li>Answers should not contain any NSFW (not safe for work) words.</li>
-                              <p>⚠️ Failure to follow any of the above rules will result in disqualification from the quest.</p>
+                              <li> Answers should be relevant to the lore and does not contain any NSFW words. (1x Entry) </li>
+                              {/* <li> Follow and Turn on notifications for both the <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a>.</li> */}
+                              <li>Follow both <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a> to increase your chances of becoming an Agent. (2x Entry)</li>
+                              <li>Share your mystery-solving experience in helping Shylock on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li>
+                              {/* <p>⚠️ Failure to follow any of the above rules will result in disqualification from the quest.</p> */}
                             </ul>
                           </div>
                         </div>
