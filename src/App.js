@@ -404,7 +404,7 @@ function App() {
                         </div>
 
                         <div className="col-lg-7 col-md-12 rules-box">
-                          <div className="rules-heading">{'<<Protocol for The Agents:>>'}</div>
+                          <div className="rules-heading">{'<<PROTOCOLS>>'}</div>
                           <div className="rules">
                             <ul>
                               <li> Answers should be relevant to the lore and does not contain any NSFW words. (1x Entry) </li>
