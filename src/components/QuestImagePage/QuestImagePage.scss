@@ -1,9 +1,69 @@
-
-.image-container{
-    height: 400px;
-    width: 440px;
-    .puzzle-image{
-        width: 100%;
-        height: 100%;
+.app {
+  width: 100%;
+  /* background-color: #191919; */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #ff8012;
+  /* background-color: #191919; */
+    @media (max-width: 800px) {
+      height: 100%;
     }
+
+  .app-container {
+    z-index: 100;
+    // display: flex;
+    // flex-direction: column;
+    /* align-items: center; */
+    // justify-content: center;
+    // align-items: center;
+    width: 95%;
+    height: 90%;
+    margin: 20px;
+    border: 1px solid #ff8012;
+    /* border: 1px solid #d5a46b; */
+    border-radius: 5px;
+    // position: relative;
+
+    .header {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      .logo-container {
+        z-index: 100;
+        .shylock-logo {
+          margin: 20px 0 0 0;
+          height: 12vmin;
+          pointer-events: none;
+        }
+      }
+    }
+
+    .image-container {
+      .puzzle-image {
+        height: 25vmin;
+        width: 25vmin;
+        @media (max-width: 490px) {
+          height: 190px;
+          width: 210px;
+        }
+      }
+    }
+
+    .Registered-container {
+        margin: 20px 0;
+        width: 90%;
+        text-align: center;
+      font-size: 1rem;
+      border: 1px solid #fff;
+    //   width: 80%;
+      padding: 1rem 0.6rem;
+      @media (max-width: 490px) {
+        padding: 0.7rem;
+        width: 90%;
+      }
+    }
+  }
 }

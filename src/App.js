@@ -168,38 +168,20 @@ function App() {
 
   const handleConnectWallet = async () => {
 
-  // Check if the user has MetaMask installed
   if (window.ethereum) {
     try {
-      // Request access to the user's accounts
-      // await window.ethereum.request({ method: 'eth_requestAccounts' });
-      await window.ethereum.enable();
-      // Create a Web3 instance using the MetaMask provider
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+
       const web3 = new Web3(window.ethereum);
       // const web3 = new Web3(Web3.currentProvider);
-      // You can now use the web3 instance to interact with the Ethereum blockchain
-      // console.log(web3);
-      // console.log(web3.eth.accounts.givenProvider.selectedAddress);
       console.log(web3.eth.accounts.currentProvider.selectedAddress);
-      setMetaKey(web3.eth.accounts.givenProvider.selectedAddress);
+      setMetaKey(web3.eth.accounts.currentProvider.selectedAddress);
     } catch (error) {
       console.error(error);
     }
   } else {
     console.error('MetaMask is not installed');
   }
-
-    // if (typeof window.ethereum !== "undefined") {
-    //   const accounts = await window.ethereum.request({
-    //     method: "eth_requestAccounts",
-    //   });
-    //   console.log(accounts[0]);
-    //   setMetaKey(accounts[0]);
-    //   // setCookie("metamaskId", accounts[0], 1);
-
-    // } else {
-    //   console.log("install meta mask");
-    // }
   };
 
   const Initiation = () => {
@@ -263,23 +245,21 @@ function App() {
     
   }
 
-  // const EndOfVoice = () => {
-  //   setportionCount(2);
-  // }
+const handleQrDownload = () => {
+  const a = document.createElement('a');
+  a.href = QR_Code;
+  a.download = 'puzzle_1.jpg';
+  a.click();
+}
 
   const jasperVideoEnded = () => {
     setHideVideo(true);
   }
 
-  // const BgmReady = () => {
-  //   setBgmAudio(true);
-  // }
-
   return (
     <>
 
       <div className="App">
-
         <div className="app-container">
           <div className="header d-flex">
             <div className="twitter-id back-btn ms-3">
@@ -395,8 +375,8 @@ function App() {
                             <input className="input-field mt-3" type="text" placeholder="@shylocknft" name="twitter" value={formData.twitter} onChange={handleFormData} />
                           </div> */}
 
-                            <label className="col-sm-4 col-form-label mt-3">Answer :</label>
-                            <div className="col-sm-8 d-flex align-items-center">
+                            <label className="col-sm-3 col-form-label mt-3">Answer :</label>
+                            <div className="col-sm-9 d-flex align-items-center">
                               <input className="input-field mt-3" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
                               <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
                               <img className="info-button" src={InfoIcon} alt="info-button" />
@@ -426,10 +406,11 @@ function App() {
                           <div className="rules">
                             <ul>
                               <li> Answers should be relevant to the lore and does not contain any NSFW words. (1x Entry) </li>
-                              {/* <li> Follow and Turn on notifications for both the <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a>.</li> */}
-                              <li>Follow both <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a> to increase your chances of becoming an Agent. (2x Entry)</li>
-                              <li>Share your mystery-solving experience in helping Shylock on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li>
-                              {/* <p>⚠️ Failure to follow any of the above rules will result in disqualification from the quest.</p> */}
+                              <li> Follow and Turn notifications on for both <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a> to get regular updates and also to increase your chances of becoming an Agent. (2x Entry).</li>
+                              <li>Share your mystery-solving experience in helping Shylock and your favorite character in the lore of Shylock Origins on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li>
+                              {/* <li>Share your mystery-solving experience in helping Shylock on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li> */}
+                              <p>⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
+                              <p>{'<<T&C applied>>'}</p>
                             </ul>
                           </div>
                         </div>
@@ -489,7 +470,8 @@ function App() {
             <img className="qr-code-image" src={QR_Code} alt="" />
           </div>
           <div className="d-flex justify-content-center align-items-center my-3">
-            <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button>
+            <button className={`enter-btn`} onClick={handleQrDownload}> Download QR </button> 
+             <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button>
           </div>
         </Modal> 
         </div>
