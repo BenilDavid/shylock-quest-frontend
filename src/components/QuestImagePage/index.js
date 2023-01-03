@@ -18,7 +18,7 @@ function QuestImagePage() {
   function goToHomePage() {
     navigate('/');
   }
-  
+
   return (
     <div className="app">
       <div className="app-container">
@@ -54,7 +54,7 @@ function QuestImagePage() {
 
          <div className='footer'>
             <button className="twitter-btn">
-              <a href="https://twitter.com/shylocknft">
+              <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
                 <img src={twitterIcon} className="twitter-logo" alt="twitter" />
               </a>
             </button>

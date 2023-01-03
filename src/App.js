@@ -168,20 +168,20 @@ function App() {
 
   const handleConnectWallet = async () => {
 
-  if (window.ethereum) {
-    try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
+    if (window.ethereum) {
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-      const web3 = new Web3(window.ethereum);
-      // const web3 = new Web3(Web3.currentProvider);
-      console.log(web3.eth.accounts.currentProvider.selectedAddress);
-      setMetaKey(web3.eth.accounts.currentProvider.selectedAddress);
-    } catch (error) {
-      console.error(error);
+        const web3 = new Web3(window.ethereum);
+        // const web3 = new Web3(Web3.currentProvider);
+        console.log(web3.eth.accounts.currentProvider.selectedAddress);
+        setMetaKey(web3.eth.accounts.currentProvider.selectedAddress);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.error('MetaMask is not installed');
     }
-  } else {
-    console.error('MetaMask is not installed');
-  }
   };
 
   const Initiation = () => {
@@ -229,7 +229,7 @@ function App() {
       }
     });
 
-    if(isRecordedData.length === 0){
+    if (isRecordedData.length === 0) {
       if (formData.answer !== "") {
         setLoading(!loading);
         handleCreateRecord();
@@ -239,18 +239,18 @@ function App() {
           setShakeSubmit(false);
         }, 500);
       }
-    }else{
+    } else {
       setIsAllreadyRecordedData(true);
     }
-    
+
   }
 
-const handleQrDownload = () => {
-  const a = document.createElement('a');
-  a.href = QR_Code;
-  a.download = 'puzzle_1.jpg';
-  a.click();
-}
+  const handleQrDownload = () => {
+    const a = document.createElement('a');
+    a.href = QR_Code;
+    a.download = 'puzzle_1.jpg';
+    a.click();
+  }
 
   const jasperVideoEnded = () => {
     setHideVideo(true);
@@ -277,7 +277,7 @@ const handleQrDownload = () => {
             </div>
           </div>
 
-          <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>THE DARK ROOM</button>
+          <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
 
           {/* <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={Initiation}> ENTER THE SHADES </button> */}
 
@@ -322,7 +322,8 @@ const handleQrDownload = () => {
 
                       <div className="col-lg-6 days-box-container my-3">
                         <span className="days-heading">Daily Quests</span>
-                        <div className="days-container">
+                       <div style={{height: "80%"}} className="d-flex align-items-center">
+                       <div className="days-container">
                           {daysData.map(({ id, day, isOpen }) => {
                             return <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={isOpen ? () => onDayClicked(id) : ""}>
                               {!isOpen ?
@@ -332,6 +333,7 @@ const handleQrDownload = () => {
                             </div>
                           })}
                         </div>
+                       </div>
                       </div>
 
                       <div className="col-lg-3 time-box-container my-3">
@@ -379,7 +381,7 @@ const handleQrDownload = () => {
                             <div className="col-sm-9 d-flex align-items-center">
                               <input className="input-field mt-3" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
                               <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
-                              <img className="info-button" src={InfoIcon} alt="info-button" />
+                                <img className="info-button" src={InfoIcon} alt="info-button" />
                               </a>
                             </div>
                           </div>
@@ -398,7 +400,7 @@ const handleQrDownload = () => {
                               data-testid="loader"
                             />
                           </button>
-                         <div className="orange-text align-self-center"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}</div>
+                          <div className="orange-text align-self-center"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}</div>
                         </div>
 
                         <div className="col-lg-7 col-md-12 rules-box">
@@ -410,7 +412,7 @@ const handleQrDownload = () => {
                               <li>Share your mystery-solving experience in helping Shylock and your favorite character in the lore of Shylock Origins on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li>
                               {/* <li>Share your mystery-solving experience in helping Shylock on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li> */}
                               <p>⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
-                              <p>{'<<T&C applied>>'}</p>
+                              <p className="mb-0">{'<<T&C applied>>'}</p>
                             </ul>
                           </div>
                         </div>
@@ -423,59 +425,61 @@ const handleQrDownload = () => {
 
           <div className='footer'>
             <button className="twitter-btn">
-              <a href="https://twitter.com/shylocknft">
+              <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
                 <img src={twitterIcon} className="twitter-logo" alt="twitter" />
               </a>
             </button>
           </div>
 
           <Modal
-          isOpen={isOpenLogin}
-          toggle={() => setisOpenLogin(!isOpenLogin)}
-          size="md"
-          headTitle="LOGIN"
-        >
-          <div className="login-box">
-            <div className={`metamask-box ${metaKey ? "border-green" : ""}`} onClick={handleConnectWallet}>
-              {/* Metamask */}
-              {metaKey ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
-              <img src={metamaskIcon} alt="" />
-
+            isOpen={isOpenLogin}
+            toggle={() => setisOpenLogin(!isOpenLogin)}
+            size="md"
+            headTitle="LOGIN"
+          >
+            <div className="login-box">
+              <div className={`metamask-box ${metaKey ? "border-green" : ""}`} onClick={handleConnectWallet}>
+                {/* Metamask */}
+                {metaKey ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
+                <img src={metamaskIcon} alt="" />
+                {window.innerWidth <= "500" ?
+                  <span className="meta-text">* Use Metamask Browser in Mobile</span>
+                  : ""}
+              </div>
+              <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
+                {user ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
+                <img src={twitterBlueIcon} alt="" />
+                {/* Twitter */}
+              </div>
             </div>
-            <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
-              {user ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
-              <img src={twitterBlueIcon} alt="" />
-              {/* Twitter */}
-            </div>
-          </div>
-          <div className="d-flex justify-content-center align-items-center my-3">
-            <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={metaKey && user ? Initiation : () => {
-              setShake(true); setTimeout(() => {
-                setShake(false);
-              }, 500);
+            <div className="d-flex justify-content-center align-items-center my-3">
+              <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={metaKey && user ? Initiation : () => {
+                setShake(true); setTimeout(() => {
+                  setShake(false);
+                }, 500);
 
-            }}> THE MIND </button>
-          </div>
-          {/* {metaKey && user ? "" : <p className="text-center">connections not verified</p>} */}
-        </Modal>
-        <Modal
-          isOpen={isOpenSubmitPopup}
-          toggle={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}
-          size="md"
-          headTitle="SCAN FOR CONFIRMATION"
-        >
-          <div className="orange-text text-center mt-2">Your answer is recorded successfully.</div>
-          <div className="orange-text text-center my-2"> Confirm your entry below</div>
-          <div className="qr-code-container d-flex align-items-center justify-content-center">
-            <img className="qr-code-image" src={QR_Code} alt="" />
-          </div>
-          <div className="d-flex justify-content-center align-items-center my-3">
-            <button className={`enter-btn`} onClick={handleQrDownload}> Download QR </button> 
-             <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button>
-          </div>
-        </Modal> 
+              }}> THE DARK ROOM </button>
+            </div>
+            {/* {metaKey && user ? "" : <p className="text-center">connections not verified</p>} */}
+          </Modal>
+          <Modal
+            isOpen={isOpenSubmitPopup}
+            toggle={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}
+            size="md"
+            headTitle="SCAN FOR CONFIRMATION"
+          >
+            <div className="orange-text text-center mt-2">Your answer is recorded successfully.</div>
+            <div className="orange-text text-center my-2"> Confirm your entry below</div>
+            <div className="qr-code-container d-flex align-items-center justify-content-center">
+              <img className="qr-code-image" src={QR_Code} alt="" />
+            </div>
+            <div className="d-flex justify-content-center align-items-center my-3">
+              <button className="enter-btn me-2" onClick={handleQrDownload}> Download QR </button>
+              <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button>
+            </div>
+          </Modal>
         </div>
-       
+
       </div>
     </>
   );
