@@ -172,14 +172,15 @@ function App() {
   if (window.ethereum) {
     try {
       // Request access to the user's accounts
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      // await window.ethereum.request({ method: 'eth_requestAccounts' });
+      await window.ethereum.enable();
       // Create a Web3 instance using the MetaMask provider
-      // const web3 = new Web3(window.ethereum);
-      const web3 = new Web3(Web3.currentProvider);
+      const web3 = new Web3(window.ethereum);
+      // const web3 = new Web3(Web3.currentProvider);
       // You can now use the web3 instance to interact with the Ethereum blockchain
       // console.log(web3);
-      console.log(web3.eth.accounts.givenProvider.selectedAddress);
-      // console.log(web3.eth.accounts.currentProvider.selectedAddress);
+      // console.log(web3.eth.accounts.givenProvider.selectedAddress);
+      console.log(web3.eth.accounts.currentProvider.selectedAddress);
       setMetaKey(web3.eth.accounts.givenProvider.selectedAddress);
     } catch (error) {
       console.error(error);
