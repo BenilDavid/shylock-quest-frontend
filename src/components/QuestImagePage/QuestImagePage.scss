@@ -67,6 +67,9 @@
       border: 1px solid #fff;
     //   width: 80%;
       padding: 1rem 0.6rem;
+      p{
+        width: 75%;
+      }
       @media (max-width: 490px) {
         padding: 0.7rem;
         width: 90%;
