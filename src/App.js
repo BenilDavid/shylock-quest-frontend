@@ -146,7 +146,7 @@ function App() {
     signInWithPopup(authentication, provider)
       .then((result) => {
         const user = result.user;
-        console.log(result);
+        // console.log(result);
         setUser(user);
         // setCookie("twitterDetails", JSON.stringify(user), 1);
       }).catch((error) => {
@@ -174,7 +174,7 @@ function App() {
 
         const web3 = new Web3(window.ethereum);
         // const web3 = new Web3(Web3.currentProvider);
-        console.log(web3.eth.accounts.currentProvider.selectedAddress);
+        // console.log(web3.eth.accounts.currentProvider.selectedAddress);
         setMetaKey(web3.eth.accounts.currentProvider.selectedAddress);
       } catch (error) {
         console.error(error);
@@ -202,7 +202,7 @@ function App() {
     try {
       const { data } = await axios.get(`${URL}/api/submit-form/getRecords`);
       setallRecords(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
