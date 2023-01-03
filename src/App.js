@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import './App.scss';
+import Web3 from 'web3';
 import logo from './shylock-logo.png';
 import twitterIcon from './twitter.png';
 import whiteLock from './Assets/white-lock.png';
@@ -166,17 +167,38 @@ function App() {
   }
 
   const handleConnectWallet = async () => {
-    if (typeof window.ethereum !== "undefined") {
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      console.log(accounts[0]);
-      setMetaKey(accounts[0]);
-      // setCookie("metamaskId", accounts[0], 1);
 
-    } else {
-      console.log("install meta mask");
+  // Check if the user has MetaMask installed
+  if (window.ethereum) {
+    try {
+      // Request access to the user's accounts
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      // Create a Web3 instance using the MetaMask provider
+      // const web3 = new Web3(window.ethereum);
+      const web3 = new Web3(Web3.currentProvider);
+      // You can now use the web3 instance to interact with the Ethereum blockchain
+      // console.log(web3);
+      console.log(web3.eth.accounts.givenProvider.selectedAddress);
+      // console.log(web3.eth.accounts.currentProvider.selectedAddress);
+      setMetaKey(web3.eth.accounts.givenProvider.selectedAddress);
+    } catch (error) {
+      console.error(error);
     }
+  } else {
+    console.error('MetaMask is not installed');
+  }
+
+    // if (typeof window.ethereum !== "undefined") {
+    //   const accounts = await window.ethereum.request({
+    //     method: "eth_requestAccounts",
+    //   });
+    //   console.log(accounts[0]);
+    //   setMetaKey(accounts[0]);
+    //   // setCookie("metamaskId", accounts[0], 1);
+
+    // } else {
+    //   console.log("install meta mask");
+    // }
   };
 
   const Initiation = () => {
@@ -274,7 +296,7 @@ function App() {
             </div>
           </div>
 
-          <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
+          <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>THE DARK ROOM</button>
 
           {/* <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={Initiation}> ENTER THE SHADES </button> */}
 
