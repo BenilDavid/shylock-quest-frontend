@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import './App.scss';
-import Web3 from 'web3';
+// import Web3 from 'web3';
 import logo from './shylock-logo.png';
 import twitterIcon from './twitter.png';
 import whiteLock from './Assets/white-lock.png';
-import metamaskIcon from './Assets/fox.png';
+// import metamaskIcon from './Assets/fox.png';
 import twitterBlueIcon from './Assets/twitter-blue.png';
 import QR_Code from './Assets/qr-code-orange.jpeg';
 import tickIcon from './Assets/checked.png';
@@ -25,13 +25,14 @@ import PulseLoader from "react-spinners/PulseLoader";
 // firebase
 import { signOut, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import { authentication } from './firebase-config';
+import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 
 function App() {
   // let navigate = useNavigate();
-
+  const address = useAddress();
   const provider = new TwitterAuthProvider();
 
   let [loading, setLoading] = useState(false);
@@ -89,11 +90,13 @@ function App() {
   }, [])
 
   useEffect(() => {
+    // console.log(address);
+    setMetaKey(address);
     setFormData((prev) => {
-      return { ...prev, "metamaskId": metaKey, "twitter": user }
+      return { ...prev, "metamaskId": address, "twitter": user }
     })
     // console.log(portionCount);
-  }, [metaKey, user])
+  }, [user])
 
   const updateClock = () => {
     let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
@@ -166,23 +169,23 @@ function App() {
     // deleteCookie("twitterDetails");
   }
 
-  const handleConnectWallet = async () => {
+  // const handleConnectWallet = async () => {
 
-    if (window.ethereum) {
-      try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
+  //   if (window.ethereum) {
+  //     try {
+  //       await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-        const web3 = new Web3(window.ethereum);
-        // const web3 = new Web3(Web3.currentProvider);
-        // console.log(web3.eth.accounts.currentProvider.selectedAddress);
-        setMetaKey(web3.eth.accounts.currentProvider.selectedAddress);
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      console.error('MetaMask is not installed');
-    }
-  };
+  //       const web3 = new Web3(window.ethereum);
+  //       // const web3 = new Web3(Web3.currentProvider);
+  //       // console.log(web3.eth.accounts.currentProvider.selectedAddress);
+  //       setMetaKey(web3.eth.accounts.currentProvider.selectedAddress);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   } else {
+  //     console.error('MetaMask is not installed');
+  //   }
+  // };
 
   const Initiation = () => {
     setisOpenLogin(false);
@@ -435,21 +438,20 @@ function App() {
             isOpen={isOpenLogin}
             toggle={() => setisOpenLogin(!isOpenLogin)}
             size="md"
-            headTitle="LOGIN"
+            headTitle="CONNECT"
           >
             <div className="login-box">
-              <div className={`metamask-box ${metaKey ? "border-green" : ""}`} onClick={handleConnectWallet}>
-                {/* Metamask */}
+            <ConnectWallet />
+              {/* <div className={`metamask-box ${metaKey ? "border-green" : ""}`} onClick={handleConnectWallet}>
                 {metaKey ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
                 <img src={metamaskIcon} alt="" />
                 {window.innerWidth <= "500" ?
                   <span className="meta-text">* Use Metamask Browser in Mobile</span>
                   : ""}
-              </div>
+              </div> */}
               <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
                 {user ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
                 <img src={twitterBlueIcon} alt="" />
-                {/* Twitter */}
               </div>
             </div>
             <div className="d-flex justify-content-center align-items-center my-3">
