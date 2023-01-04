@@ -23,7 +23,8 @@ import PulseLoader from "react-spinners/PulseLoader";
 // import { useNavigate } from "react-router-dom";
 // import { setCookie, getCookie, deleteCookie } from "./Utils/common";
 // firebase
-import { signOut, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
+
+import { signOut, getRedirectResult, signInWithRedirect, TwitterAuthProvider } from "firebase/auth";
 import { authentication } from './firebase-config';
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 
@@ -73,15 +74,16 @@ function App() {
     }
   )
 
-  // const override: CSSProperties = {
-  //   display: "block",
-  //   margin: "0 auto",
-  //   borderColor: "red",
-  // };
-
-  // const twitterDetails = JSON.parse(getCookie("twitterDetails"));
-
   useEffect(() => {
+
+    getRedirectResult(authentication)
+      .then((result) => {
+        console.log(result);
+        setUser(result.user);
+      }).catch((error) => {
+        console.log(error);
+      });
+
     getAllRecords();
     // update clock
     setInterval(() => {
@@ -146,15 +148,16 @@ function App() {
   ]
 
   const handleTwitterLogin = () => {
-    signInWithPopup(authentication, provider)
-      .then((result) => {
-        const user = result.user;
-        // console.log(result);
-        setUser(user);
-        // setCookie("twitterDetails", JSON.stringify(user), 1);
-      }).catch((error) => {
-        console.log(error);
-      });
+    console.log(authentication, provider);
+    signInWithRedirect(authentication, provider);
+    // signInWithPopup(authentication, provider)
+    //   .then((result) => {
+        // const user = result.user;
+    //     console.log(result);
+        // setUser(user);
+    //   }).catch((error) => {
+    //     console.log(error);
+    //   });
   }
 
   const handleTwitterLogout = () => {
@@ -325,18 +328,18 @@ function App() {
 
                       <div className="col-lg-6 days-box-container my-3">
                         <span className="days-heading">Daily Quests</span>
-                       <div style={{height: "80%"}} className="d-flex align-items-center">
-                       <div className="days-container">
-                          {daysData.map(({ id, day, isOpen }) => {
-                            return <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={isOpen ? () => onDayClicked(id) : ""}>
-                              {!isOpen ?
-                                <img className="locked-image" src={whiteLock} alt="" />
-                                : ""}
-                              <span>{day}</span>
-                            </div>
-                          })}
+                        <div style={{ height: "80%" }} className="d-flex align-items-center">
+                          <div className="days-container">
+                            {daysData.map(({ id, day, isOpen }) => {
+                              return <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={isOpen ? () => onDayClicked(id) : ""}>
+                                {!isOpen ?
+                                  <img className="locked-image" src={whiteLock} alt="" />
+                                  : ""}
+                                <span>{day}</span>
+                              </div>
+                            })}
+                          </div>
                         </div>
-                       </div>
                       </div>
 
                       <div className="col-lg-3 time-box-container my-3">
@@ -441,7 +444,7 @@ function App() {
             headTitle="CONNECT"
           >
             <div className="login-box">
-            <ConnectWallet />
+              <ConnectWallet />
               {/* <div className={`metamask-box ${metaKey ? "border-green" : ""}`} onClick={handleConnectWallet}>
                 {metaKey ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
                 <img src={metamaskIcon} alt="" />
