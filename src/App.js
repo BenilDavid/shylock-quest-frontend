@@ -51,8 +51,11 @@ function App() {
   const [shakeSubmit, setShakeSubmit] = useState(false);
   const [formData, setFormData] = useState({
     twitter: null,
+    twitterUserName: "",
     metamaskId: "",
-    answer: ""
+    answer: "",
+    alias: "",
+    walletAmount: ""
   });
   const [allRecords, setallRecords] = useState([]);
   const [analogClockTime, setAnalogClockTime] = useState(
@@ -81,8 +84,8 @@ function App() {
         .then((result) => {
           // console.log(result);
           if (result) {
-            setUser(result.user);
-          }
+          setUser(result.user);
+          } 
         }).catch((error) => {
           console.log(error);
         });
@@ -91,16 +94,16 @@ function App() {
     // update clock
     setInterval(() => {
       updateClock();
-   
+
     }, 1000);
-   
+
   }, [])
 
   useEffect(() => {
     // if(address){
-      console.log(address);
-      setMetaKey(address);
-      getBalance();
+    // console.log(address);
+    setMetaKey(address);
+    getBalance();
     // }
   }, [address])
 
@@ -115,7 +118,13 @@ function App() {
     const web3 = new Web3(window.ethereum)
     const accounts = await web3.eth.getAccounts()
     const balance = await web3.eth.getBalance(accounts[0])
-    console.log(balance);
+    // console.log(balance);
+    const etherBalance = web3.utils.fromWei(balance, 'ether')
+    console.log(etherBalance);
+    setFormData((prev) => {
+      return { ...prev, "walletAmount": etherBalance }
+    })
+    
   }
 
   const updateClock = () => {
@@ -213,6 +222,28 @@ function App() {
   //   }
   // };
 
+  const enterDarkRoom = () => {
+    if (window.innerWidth < 700) {
+      if (metaKey) {
+        Initiation();
+      } else {
+        setShake(true);
+        setTimeout(() => {
+          setShake(false);
+        }, 500);
+      }
+    } else {
+      if (metaKey && user) {
+        Initiation();
+      } else {
+        setShake(true);
+        setTimeout(() => {
+          setShake(false);
+        }, 500);
+      }
+    }
+  }
+
   const Initiation = () => {
     setisOpenLogin(false);
     setportionCount(0);
@@ -241,7 +272,7 @@ function App() {
   const handleCreateRecord = async () => {
     try {
       await axios.post(`${URL}/api/submit-form`, formData);
-      setFormData({ ...formData, answer: "" });
+      setFormData({ ...formData, answer: "", twitterUserName: "", alias: "" });
       setisOpenSubmitPopup(!isOpenSubmitPopup);
       setLoading(false);
       getAllRecords();
@@ -252,26 +283,48 @@ function App() {
 
   const submitButton = () => {
     // eslint-disable-next-line array-callback-return
-    const isRecordedData = allRecords.filter(({ metamaskId, twitter: { uid } }) => {
-      if (formData.metamaskId === metamaskId && formData.twitter.uid === uid) {
-        return uid;
+    const isRecordedData = allRecords.filter(({ metamaskId, twitter, twitterUserName }, index) => {
+      if(window.innerWidth < "700"){
+        if (formData.metamaskId === metamaskId || formData.twitterUserName === twitterUserName ) {
+          console.log("inside mobile");
+          return metamaskId;
+        }
+      }else{
+        if (formData.metamaskId === metamaskId || formData.twitter.uid === twitter.uid ) {
+          console.log("inside desktop");
+          return metamaskId;
+        }
       }
     });
-
+console.log(isRecordedData);
     if (isRecordedData.length === 0) {
-      if (formData.answer !== "") {
-        setLoading(!loading);
-        handleCreateRecord();
-      } else {
-        setShakeSubmit(true);
-        setTimeout(() => {
-          setShakeSubmit(false);
-        }, 500);
+      if(window.innerWidth < "700"){
+        if (formData.answer !== "" && formData.twitterUserName !== "") {
+          setLoading(!loading);
+          handleCreateRecord();
+        }
+        else {
+          setShakeSubmit(true);
+          setTimeout(() => {
+            setShakeSubmit(false);
+          }, 500);
+        }
+      }else{
+        if (formData.answer !== "") {
+          setLoading(!loading);
+          handleCreateRecord();
+        }
+        else {
+          setShakeSubmit(true);
+          setTimeout(() => {
+            setShakeSubmit(false);
+          }, 500);
+        }
       }
+      
     } else {
       setIsAllreadyRecordedData(true);
     }
-
   }
 
   const handleQrDownload = () => {
@@ -406,9 +459,25 @@ function App() {
                             {/* <div className="col-sm-10">
                             <input className="input-field mt-3" type="text" placeholder="@shylocknft" name="twitter" value={formData.twitter} onChange={handleFormData} />
                           </div> */}
-
-                            <label className="col-sm-3 col-form-label mt-3">Answer :</label>
-                            <div className="col-sm-9 d-flex align-items-center">
+                            {window.innerWidth < "700" ?
+                              <>
+                                <label className="col-sm-3 align-self-center col-form-label mt-3">Twitter :</label>
+                                <div className="col-sm-9 align-self-center d-flex align-items-center mt-3">
+                                  <input className="input-field mt-3" type="text" placeholder="@shylocknft" name="twitterUserName" value={formData.twitterUserName} onChange={handleFormData} />
+                                  <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
+                                  </a>
+                                </div>
+                              </>
+                              :
+                              ""}
+                            <label className="col-sm-3 align-self-center col-form-label mt-3">Alias :</label>
+                            <div className="col-sm-9 align-self-center d-flex align-items-center mt-3">
+                              <input className="input-field mt-3" type="text" placeholder="Alias" name="alias" value={formData.alias} onChange={handleFormData} />
+                              <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
+                              </a>
+                            </div>
+                            <label className="col-sm-3 align-self-center col-form-label mt-3">Answer :</label>
+                            <div className="col-sm-9 align-self-center d-flex align-items-center mt-3">
                               <input className="input-field mt-3" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
                               <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
                                 <img className="info-button" src={InfoIcon} alt="info-button" />
@@ -470,12 +539,6 @@ function App() {
             <div className="login-box">
               <ConnectWallet
                 accentColor="#000"
-                // auth={{
-                //   loginConfig: {
-                //     // The URL to redirect to on login.
-                //     redirectTo: "http://localhost:3000",
-                // },
-                // }}
               />
               {/* <div className={`metamask-box ${metaKey ? "border-green" : ""}`} onClick={handleConnectWallet}>
                 {metaKey ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
@@ -484,19 +547,19 @@ function App() {
                   <span className="meta-text">* Use Metamask Browser in Mobile</span>
                   : ""}
               </div> */}
-              <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
-                {user ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
-                <span>Twitter</span>
-                <img className="ms-4 twitter-icon" src={twitterBlueIcon} alt="" />
-              </div>
+              {window.innerWidth < "700" ?
+                ""
+                :
+                <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
+                  {user ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
+                  <span>Twitter</span>
+                  <img className="ms-4 twitter-icon" src={twitterBlueIcon} alt="" />
+                </div>
+              }
+
             </div>
             <div className="d-flex justify-content-center align-items-center my-3">
-              <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={metaKey && user ? Initiation : () => {
-                setShake(true); setTimeout(() => {
-                  setShake(false);
-                }, 500);
-
-              }}> THE DARK ROOM </button>
+              <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={enterDarkRoom}> THE DARK ROOM </button>
             </div>
             {/* {metaKey && user ? "" : <p className="text-center">connections not verified</p>} */}
           </Modal>
