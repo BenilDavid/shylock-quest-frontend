@@ -24,9 +24,10 @@ import PulseLoader from "react-spinners/PulseLoader";
 // import { setCookie, getCookie, deleteCookie } from "./Utils/common";
 // firebase
 
-import { signOut, getRedirectResult, signInWithRedirect, TwitterAuthProvider } from "firebase/auth";
+import { signOut, getRedirectResult, signInWithRedirect, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import { authentication } from './firebase-config';
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
+import Web3 from 'web3'
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -75,30 +76,47 @@ function App() {
   )
 
   useEffect(() => {
-
-    getRedirectResult(authentication)
-      .then((result) => {
-        console.log(result);
-        setUser(result.user);
-      }).catch((error) => {
-        console.log(error);
-      });
-
+    if (window.innerWidth < "700") {
+      getRedirectResult(authentication)
+        .then((result) => {
+          // console.log(result);
+          if (result) {
+            setUser(result.user);
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
+    }
     getAllRecords();
     // update clock
     setInterval(() => {
       updateClock();
+   
     }, 1000);
+   
   }, [])
 
   useEffect(() => {
-    // console.log(address);
-    setMetaKey(address);
+    // if(address){
+      console.log(address);
+      setMetaKey(address);
+      getBalance();
+    // }
+  }, [address])
+
+  useEffect(() => {
     setFormData((prev) => {
-      return { ...prev, "metamaskId": address, "twitter": user }
+      return { ...prev, "metamaskId": metaKey, "twitter": user }
     })
     // console.log(portionCount);
-  }, [user])
+  }, [user, metaKey])
+
+  const getBalance = async () => {
+    const web3 = new Web3(window.ethereum)
+    const accounts = await web3.eth.getAccounts()
+    const balance = await web3.eth.getBalance(accounts[0])
+    console.log(balance);
+  }
 
   const updateClock = () => {
     let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
@@ -148,16 +166,21 @@ function App() {
   ]
 
   const handleTwitterLogin = () => {
-    console.log(authentication, provider);
-    signInWithRedirect(authentication, provider);
-    // signInWithPopup(authentication, provider)
-    //   .then((result) => {
-        // const user = result.user;
-    //     console.log(result);
-        // setUser(user);
-    //   }).catch((error) => {
-    //     console.log(error);
-    //   });
+    // console.log(authentication, provider);
+
+    if (window.innerWidth >= "700") {
+      signInWithPopup(authentication, provider)
+        .then((result) => {
+          const user = result.user;
+          console.log(result);
+          setUser(user);
+        }).catch((error) => {
+          console.log(error);
+        });
+    } else {
+      signInWithRedirect(authentication, provider);
+    }
+
   }
 
   const handleTwitterLogout = () => {
@@ -276,7 +299,7 @@ function App() {
             <div className="logo-container cursor-pointer" onClick={() => { setportionCount(-1) }}>
               <img src={logo} className="shylock-logo" alt="logo" />
             </div>
-            <div className={`metakey me-3 ${metaKey ? "border-orange" : ""}`}>
+            <div className={`metakey ${metaKey ? "border-orange" : ""}`}>
               {metaKey
                 ? metaKey.slice(0, 5) + "..." + metaKey.slice(-5)
                 : ""}
@@ -444,7 +467,15 @@ function App() {
             headTitle="CONNECT"
           >
             <div className="login-box">
-              <ConnectWallet />
+              <ConnectWallet
+                accentColor="#000"
+                // auth={{
+                //   loginConfig: {
+                //     // The URL to redirect to on login.
+                //     redirectTo: "http://localhost:3000",
+                // },
+                // }}
+              />
               {/* <div className={`metamask-box ${metaKey ? "border-green" : ""}`} onClick={handleConnectWallet}>
                 {metaKey ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
                 <img src={metamaskIcon} alt="" />
@@ -454,7 +485,8 @@ function App() {
               </div> */}
               <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
                 {user ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
-                <img src={twitterBlueIcon} alt="" />
+                <span>Twitter</span>
+                <img className="ms-4 twitter-icon" src={twitterBlueIcon} alt="" />
               </div>
             </div>
             <div className="d-flex justify-content-center align-items-center my-3">

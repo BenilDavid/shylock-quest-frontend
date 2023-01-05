@@ -42,11 +42,11 @@
       }
     }
 
-    .header{
+    .header {
       width: 100%;
       justify-content: space-between;
       align-items: center;
-      .twitter-id{
+      .twitter-id {
         width: 110px;
       }
       .logo-container {
@@ -57,12 +57,18 @@
           pointer-events: none;
         }
       }
-      .metakey{
+      .metakey {
         width: 120px;
         font-size: 1rem;
+        margin-right: 1rem;
+        @media (max-width: 478px) {
+          font-size: 0.7rem;
+          width: 90px;
+          margin: 20px 6px 0 6px;
+        }
       }
     }
-    
+
     .internal-content {
       display: flex;
       align-items: center;
@@ -181,7 +187,7 @@
                 margin-top: 0 !important;
               }
             }
-            .info-button{
+            .info-button {
               cursor: pointer;
               width: 25px;
               height: 25px;
@@ -246,7 +252,7 @@
 .initiate-btn {
   @media (max-width: 1010px) {
     margin: 178px 0;
-  } 
+  }
 
   @media (max-width: 420px) {
     margin: 80% 0;
@@ -288,15 +294,16 @@
 }
 
 // modal
-.modal-dialog{
+.modal-dialog {
   justify-content: center !important;
 }
-.modal-content{
+.modal-content {
   width: 92% !important;
 }
 .login-box {
   width: 100%;
   display: flex;
+  flex-direction: column;
   color: #ff8012;
   .metamask-box,
   .twitter-box {
@@ -305,27 +312,36 @@
     background-color: #000;
     border: 1px solid #ff8012;
     border-radius: 5px;
-    margin: 5px;
-    height: 140px;
+    margin: 10px 0;
+    height: 50px;
     display: flex;
     // flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    .meta-text{
+
+    @media (max-width: 420px) {
+      height: 50px;
+    }
+    span{
+      font-weight: 500;
+    }
+    .twitter-icon{
+      width: 25px;
+      height: 25px;
+    }
+    .meta-text {
       text-align: center;
       position: absolute;
       bottom: 0;
       // left: 0;
-font-size: 0.69rem;
-@media (max-width: 420px) {
-  font-size: 0.5rem;
-}
+      font-size: 0.69rem;
+      @media (max-width: 420px) {
+        font-size: 0.5rem;
+      }
     }
-    @media (max-width: 420px) {
-      height: 90px;
-    }
-    .tick-icon{
+
+    .tick-icon {
       position: absolute;
       top: 10px;
       right: 10px;
@@ -334,9 +350,71 @@ font-size: 0.69rem;
   }
 }
 
-.qr-code-container{
-  .qr-code-image{
+.qr-code-container {
+  .qr-code-image {
     width: 200px;
     height: 200px;
   }
+}
+
+// connect wallet
+.css-55ygxk {
+  position: relative;
+  border-radius: 5px !important;
+  padding: 0.75em 1.25em;
+  padding-right: 0.75em;
+  padding-left: 1.25em;
+  font-size: 1em;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5em;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+  color: #ff8012 !important;
+  border: 1px solid #ff8012 !important;
+  background: #000;
+  &:hover{
+    background-color: #000 !important;
+  }
+  svg{
+    display: none !important;
+  }
+}
+
+
+.css-1bnwz7w {
+  position: relative;
+  border-radius: 5px !important;
+  padding: 0.75em 1.25em;
+  padding-right: 0.75em;
+  padding-left: 0.75em;
+  font-size: 1em;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5em;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+  color: #ff8012 !important;
+  border: 1px solid #377037 !important;
+  background: #000;
 }
