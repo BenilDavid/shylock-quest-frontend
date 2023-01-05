@@ -367,8 +367,9 @@ function App() {
 
                       <div className="col-lg-3 time-box-container my-3">
                         <div>
-                          <p>Starting Time: 10:30 AM (EST)</p>
-                          <p> Quest Live for 24 hours</p>
+                          <div>QUEST LIVE:</div>
+                          <div>9:00 AM - 11:00 AM EST</div>
+                          <div>9:00 PM - 11:00 PM EST</div>
                         </div>
                       </div>
                     </div>
@@ -436,11 +437,11 @@ function App() {
                           <div className="rules-heading">{'<<PROTOCOLS>>'}</div>
                           <div className="rules">
                             <ul>
-                              <li> Answers should be relevant to the lore and does not contain any NSFW words. (1x Entry) </li>
-                              <li> Follow and Turn notifications on for both <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a> to get regular updates and also to increase your chances of becoming an Agent. (2x Entry).</li>
-                              <li>Share your mystery-solving experience in helping Shylock and your favorite character in the lore of Shylock Origins on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li>
+                              <li>Answers should be relevant to the lore and does not contain any NSFW words. (1x Entry)</li>
+                              <li>Follow and Turn on notifications for both <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a> to get regular updates and also to increase your chances of becoming an Agent. (2x Entry)</li>
+                              <li>Share your mystery-solving experience in helping Shylock, your favorite character in the lore of Shylock Origins on your Twitter, and also tag your friends whom you think can become potential Agents. (3x Entry)</li>
                               {/* <li>Share your mystery-solving experience in helping Shylock on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li> */}
-                              <p>⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
+                              <p>⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
                               <p className="mb-0">{'<<T&C applied>>'}</p>
                             </ul>
                           </div>
