@@ -312,7 +312,7 @@ console.log(isRecordedData);
           }, 500);
         }
       }else{
-        if (formData.answer !== "") {
+        if (formData.answer !== "" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
