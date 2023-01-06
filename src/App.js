@@ -84,6 +84,8 @@ function App() {
   )
 
   useEffect(() => {
+    setTimerFunction();
+
     if (window.innerWidth < "700") {
       getRedirectResult(authentication)
         .then((result) => {
@@ -144,6 +146,45 @@ function App() {
       }
     )
   }
+
+  // timer function
+  const setTimerFunction = () => {
+    // Set the date we're counting down to
+    var countDownDate = new Date("Jan 6, 2023 24:00:00").getTime();
+    
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+    
+      // Get today's date and time
+      var now = new Date().getTime();
+        
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+        
+      // Time calculations for days, hours, minutes and seconds
+      // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+      // console.log(hours.toString().length);
+      // console.log("hours", hours);
+      let tempHour = hours.toString().length === 1 ? "0" : "";
+      let tempMinutes = minutes.toString().length === 1 ? "0" : "";
+      let tempSeconds = seconds.toString().length === 1 ? "0" : "";
+      // Output the result in an element with id="demo"
+      document.querySelector("#timer-value .hour-box").innerHTML = tempHour + hours; 
+       document.querySelector("#timer-value .minute-box").innerHTML = tempMinutes + minutes;
+       document.querySelector("#timer-value .second-box").innerHTML = tempSeconds + seconds;
+        
+      // If the count down is over, write some text 
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("timer-value").innerHTML = "EXPIRED";
+      }
+    }, 1000);
+      }
+    
 
   const daysData = [
     {
@@ -350,6 +391,13 @@ console.log(isRecordedData);
               {portionCount === 1 ? <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => setportionCount(0)}>
                 <span>{'<<'}</span>
               </div> : ""}
+                        {/* <div className="my-2" id="timer-value">
+                          <span className="hour-box"></span><span className="timer-colen">:</span>
+                          <span className="minute-box"></span><span className="timer-colen">:</span>
+                          <span className="second-box"></span>
+                        </div> */}
+
+              {/* <div id="timer-value"></div> */}
                         {/* <Timer expiryTimestamp={time} /> */}
 
             </div>
@@ -404,6 +452,7 @@ console.log(isRecordedData);
                     <div className="row bottom-portion-1">
                       <div className="col-lg-3 analog-clock my-3">
                         {/* <Timer /> */}
+                        {/* <div className="my-2" id="timer-value"></div> */}
                         <AnalogClock {...analogClockTime} />
                       </div>
 
@@ -434,6 +483,12 @@ console.log(isRecordedData);
                   </>
                   : portionCount === 1 ?
                     <>
+                     <div className="my-2 me-3" id="timer-value">
+                          <span className="hour-box"></span><span className="timer-colen">:</span>
+                          <span className="minute-box"></span><span className="timer-colen">:</span>
+                          <span className="second-box"></span>
+                        </div>
+                        {/* <div className="my-2" id="timer-value"></div> */}
                       <div className="upper-portion-2">
                         <div className="riddle-container">
                           <div className="riddle-heading">{'<<Quest: 1>>'}</div>
@@ -477,7 +532,7 @@ console.log(isRecordedData);
                               ""}
                             <label className="col-sm-4 align-self-center col-form-label mt-3">Your Detective Alias Name :</label>
                             <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
-                              <input className="input-field" type="text" placeholder="Alias" name="alias" value={formData.alias} onChange={handleFormData} />
+                              <input className="input-field" type="text" placeholder="Agent Shylock" name="alias" value={formData.alias} onChange={handleFormData} />
                               <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
                               </a>
                             </div>

@@ -99,3 +99,39 @@ body {
   border-radius: 5px;
   border: 1px solid #ff8012;
 }
+
+#timer-value{
+  font-size: 1.4rem;
+  align-self: flex-end;
+  display: flex;
+  // margin-right: 30px;
+  .hour-box, .minute-box, .second-box{
+    text-decoration: line-through;
+    text-decoration-color: #000;
+    text-decoration-thickness: 0.5px;
+    width: 35px;
+    height: 40px;
+    margin: 0 2px;
+    font-weight: 600;
+    // background-color: #222;
+    padding: 4px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    @media (max-width: 978px) {
+      width: 28px;
+    height: 30px;
+    }
+  }
+  .timer-colen{
+    margin: 0 2px;
+    font-size: 1.6rem;
+    @media (max-width: 978px) {
+      font-size: 1.2rem;
+
+    }
+  }
+  @media (max-width: 978px) {
+    margin-right: 10px;
+  font-size: 1rem;
+  }
+}
