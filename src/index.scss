@@ -56,6 +56,10 @@ body {
     background-color: #ff8012;
     color: #000000;
   }
+  @media (max-width: 978px) {
+    margin: 30px 0;
+
+  }
 }
 
 .link{

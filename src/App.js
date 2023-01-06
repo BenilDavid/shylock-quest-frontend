@@ -14,7 +14,7 @@ import ReactPlayer from 'react-player';
 import axios from 'axios';
 import Bgm from './Audio/shylock-bgm.mp3';
 import JasperVoiceWave from './Audio/audio-wave.mp4';
-import question1 from './Audio/questions/question.webm';
+import question1 from './Audio/questions/question.mp4';
 import Typewriter from 'typewriter-effect';
 import 'animate.css';
 import AnalogClock from 'analog-clock-react';
@@ -28,6 +28,7 @@ import { signOut, getRedirectResult, signInWithRedirect, signInWithPopup, Twitte
 import { authentication } from './firebase-config';
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import Web3 from 'web3'
+// import Timer from "./components/common/Timer";
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -36,6 +37,10 @@ function App() {
   // let navigate = useNavigate();
   const address = useAddress();
   const provider = new TwitterAuthProvider();
+
+  // timer
+  // const time = new Date();
+  // time.setSeconds(time.getSeconds() + 60 * 120);
 
   let [loading, setLoading] = useState(false);
   const [isOpenLogin, setisOpenLogin] = useState(false);
@@ -123,8 +128,7 @@ function App() {
     console.log(etherBalance);
     setFormData((prev) => {
       return { ...prev, "walletAmount": etherBalance }
-    })
-    
+    }) 
   }
 
   const updateClock = () => {
@@ -181,7 +185,7 @@ function App() {
       signInWithPopup(authentication, provider)
         .then((result) => {
           const user = result.user;
-          console.log(result);
+          console.log(user.twitterUsername);
           setUser(user);
         }).catch((error) => {
           console.log(error);
@@ -189,7 +193,6 @@ function App() {
     } else {
       signInWithRedirect(authentication, provider);
     }
-
   }
 
   const handleTwitterLogout = () => {
@@ -199,7 +202,6 @@ function App() {
       console.log(error);
       // An error happened.
     });
-
     setUser(null);
     // deleteCookie("twitterDetails");
   }
@@ -348,6 +350,8 @@ console.log(isRecordedData);
               {portionCount === 1 ? <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => setportionCount(0)}>
                 <span>{'<<'}</span>
               </div> : ""}
+                        {/* <Timer expiryTimestamp={time} /> */}
+
             </div>
             <div className="logo-container cursor-pointer" onClick={() => { setportionCount(-1) }}>
               <img src={logo} className="shylock-logo" alt="logo" />
@@ -399,6 +403,7 @@ console.log(isRecordedData);
                     </div>
                     <div className="row bottom-portion-1">
                       <div className="col-lg-3 analog-clock my-3">
+                        {/* <Timer /> */}
                         <AnalogClock {...analogClockTime} />
                       </div>
 
@@ -454,31 +459,31 @@ console.log(isRecordedData);
                       <div className="row bottom-portion-2">
                         <div className="col-lg-5 col-md-12 form-box py-2 px-4">
 
-                          <div className="form-group w-100 row">
+                          <div className="form-group row">
                             {/* <label className="col-sm-2 col-form-label mt-3">Twitter:</label> */}
                             {/* <div className="col-sm-10">
                             <input className="input-field mt-3" type="text" placeholder="@shylocknft" name="twitter" value={formData.twitter} onChange={handleFormData} />
                           </div> */}
                             {window.innerWidth < "700" ?
                               <>
-                                <label className="col-sm-3 align-self-center col-form-label mt-3">Twitter :</label>
-                                <div className="col-sm-9 align-self-center d-flex align-items-center mt-3">
-                                  <input className="input-field mt-3" type="text" placeholder="@shylocknft" name="twitterUserName" value={formData.twitterUserName} onChange={handleFormData} />
+                                <label className="col-sm-4 align-self-center col-form-label mt-3">Twitter :</label>
+                                <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
+                                  <input className="input-field" type="text" placeholder="@shylocknft" name="twitterUserName" value={formData.twitterUserName} onChange={handleFormData} />
                                   <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
                                   </a>
                                 </div>
                               </>
                               :
                               ""}
-                            <label className="col-sm-3 align-self-center col-form-label mt-3">Alias :</label>
-                            <div className="col-sm-9 align-self-center d-flex align-items-center mt-3">
-                              <input className="input-field mt-3" type="text" placeholder="Alias" name="alias" value={formData.alias} onChange={handleFormData} />
+                            <label className="col-sm-4 align-self-center col-form-label mt-3">Your Detective Alias Name :</label>
+                            <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
+                              <input className="input-field" type="text" placeholder="Alias" name="alias" value={formData.alias} onChange={handleFormData} />
                               <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
                               </a>
                             </div>
-                            <label className="col-sm-3 align-self-center col-form-label mt-3">Answer :</label>
-                            <div className="col-sm-9 align-self-center d-flex align-items-center mt-3">
-                              <input className="input-field mt-3" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
+                            <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
+                            <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
+                              <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
                               <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
                                 <img className="info-button" src={InfoIcon} alt="info-button" />
                               </a>
@@ -514,7 +519,7 @@ console.log(isRecordedData);
                            
                           </div>
                           <p className="attention-notes">⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
-                              <p className="tac mb-0">{'<<T&C applied>>'}</p>
+                              <p className="tac my-2">{'<<T&C applied>>'}</p>
                         </div>
                       </div>
                     </>
