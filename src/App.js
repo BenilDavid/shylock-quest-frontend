@@ -301,7 +301,7 @@ function App() {
 console.log(isRecordedData);
     if (isRecordedData.length === 0) {
       if(window.innerWidth < "700"){
-        if (formData.answer !== "" && formData.twitterUserName !== "") {
+        if (formData.answer !== "" && formData.twitterUserName !== "" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
