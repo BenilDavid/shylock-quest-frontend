@@ -13,7 +13,7 @@ import InfoIcon from './Assets/information-button.png'
 import ReactPlayer from 'react-player';
 import axios from 'axios';
 import Bgm from './Audio/shylock-bgm.mp3';
-import JasperVoiceWave from './Audio/audio-wave.webm';
+import JasperVoiceWave from './Audio/audio-wave.mp4';
 import question1 from './Audio/questions/question.webm';
 import Typewriter from 'typewriter-effect';
 import 'animate.css';
@@ -510,10 +510,11 @@ console.log(isRecordedData);
                               <li>Follow and Turn on notifications for both <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a> to get regular updates and also to increase your chances of becoming an Agent. (2x Entry)</li>
                               <li>Share your mystery-solving experience in helping Shylock, your favorite character in the lore of Shylock Origins on your Twitter, and also tag your friends whom you think can become potential Agents. (3x Entry)</li>
                               {/* <li>Share your mystery-solving experience in helping Shylock on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li> */}
-                              <p>⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
-                              <p className="mb-0">{'<<T&C applied>>'}</p>
                             </ul>
+                           
                           </div>
+                          <p className="attention-notes">⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
+                              <p className="tac mb-0">{'<<T&C applied>>'}</p>
                         </div>
                       </div>
                     </>

@@ -80,6 +80,10 @@
         margin-top: 30px;
         z-index: 100;
         height: 45%;
+        @media (max-width: 978px) {
+          // margin-top: 20px;
+          min-height: 180px;
+        }
       }
       .upper-portion-2 {
         width: 80%;
@@ -201,17 +205,23 @@
           }
         }
         .rules-box {
-          padding: 0 30px;
+          display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+          padding: 0 15px;
           border: 1px solid #fff;
-          // .rules-heading{
-          //   text-decoration: underline;
-          // }
+          .rules-heading {
+            @media (max-width: 978px) {
+              margin-top: 10px;
+            }
+          }
           @media (max-width: 978px) {
             padding: 0 !important;
           }
           .rules {
-            height: 80%;
-            margin-top: 8px;
+            // height: 80%;
+            // margin-top: 8px;
             text-align: left;
             font-size: 0.81rem;
             display: flex;
@@ -219,17 +229,33 @@
             @media (max-width: 978px) {
               font-size: 0.92rem;
               padding: 10px;
-            height: auto;
-
+              height: auto;
             }
             ul {
               margin: 5px 0;
               li {
                 list-style-type: decimal;
               }
-              p {
-                margin-top: 5px;
-              }
+              // p {
+              //   margin-top: 5px;
+              // }
+            }
+          }
+          .attention-notes {
+            font-size: 0.81rem;
+            padding: 0 10px;
+            text-align: left;
+            margin-bottom: 0;
+            margin-top: 5px;
+            @media (max-width: 978px) {
+              font-size: 0.92rem;
+            }
+          }
+          .tac {
+            font-size: 0.81rem;
+            @media (max-width: 978px) {
+              font-size: 0.92rem;
+              margin-bottom: 10px;
             }
           }
         }
@@ -327,10 +353,10 @@
     @media (max-width: 420px) {
       height: 50px;
     }
-    span{
+    span {
       font-weight: 500;
     }
-    .twitter-icon{
+    .twitter-icon {
       width: 25px;
       height: 25px;
     }
@@ -387,14 +413,13 @@
   color: #ff8012 !important;
   border: 1px solid #ff8012 !important;
   background: #000;
-  &:hover{
+  &:hover {
     background-color: #000 !important;
   }
-  svg{
+  svg {
     display: none !important;
   }
 }
-
 
 .css-1bnwz7w {
   position: relative;

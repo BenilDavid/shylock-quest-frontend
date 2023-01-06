@@ -46,7 +46,7 @@ function QuestImagePage() {
 
          <div className="d-flex align-items-center justify-content-center">
          <div className='Registered-container'>
-            <div className="rules-heading">{'<<Registered>>'}</div>
+            <div className="rules-heading">{'<<Display your evidence>>'}</div>
             <p>Share your mystery-solving experience in helping Shylock, your favorite character in the lore of Shylock Origins on your Twitter, and also tag your friends whom you think can become potential Agents.</p>
             <a className='mx-2' href=" https://twitter.com/intent/tweet?text=I%27ve%20just%20entered%20the%20shylocknft.com.%20Waiting%20to%20meet%20Detective%20Shylock%20and%20get%20early%20access%20to%20The%20Shades.%0a&via=shylocknft&%0a&url=https%3A%2F%2Ftwitter.com%2Fshylocknft%2Fstatus%2F1604180496463802370%3Fs%3D20%26t%3DrfXGfH-kpQgSvDNjy4ArCg%0a&hashtags=SolvewithShylock">
                   <button className='download-btn enter-btn'>Share</button>
