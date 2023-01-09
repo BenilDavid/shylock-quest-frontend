@@ -428,7 +428,7 @@ console.log(isRecordedData);
 
           {portionCount !== -1 ?
             <>
-              <ReactPlayer className="d-none" url={Bgm} playing={true} controls={true} volume={1} muted={false} loop={true} playsinline={true} />
+              <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} playsinline={true} />
 
               <div className="internal-content">
                 {portionCount === 0 ?
@@ -455,7 +455,7 @@ console.log(isRecordedData);
                         }}
                         options={{
                           loop: false,
-                          delay: 40,
+                          delay: 50,
                           pauseFor: 100000,
                         }}
                       />
