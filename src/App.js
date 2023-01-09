@@ -96,8 +96,8 @@ function App() {
         .then((result) => {
           // console.log(result);
           if (result) {
-          setUser(result.user);
-          } 
+            setUser(result.user);
+          }
         }).catch((error) => {
           console.log(error);
         });
@@ -135,7 +135,7 @@ function App() {
     // console.log(etherBalance);
     setFormData((prev) => {
       return { ...prev, "walletAmount": etherBalance }
-    }) 
+    })
   }
 
   const updateClock = () => {
@@ -156,22 +156,22 @@ function App() {
   const setTimerFunction = () => {
     // Set the date we're counting down to
     var countDownDate = new Date("Jan 9, 2023 22:00:00").getTime();
-    
+
     // Update the count down every 1 second
-    var x = setInterval(function() {
-    
+    var x = setInterval(function () {
+
       // Get today's date and time
       var now = new Date().getTime();
-        
+
       // Find the distance between now and the count down date
       var distance = countDownDate - now;
-        
+
       // Time calculations for days, hours, minutes and seconds
       // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
       var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
+
       // console.log(hours.toString().length);
       // console.log("hours", hours);
       let tempHour = hours.toString().length === 1 ? "0" : "";
@@ -179,21 +179,21 @@ function App() {
       let tempSeconds = seconds.toString().length === 1 ? "0" : "";
 
       setTimer((prev) => {
-        return {prev, "hours": tempHour + hours, "minutes": tempMinutes + minutes, "seconds" : tempSeconds + seconds }
+        return { prev, "hours": tempHour + hours, "minutes": tempMinutes + minutes, "seconds": tempSeconds + seconds }
       });
       // Output the result in an element with id="demo"
       // document.querySelector("#timer-value .hour-box").innerHTML = tempHour + hours; 
       //  document.querySelector("#timer-value .minute-box").innerHTML = tempMinutes + minutes;
       //  document.querySelector("#timer-value .second-box").innerHTML = tempSeconds + seconds;
-        
+
       // If the count down is over, write some text 
       if (distance < 0) {
         clearInterval(x);
         document.getElementById("timer-value").innerHTML = "EXPIRED";
       }
     }, 1000);
-      }
-    
+  }
+
   const daysData = [
     {
       id: 1,
@@ -298,7 +298,7 @@ function App() {
   const Initiation = () => {
     setisOpenLogin(false);
     setTimeout(() => {
-    setportionCount(0);
+      setportionCount(0);
     }, 500);
   }
 
@@ -337,26 +337,26 @@ function App() {
   const submitButton = () => {
     // eslint-disable-next-line array-callback-return
     const isRecordedData = allRecords.filter(({ metamaskId, twitter, twitterUserName }, index) => {
-      if(window.innerWidth < "700"){
-        if (formData.metamaskId === metamaskId || formData.twitterUserName === twitterUserName ) {
+      if (window.innerWidth < "700") {
+        if (formData.metamaskId === metamaskId || formData.twitterUserName === twitterUserName) {
           console.log("inside mobile");
           return metamaskId;
         }
-      }else{
+      } else {
         // console.log(twitter.id);
-        if(twitter === null){
-          if (formData.metamaskId === metamaskId){
+        if (twitter === null) {
+          if (formData.metamaskId === metamaskId) {
             return metamaskId;
           }
-        }else if (formData.metamaskId === metamaskId || formData.twitter.uid === twitter.uid ) {
+        } else if (formData.metamaskId === metamaskId || formData.twitter.uid === twitter.uid) {
           console.log("inside desktop");
           return metamaskId;
         }
       }
     });
-console.log(isRecordedData);
+    console.log(isRecordedData);
     if (isRecordedData.length === 0) {
-      if(window.innerWidth < "700"){
+      if (window.innerWidth < "700") {
         if (formData.answer !== "" && formData.twitterUserName !== "" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
@@ -367,7 +367,7 @@ console.log(isRecordedData);
             setShakeSubmit(false);
           }, 500);
         }
-      }else{
+      } else {
         if (formData.answer !== "" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
@@ -404,17 +404,17 @@ console.log(isRecordedData);
               {portionCount === 1 ? <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => setportionCount(0)}>
                 <span>{'<<'}</span>
               </div> : ""}
-                        {/* <div className="my-2" id="timer-value">
+              {/* <div className="my-2" id="timer-value">
                           <span className="hour-box"></span><span className="timer-colen">:</span>
                           <span className="minute-box"></span><span className="timer-colen">:</span>
                           <span className="second-box"></span>
                         </div> */}
 
               {/* <div id="timer-value"></div> */}
-                        {/* <Timer expiryTimestamp={time} /> */}
+              {/* <Timer expiryTimestamp={time} /> */}
 
             </div>
-            <div className="logo-container cursor-pointer" onClick={() => { setportionCount(-1) }}>
+            <div className="logo-container cursor-pointer" onClick={() => setportionCount(-1)}>
               <img src={logo} className="shylock-logo" alt="logo" />
             </div>
             <div className={`metakey ${metaKey ? "border-orange" : ""}`}>
@@ -424,7 +424,15 @@ console.log(isRecordedData);
             </div>
           </div>
 
-          <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
+          <div className="begin-btn">
+            <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
+
+            <div className="fs-6 mt-2 better-experience">
+              {window.innerWidth < "700" ?
+                "<<Use desktop for better experience>>"
+                : ""}
+            </div>
+          </div>
 
           {/* <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={Initiation}> ENTER THE SHADES </button> */}
 
@@ -443,21 +451,15 @@ console.log(isRecordedData);
                       <Typewriter
                         onInit={(typewriter) => {
                           typewriter
-                            .typeString("Agents, the time has come. It is not possible for Detective Shylock to visit The Office anytime soon as he seeks your assistance in gathering the photographic evidences about the SERA and their allies. Let’s get to work.")
-                            // .pauseFor(500)
-                            // .typeString(' To become an Agent, you must be able to unravel the mysteries with Shylock and help him find ways to solve the investigation.')
-                            // .pauseFor(400)
-                            // .typeString(' Every participant is considered and rewarded deservingly.')
-                            // .pauseFor(800)
-                            // .typeString(' When in doubt look out for The Shades.')
-                            // .callFunction(() => {
-                            //   setTypingAudio(false);
-                            // })
+                            .pauseFor(400)
+                            .typeString(" Agents, the time has come. It is not possible for Detective Shylock to visit The Office anytime soon as he seeks your assistance in gathering the photographic evidences about the SERA and their allies.")
+                            .pauseFor(1000)
+                            .typeString(" Let’s get to work.")
                             .start();
                         }}
                         options={{
                           loop: false,
-                          delay: 50,
+                          delay: 40,
                           pauseFor: 100000,
                         }}
                       />
@@ -486,22 +488,22 @@ console.log(isRecordedData);
                       </div>
 
                       <div className="col-lg-3 time-box-container my-3">
-                        <div>
+                        {/* <div>
                           <div>QUEST LIVE:</div>
                           <div>9:00 AM - 11:00 AM EST</div>
                           <div>9:00 PM - 11:00 PM EST</div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </>
                   : portionCount === 1 ?
                     <>
-                     <div className="my-2 me-3" id="timer-value">
-                          <span className="hour-box">{timer.hours}</span><span className="timer-colen">:</span>
-                          <span className="minute-box">{timer.minutes}</span><span className="timer-colen">:</span>
-                          <span className="second-box">{timer.seconds}</span>
-                        </div>
-                        {/* <div className="my-2" id="timer-value"></div> */}
+                      <div className="my-2 me-3" id="timer-value">
+                        <span className="hour-box">{timer.hours}</span><span className="timer-colen">:</span>
+                        <span className="minute-box">{timer.minutes}</span><span className="timer-colen">:</span>
+                        <span className="second-box">{timer.seconds}</span>
+                      </div>
+                      {/* <div className="my-2" id="timer-value"></div> */}
                       <div className="upper-portion-2">
                         <div className="riddle-container">
                           <div className="riddle-heading">{'<<Quest: 1>>'}</div>
@@ -584,10 +586,10 @@ console.log(isRecordedData);
                               <li>Share your mystery-solving experience in helping Shylock, your favorite character in the lore of Shylock Origins on your Twitter, and also tag your friends whom you think can become potential Agents. (3x Entry)</li>
                               {/* <li>Share your mystery-solving experience in helping Shylock on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li> */}
                             </ul>
-                           
+
                           </div>
                           <p className="attention-notes">⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
-                              <p className="tac my-2">{'<<T&C applied>>'}</p>
+                          <p className="tac my-2">{'<<T&C applied>>'}</p>
                         </div>
                       </div>
                     </>
@@ -614,6 +616,7 @@ console.log(isRecordedData);
               <ConnectWallet
                 accentColor="#000"
               />
+
               {/* <div className={`metamask-box ${metaKey ? "border-green" : ""}`} onClick={handleConnectWallet}>
                 {metaKey ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
                 <img src={metamaskIcon} alt="" />

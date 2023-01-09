@@ -36,6 +36,9 @@
       right: 0;
       width: 120px !important;
       height: 120px !important;
+      video{
+        border-radius: 10px;
+      }
       @media (max-width: 978px) {
         width: 90px !important;
         height: 90px !important;
@@ -285,14 +288,22 @@
   border-radius: 3px;
   background-color: transparent;
 }
-.initiate-btn {
+.begin-btn{
+  display: grid;
+  place-content: center;
+ 
   @media (max-width: 1010px) {
     margin: 178px 0;
   }
-  @media (max-width: 420px) {
-    margin: 80% 0;
+ @media (max-width: 420px) {
+      margin: 80% 0;
+    }
+  .initiate-btn {   
+    width: fit-content;
+    justify-self: center;
   }
 }
+
 .intent-tweet-link {
   animation-delay: 6s;
   .intent-tweet a {
