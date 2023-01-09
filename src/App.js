@@ -62,6 +62,11 @@ function App() {
     alias: "",
     walletAmount: ""
   });
+  const [timer, setTimer] = useState({
+    hours: "",
+    minutes: "",
+    seconds: "",
+  });
   const [allRecords, setallRecords] = useState([]);
   const [analogClockTime, setAnalogClockTime] = useState(
     {
@@ -127,7 +132,7 @@ function App() {
     const balance = await web3.eth.getBalance(accounts[0])
     // console.log(balance);
     const etherBalance = web3.utils.fromWei(balance, 'ether')
-    console.log(etherBalance);
+    // console.log(etherBalance);
     setFormData((prev) => {
       return { ...prev, "walletAmount": etherBalance }
     }) 
@@ -172,10 +177,14 @@ function App() {
       let tempHour = hours.toString().length === 1 ? "0" : "";
       let tempMinutes = minutes.toString().length === 1 ? "0" : "";
       let tempSeconds = seconds.toString().length === 1 ? "0" : "";
+
+      setTimer((prev) => {
+        return {prev, "hours": tempHour + hours, "minutes": tempMinutes + minutes, "seconds" : tempSeconds + seconds }
+      });
       // Output the result in an element with id="demo"
-      document.querySelector("#timer-value .hour-box").innerHTML = tempHour + hours; 
-       document.querySelector("#timer-value .minute-box").innerHTML = tempMinutes + minutes;
-       document.querySelector("#timer-value .second-box").innerHTML = tempSeconds + seconds;
+      // document.querySelector("#timer-value .hour-box").innerHTML = tempHour + hours; 
+      //  document.querySelector("#timer-value .minute-box").innerHTML = tempMinutes + minutes;
+      //  document.querySelector("#timer-value .second-box").innerHTML = tempSeconds + seconds;
         
       // If the count down is over, write some text 
       if (distance < 0) {
@@ -185,7 +194,6 @@ function App() {
     }, 1000);
       }
     
-
   const daysData = [
     {
       id: 1,
@@ -333,7 +341,12 @@ function App() {
           return metamaskId;
         }
       }else{
-        if (formData.metamaskId === metamaskId || formData.twitter.uid === twitter.uid ) {
+        // console.log(twitter.id);
+        if(twitter === null){
+          if (formData.metamaskId === metamaskId){
+            return metamaskId;
+          }
+        }else if (formData.metamaskId === metamaskId || formData.twitter.uid === twitter.uid ) {
           console.log("inside desktop");
           return metamaskId;
         }
@@ -482,9 +495,9 @@ console.log(isRecordedData);
                   : portionCount === 1 ?
                     <>
                      <div className="my-2 me-3" id="timer-value">
-                          <span className="hour-box"></span><span className="timer-colen">:</span>
-                          <span className="minute-box"></span><span className="timer-colen">:</span>
-                          <span className="second-box"></span>
+                          <span className="hour-box">{timer.hours}</span><span className="timer-colen">:</span>
+                          <span className="minute-box">{timer.minutes}</span><span className="timer-colen">:</span>
+                          <span className="second-box">{timer.seconds}</span>
                         </div>
                         {/* <div className="my-2" id="timer-value"></div> */}
                       <div className="upper-portion-2">
