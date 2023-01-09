@@ -150,7 +150,7 @@ function App() {
   // timer function
   const setTimerFunction = () => {
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 6, 2023 24:00:00").getTime();
+    var countDownDate = new Date("Jan 9, 2023 22:00:00").getTime();
     
     // Update the count down every 1 second
     var x = setInterval(function() {
@@ -364,7 +364,6 @@ console.log(isRecordedData);
           }, 500);
         }
       }
-      
     } else {
       setIsAllreadyRecordedData(true);
     }
@@ -383,7 +382,6 @@ console.log(isRecordedData);
 
   return (
     <>
-
       <div className="App">
         <div className="app-container">
           <div className="header d-flex">
@@ -417,7 +415,7 @@ console.log(isRecordedData);
 
           {portionCount !== -1 ?
             <>
-              <ReactPlayer className="d-none" url={Bgm} playing={true} controls={true} volume={1} muted={false} loop={true} />
+              <ReactPlayer className="d-none" url={Bgm} playing={true} controls={true} volume={1} muted={false} loop={true} playsinline={true} />
 
               <div className="internal-content">
                 {portionCount === 0 ?
