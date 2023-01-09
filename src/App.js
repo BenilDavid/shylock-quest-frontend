@@ -420,7 +420,7 @@ function App() {
           <div className={`begin-btn  ${portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`}>
             <button className={`initiate-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
            
-            <div className={`fs-6 mt-1 better-experience`}>
+            <div className={`fs-7 mt-1 better-experience`}>
               {window.innerWidth < "700" ?
                 "<<Use desktop for better experience>>"
                 : ""}
@@ -567,7 +567,7 @@ function App() {
                               data-testid="loader"
                             />
                           </button>
-                          <div className="orange-text align-self-center"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}</div>
+                          <div className="orange-text align-self-center text-center fs-7"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}</div>
                         </div>
 
                         <div className="col-lg-7 col-md-12 rules-box">
