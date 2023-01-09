@@ -425,14 +425,13 @@ function App() {
           </div>
 
           <div className="begin-btn">
-          <div className="fs-6 mb-2 better-experience animate__animated animate__fadeInUp animate__delay-1s">
+            <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
+           
+            <div className="fs-6 mt-1 better-experience animate__animated animate__fadeInUp animate__delay-1s">
               {window.innerWidth < "700" ?
                 "<<Use desktop for better experience>>"
                 : ""}
             </div>
-
-            <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
-           
           </div>
 
           {/* <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={Initiation}> ENTER THE SHADES </button> */}
