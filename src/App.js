@@ -155,7 +155,7 @@ function App() {
   // timer function
   const setTimerFunction = () => {
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 9, 2023 22:00:00").getTime();
+    var countDownDate = new Date("Jan 10, 2023 24:00:00").getTime();
 
     // Update the count down every 1 second
     var x = setInterval(function () {
@@ -172,8 +172,6 @@ function App() {
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // console.log(hours.toString().length);
-      // console.log("hours", hours);
       let tempHour = hours.toString().length === 1 ? "0" : "";
       let tempMinutes = minutes.toString().length === 1 ? "0" : "";
       let tempSeconds = seconds.toString().length === 1 ? "0" : "";
@@ -181,10 +179,6 @@ function App() {
       setTimer((prev) => {
         return { prev, "hours": tempHour + hours, "minutes": tempMinutes + minutes, "seconds": tempSeconds + seconds }
       });
-      // Output the result in an element with id="demo"
-      // document.querySelector("#timer-value .hour-box").innerHTML = tempHour + hours; 
-      //  document.querySelector("#timer-value .minute-box").innerHTML = tempMinutes + minutes;
-      //  document.querySelector("#timer-value .second-box").innerHTML = tempSeconds + seconds;
 
       // If the count down is over, write some text 
       if (distance < 0) {
@@ -228,7 +222,6 @@ function App() {
   ]
 
   const handleTwitterLogin = () => {
-    // console.log(authentication, provider);
 
     if (window.innerWidth >= "700") {
       signInWithPopup(authentication, provider)
@@ -424,10 +417,10 @@ function App() {
             </div>
           </div>
 
-          <div className="begin-btn">
-            <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
+          <div className={`begin-btn  ${portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`}>
+            <button className={`initiate-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
            
-            <div className="fs-6 mt-1 better-experience animate__animated animate__fadeInUp animate__delay-1s">
+            <div className={`fs-6 mt-1 better-experience`}>
               {window.innerWidth < "700" ?
                 "<<Use desktop for better experience>>"
                 : ""}
