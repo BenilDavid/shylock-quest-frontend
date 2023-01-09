@@ -297,7 +297,9 @@ function App() {
 
   const Initiation = () => {
     setisOpenLogin(false);
+    setTimeout(() => {
     setportionCount(0);
+    }, 500);
   }
 
   const onDayClicked = (id) => {
@@ -624,8 +626,8 @@ console.log(isRecordedData);
                 :
                 <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
                   {user ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
-                  <span>Twitter</span>
-                  <img className="ms-4 twitter-icon" src={twitterBlueIcon} alt="" />
+                  <span>{user ? "Connected" : "Connect Twitter"}</span>
+                  {/* <img className="ms-4 twitter-icon" src={twitterBlueIcon} alt="" /> */}
                 </div>
               }
 
