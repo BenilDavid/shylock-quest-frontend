@@ -32,6 +32,7 @@ import Web3 from 'web3'
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
+const WindowSize = "600";
 
 function App() {
   // let navigate = useNavigate();
@@ -91,7 +92,7 @@ function App() {
   useEffect(() => {
     setTimerFunction();
 
-    if (window.innerWidth < "700") {
+    if (window.innerWidth < WindowSize) {
       getRedirectResult(authentication)
         .then((result) => {
           // console.log(result);
@@ -158,7 +159,7 @@ function App() {
     var countDownDate = new Date("Jan 10, 2023 24:00:00").getTime();
 
     // Update the count down every 1 second
-    var x = setInterval(function () {
+    var x = setInterval(() => {
 
       // Get today's date and time
       var now = new Date().getTime();
@@ -168,16 +169,16 @@ function App() {
 
       // Time calculations for days, hours, minutes and seconds
       // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      let tempHour = hours.toString().length === 1 ? "0" : "";
-      let tempMinutes = minutes.toString().length === 1 ? "0" : "";
-      let tempSeconds = seconds.toString().length === 1 ? "0" : "";
+      // let tempHour = hours.toString().length === 1 ? "0" : "" + hours;
+      // let tempMinutes = minutes.toString().length === 1 ? "0" : "" + minutes;
+      // let tempSeconds = seconds.toString().length === 1 ? "0" : "" + seconds;
 
       setTimer((prev) => {
-        return { prev, "hours": tempHour + hours, "minutes": tempMinutes + minutes, "seconds": tempSeconds + seconds }
+        return { ...prev, "hours": hours, "minutes": minutes, "seconds": seconds }
       });
 
       // If the count down is over, write some text 
@@ -223,7 +224,7 @@ function App() {
 
   const handleTwitterLogin = () => {
 
-    if (window.innerWidth >= "700") {
+    if (window.innerWidth >= WindowSize) {
       signInWithPopup(authentication, provider)
         .then((result) => {
           const user = result.user;
@@ -267,7 +268,7 @@ function App() {
   // };
 
   const enterDarkRoom = () => {
-    if (window.innerWidth < 700) {
+    if (window.innerWidth < WindowSize) {
       if (metaKey) {
         Initiation();
       } else {
@@ -330,7 +331,7 @@ function App() {
   const submitButton = () => {
     // eslint-disable-next-line array-callback-return
     const isRecordedData = allRecords.filter(({ metamaskId, twitter, twitterUserName }, index) => {
-      if (window.innerWidth < "700") {
+      if (window.innerWidth < WindowSize) {
         if (formData.metamaskId === metamaskId || formData.twitterUserName === twitterUserName) {
           console.log("inside mobile");
           return metamaskId;
@@ -349,7 +350,7 @@ function App() {
     });
     console.log(isRecordedData);
     if (isRecordedData.length === 0) {
-      if (window.innerWidth < "700") {
+      if (window.innerWidth < WindowSize) {
         if (formData.answer !== "" && formData.twitterUserName !== "" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
@@ -421,7 +422,7 @@ function App() {
             <button className={`initiate-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
            
             <div className={`fs-7 mt-1 better-experience`}>
-              {window.innerWidth < "700" ?
+              {window.innerWidth < WindowSize ?
                 "<<Use desktop for better experience>>"
                 : ""}
             </div>
@@ -527,7 +528,7 @@ function App() {
                             {/* <div className="col-sm-10">
                             <input className="input-field mt-3" type="text" placeholder="@shylocknft" name="twitter" value={formData.twitter} onChange={handleFormData} />
                           </div> */}
-                            {window.innerWidth < "700" ?
+                            {window.innerWidth < WindowSize ?
                               <>
                                 <label className="col-sm-4 align-self-center col-form-label mt-3">Twitter :</label>
                                 <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
@@ -617,7 +618,7 @@ function App() {
                   <span className="meta-text">* Use Metamask Browser in Mobile</span>
                   : ""}
               </div> */}
-              {window.innerWidth < "700" ?
+              {window.innerWidth < WindowSize ?
                 ""
                 :
                 <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>

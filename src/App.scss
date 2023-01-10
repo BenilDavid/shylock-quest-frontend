@@ -243,6 +243,7 @@
             }
             ul {
               margin: 5px 0;
+              padding-left: 1rem;
               li {
                 list-style-type: decimal;
               }
@@ -252,6 +253,7 @@
             }
           }
           .attention-notes {
+            text-align: center;
             font-size: 0.81rem;
             padding: 0 10px;
             text-align: left;
