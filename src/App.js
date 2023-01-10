@@ -371,7 +371,7 @@ function App() {
           }, 500);
         }
       } else {
-        if (formData.answer !== "6969" && formData.alias !== "") {
+        if (formData.answer === "6969" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
@@ -585,7 +585,7 @@ function App() {
                               data-testid="loader"
                             />
                           </button>
-                          <div className="orange-text align-self-center text-center fs-7"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}{isWrongAnswer ? "<<Incorrect Answer>>" : ""}
+                          <div className="orange-text align-self-center text-center fs-7"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}{isWrongAnswer ? "<<Nice try, but that's not quite right. Look at the clue again.>>" : ""}
                           </div>
                         </div>
 
