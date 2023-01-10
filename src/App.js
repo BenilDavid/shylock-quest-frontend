@@ -432,7 +432,7 @@ function App() {
 
           {portionCount !== -1 ?
             <>
-              <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} playsinline={true} />
+              <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} />
 
               <div className="internal-content">
                 {portionCount === 0 ?
