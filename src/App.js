@@ -47,6 +47,7 @@ function App() {
   const [isOpenLogin, setisOpenLogin] = useState(false);
   const [isOpenSubmitPopup, setisOpenSubmitPopup] = useState(false);
   const [isAllreadyRecordedData, setIsAllreadyRecordedData] = useState(false);
+  const [isWrongAnswer, setIsWrongAnswer] = useState(false);
   const [hideVideo, setHideVideo] = useState(false);
   // const [typingAudio, setTypingAudio] = useState(false);
   // const [bgmAudio, setBgmAudio] = useState(false);
@@ -156,10 +157,10 @@ function App() {
   // timer function
   const setTimerFunction = () => {
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 10, 2023 22:00:00").getTime();
+    var countDownDate = new Date("Jan 10, 2023 23:59:59").getTime();
 
     // Update the count down every 1 second
-    var x = setInterval(function() {
+    var x = setInterval(function () {
 
       // Get today's date and time
       var now = new Date().getTime();
@@ -180,16 +181,16 @@ function App() {
       // setTimer((prev) => {
       //   return { ...prev, "hours": hours, "minutes": minutes, "seconds": seconds }
       // });
- 
+
       setTimer((prev) => {
-        return { ...prev, "hours": tempHours + hours, "minutes": tempMinutes + minutes, "seconds" : tempSeconds + seconds }
+        return { ...prev, "hours": tempHours + hours, "minutes": tempMinutes + minutes, "seconds": tempSeconds + seconds }
       });
 
       // If the count down is over, write some text 
       if (distance < 0) {
         clearInterval(x);
         setTimer((prev) => {
-          return { ...prev, "hours": "00", "minutes": "00", "seconds" : "00" }
+          return { ...prev, "hours": "00", "minutes": "00", "seconds": "00" }
         });
         // document.getElementById("timer-value").innerHTML = "EXPIRED";
       }
@@ -340,7 +341,6 @@ function App() {
     const isRecordedData = allRecords.filter(({ metamaskId, twitter, twitterUserName }, index) => {
       if (window.innerWidth < WindowSize) {
         if (formData.metamaskId === metamaskId || formData.twitterUserName === twitterUserName) {
-          console.log("inside mobile");
           return metamaskId;
         }
       } else {
@@ -350,17 +350,19 @@ function App() {
             return metamaskId;
           }
         } else if (formData.metamaskId === metamaskId || formData.twitter.uid === twitter.uid) {
-          console.log("inside desktop");
           return metamaskId;
         }
       }
     });
-    console.log(isRecordedData);
+    // console.log(isRecordedData);
     if (isRecordedData.length === 0) {
       if (window.innerWidth < WindowSize) {
-        if (formData.answer !== "" && formData.twitterUserName !== "" && formData.alias !== "") {
+        if (formData.answer === "6969" && formData.twitterUserName !== "" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
+        }
+        else if (formData.answer !== "" && formData.twitterUserName !== "" && formData.alias !== "") {
+          setIsWrongAnswer(true);
         }
         else {
           setShakeSubmit(true);
@@ -369,9 +371,12 @@ function App() {
           }, 500);
         }
       } else {
-        if (formData.answer !== "" && formData.alias !== "") {
+        if (formData.answer !== "6969" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
+        }
+        else if (formData.answer !== "" && formData.alias !== "") {
+          setIsWrongAnswer(true);
         }
         else {
           setShakeSubmit(true);
@@ -427,7 +432,7 @@ function App() {
 
           <div className={`begin-btn  ${portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`}>
             <button className={`initiate-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
-           
+
             <div className={`fs-7 mt-1 better-experience`}>
               {window.innerWidth < WindowSize ?
                 "<<Use desktop for better experience>>"
@@ -435,11 +440,16 @@ function App() {
             </div>
           </div>
 
+          {portionCount !== -1 ?
+            <>
+              <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} />
+            </> : ""
+          }
           {/* <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={Initiation}> ENTER THE SHADES </button> */}
 
           {portionCount !== -1 ?
             <>
-              <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} />
+              {/* <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} /> */}
 
               <div className="internal-content">
                 {portionCount === 0 ?
@@ -575,7 +585,8 @@ function App() {
                               data-testid="loader"
                             />
                           </button>
-                          <div className="orange-text align-self-center text-center fs-7"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}</div>
+                          <div className="orange-text align-self-center text-center fs-7"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}{isWrongAnswer ? "<<Incorrect Answer>>" : ""}
+                          </div>
                         </div>
 
                         <div className="col-lg-7 col-md-12 rules-box">
@@ -584,10 +595,8 @@ function App() {
                             <ul>
                               <li>Answers should be relevant to the lore and does not contain any NSFW words. (1x Entry)</li>
                               <li>Follow and Turn on notifications for both <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a> to get regular updates and also to increase your chances of becoming an Agent. (2x Entry)</li>
-                              <li>Share your mystery-solving experience in helping Shylock, your favorite character in the lore of Shylock Origins on your Twitter, and also tag your friends whom you think can become potential Agents. (3x Entry)</li>
-                              {/* <li>Share your mystery-solving experience in helping Shylock on Twitter and also tag your friends who can be potential Agents. (3x Entry)</li> */}
+                              <li>Share your mystery-solving experience by uploading the Evidence image and Tag 3 potential Agents on your Twitter with whom you can join together to solve the case with Shylock. (3x Entry)</li>
                             </ul>
-
                           </div>
                           <p className="attention-notes">⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
                           <p className="tac my-2">{'<<T&C applied>>'}</p>

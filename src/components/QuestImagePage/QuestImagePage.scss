@@ -46,11 +46,11 @@
         justify-content: center;
       .puzzle-image {
         align-self: center;
-        height: 25vmin;
-        width: 35vmin;
+        height: 27vmin;
+        width: 48vmin;
         @media (max-width: 490px) {
           height: 190px;
-          width: 260px;
+          width: 100%;
         }
       }
     }

@@ -34,13 +34,9 @@ function QuestImagePage() {
           <div className="d-flex align-items-center justify-content-center">
             <div className='image-container my-2'>
               <img className='puzzle-image' src={PuzzleImage} alt="" />
-
               <div className="d-flex justify-content-center align-items-center">
-               
                   <button className='download-btn enter-btn mt-3 mx-2' onClick={handleDownload}>Collect Evidence</button>
-
               </div>
-
             </div>
           </div>
 
@@ -49,7 +45,7 @@ function QuestImagePage() {
             <div className="rules-heading">{'<<Upload your Evidence>>'}</div>
             <p>Share your mystery-solving experience by uploading the Evidence image above and Tag 3 potential Agents on your Twitter with whom you can join together to solve the case with Shylock.</p>
             <a className='mx-2' href=" https://twitter.com/intent/tweet?text=I%27ve%20just%20entered%20the%20shylocknft.com.%20Waiting%20to%20meet%20Detective%20Shylock%20and%20get%20early%20access%20to%20The%20Shades.%0a&via=shylocknft&%0a&url=https%3A%2F%2Ftwitter.com%2Fshylocknft%2Fstatus%2F1604180496463802370%3Fs%3D20%26t%3DrfXGfH-kpQgSvDNjy4ArCg%0a&hashtags=SolvewithShylock">
-                  <button className='download-btn enter-btn'>{`>>Share<<`}</button>
+                  <button className='download-btn enter-btn'>{`>> Share <<`}</button>
                 </a>
           </div>
          </div>
