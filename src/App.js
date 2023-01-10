@@ -173,12 +173,16 @@ function App() {
       let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // let tempHour = hours.toString().length === 1 ? "0" : "" + hours;
-      // let tempMinutes = minutes.toString().length === 1 ? "0" : "" + minutes;
-      // let tempSeconds = seconds.toString().length === 1 ? "0" : "" + seconds;
+      let tempHour = hours.toString().length === 1 ? "0" : "";
+      let tempMinutes = minutes.toString().length === 1 ? "0" : "";
+      let tempSeconds = seconds.toString().length === 1 ? "0" : "";
 
+      // setTimer((prev) => {
+      //   return { ...prev, "hours": hours, "minutes": minutes, "seconds": seconds }
+      // });
+      
       setTimer((prev) => {
-        return { ...prev, "hours": hours, "minutes": minutes, "seconds": seconds }
+        return {prev, "hours": tempHour + hours, "minutes": tempMinutes + minutes, "seconds" : tempSeconds + seconds }
       });
 
       // If the count down is over, write some text 
