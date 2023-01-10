@@ -236,7 +236,7 @@ function App() {
       signInWithPopup(authentication, provider)
         .then((result) => {
           const user = result.user;
-          console.log(user.twitterUsername);
+          // console.log(user.twitterUsername);
           setUser(user);
         }).catch((error) => {
           console.log(error);
