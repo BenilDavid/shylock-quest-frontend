@@ -156,10 +156,10 @@ function App() {
   // timer function
   const setTimerFunction = () => {
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 10, 2023 24:00:00").getTime();
+    var countDownDate = new Date("Jan 10, 2023 22:00:00").getTime();
 
     // Update the count down every 1 second
-    var x = setInterval(() => {
+    var x = setInterval(function() {
 
       // Get today's date and time
       var now = new Date().getTime();
@@ -169,26 +169,29 @@ function App() {
 
       // Time calculations for days, hours, minutes and seconds
       // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      let tempHour = hours.toString().length === 1 ? "0" : "";
+      let tempHours = hours.toString().length === 1 ? "0" : "";
       let tempMinutes = minutes.toString().length === 1 ? "0" : "";
       let tempSeconds = seconds.toString().length === 1 ? "0" : "";
 
       // setTimer((prev) => {
       //   return { ...prev, "hours": hours, "minutes": minutes, "seconds": seconds }
       // });
-      
+ 
       setTimer((prev) => {
-        return {prev, "hours": tempHour + hours, "minutes": tempMinutes + minutes, "seconds" : tempSeconds + seconds }
+        return { ...prev, "hours": tempHours + hours, "minutes": tempMinutes + minutes, "seconds" : tempSeconds + seconds }
       });
 
       // If the count down is over, write some text 
       if (distance < 0) {
         clearInterval(x);
-        document.getElementById("timer-value").innerHTML = "EXPIRED";
+        setTimer((prev) => {
+          return { ...prev, "hours": "00", "minutes": "00", "seconds" : "00" }
+        });
+        // document.getElementById("timer-value").innerHTML = "EXPIRED";
       }
     }, 1000);
   }
