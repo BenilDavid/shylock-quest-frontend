@@ -11,7 +11,7 @@ function QuestImagePage() {
   function handleDownload() {
     const a = document.createElement('a');
     a.href = PuzzleImage;
-    a.download = 'puzzle_1.jpg';
+    a.download = 'Shylock’s Quest Day 1.jpg';
     a.click();
   }
 
