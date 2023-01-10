@@ -91,6 +91,13 @@ function App() {
   )
 
   useEffect(() => {
+   setTimeout(() => {
+    setIsAllreadyRecordedData(false);
+    setIsWrongAnswer(false);
+   }, 3000);
+  }, [isAllreadyRecordedData, isWrongAnswer])
+  
+  useEffect(() => {
     setTimerFunction();
 
     if (window.innerWidth < WindowSize) {
@@ -157,7 +164,7 @@ function App() {
   // timer function
   const setTimerFunction = () => {
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 11, 2023 23:30:00").getTime();
+    var countDownDate = new Date("Jan 12, 2023 00:45:00").getTime();
 
     // Update the count down every 1 second
     var x = setInterval(function () {
