@@ -7,7 +7,7 @@ import twitterIcon from './twitter.png';
 import whiteLock from './Assets/white-lock.png';
 // import metamaskIcon from './Assets/fox.png';
 // import twitterBlueIcon from './Assets/twitter-blue.png';
-import QR_Code from './Assets/qr-code.jpeg';
+// import QR_Code from './Assets/qr-code.jpeg';
 import tickIcon from './Assets/checked.png';
 import InfoIcon from './Assets/information-button.png'
 import ReactPlayer from 'react-player';
