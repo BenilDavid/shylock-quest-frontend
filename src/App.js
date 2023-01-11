@@ -20,7 +20,7 @@ import 'animate.css';
 import AnalogClock from 'analog-clock-react';
 import Modal from "./components/common/Modal";
 import PulseLoader from "react-spinners/PulseLoader";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { setCookie, getCookie, deleteCookie } from "./Utils/common";
 // firebase
 
@@ -35,7 +35,7 @@ export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 const WindowSize = "600";
 
 function App() {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   const address = useAddress();
   const provider = new TwitterAuthProvider();
 
@@ -661,15 +661,16 @@ function App() {
             isOpen={isOpenSubmitPopup}
             toggle={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}
             size="md"
-            headTitle="SCAN FOR CONFIRMATION"
+            headTitle="ENTRY STATUS"
           >
             <div className="orange-text text-center mt-2">Your answer is recorded successfully.</div>
             <div className="orange-text text-center my-2"> Confirm your entry below</div>
-            <div className="qr-code-container d-flex align-items-center justify-content-center">
+            {/* <div className="qr-code-container d-flex align-items-center justify-content-center">
               <img className="qr-code-image" src={QR_Code} alt="" />
-            </div>
+            </div> */}
             <div className="d-flex justify-content-center align-items-center my-3">
-              <button className="enter-btn me-2" onClick={handleQrDownload}> Download QR </button>
+              {/* <button className="enter-btn me-2" onClick={handleQrDownload}> Download QR </button> */}
+              <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button>
               <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button>
             </div>
           </Modal>
