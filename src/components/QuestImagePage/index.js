@@ -35,7 +35,9 @@ function QuestImagePage() {
             <div className='image-container my-2'>
               <img className='puzzle-image' src={PuzzleImage} alt="" />
               <div className="d-flex justify-content-center align-items-center">
-                  <button className='download-btn enter-btn mt-3 mx-2' onClick={handleDownload}>Collect Evidence</button>
+              <a className='mx-2' href="https://twitter.com/intent/tweet?text=Here%20is%20the%20piece%20of%20Intel%20%40shylocknft%2C%20that%20you're%20looking%20for.%20%20%20%0a%0aIt%20is%20about%20Gregory%2C%20a%20formidable%20Eastern%20European%20mafia%20boss%20who%20controls%20the%20SERA%20gang%E2%80%99s%20operations%20in%20Europe.%20%20%20%0a%0a%20%23SolvewithShylock." onClick={handleDownload}>
+                  <button className='download-btn enter-btn mt-3 mx-2'>{`>> Tweet <<`} </button>
+                  </a>
               </div>
             </div>
           </div>
@@ -44,9 +46,9 @@ function QuestImagePage() {
          <div className='Registered-container'>
             <div className="rules-heading">{'<<Upload your Evidence>>'}</div>
             <p>Share your mystery-solving experience by uploading the Evidence image above and Tag 3 potential Agents on your Twitter with whom you can join together to solve the case with Shylock.</p>
-            <a className='mx-2' href="https://twitter.com/intent/tweet?text=Here%20is%20the%20piece%20of%20Intel%20%40shylocknft%2C%20that%20you're%20looking%20for.%20%20%20%0a%0aAgent%20%3C%3CEnter%20your%20Alias%3E%3E%2C%20reporting%20about%20Gregory%2C%20a%20formidable%20Eastern%20European%20mafia%20boss%20who%20controls%20the%20SERA%20gang%E2%80%99s%20operations%20in%20Europe.%20%20%20%0a%0aJoin%20me%20%3C%3C%40%20Tag%203%20friends%3E%3E%20to%20%23SolvewithShylock">
+            {/* <a className='mx-2' href="https://twitter.com/intent/tweet?text=Here%20is%20the%20piece%20of%20Intel%20%40shylocknft%2C%20that%20you're%20looking%20for.%20%20%20%0a%0aAgent%20%3C%3CEnter%20your%20Alias%3E%3E%2C%20reporting%20about%20Gregory%2C%20a%20formidable%20Eastern%20European%20mafia%20boss%20who%20controls%20the%20SERA%20gang%E2%80%99s%20operations%20in%20Europe.%20%20%20%0a%0aJoin%20me%20%3C%3C%40%20Tag%203%20friends%3E%3E%20to%20%23SolvewithShylock">
                   <button className='download-btn enter-btn'>{`>> Share <<`}</button>
-                </a>
+                </a> */}
           </div>
          </div>
 

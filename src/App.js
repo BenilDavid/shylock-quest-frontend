@@ -671,7 +671,10 @@ function App() {
             <div className="d-flex justify-content-center align-items-center my-3">
               {/* <button className="enter-btn me-2" onClick={handleQrDownload}> Download QR </button> */}
               <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button>
-              <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button>
+              {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
+              <a target="_blank" href="https://twitter.com/intent/tweet?text=Here%20is%20the%20piece%20of%20Intel%20%40shylocknft%2C%20that%20you're%20looking%20for.%20%20%20%0a%0aIt%20is%20about%20Gregory%2C%20a%20formidable%20Eastern%20European%20mafia%20boss%20who%20controls%20the%20SERA%20gang%E2%80%99s%20operations%20in%20Europe.%20%20%20%0a%0a%20%23SolvewithShylock." rel="noreferrer">
+                  <button className='enter-btn'>{`>> Tweet <<`} </button>
+                  </a>
             </div>
           </Modal>
         </div>
