@@ -673,7 +673,7 @@ function App() {
               {/* <button className="enter-btn me-2" onClick={handleQrDownload}> Download QR </button> */}
               {/* <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button> */}
               {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
-              <a target="_blank" href="`https://twitter.com/intent/tweet?text=The%20more%20I%20dig%20%40shylocknft%2C%20the%20more%20ruthless%20and%20vicious%20the%20SERA%20gang%20is%20starting%20to%20look.%0a%0aI%20assume%20we%20are%20gonna%20need%20reinforcements%20after%20witnessing%20Alexei%2C%20a%20Russian%20mobster%20who%20serves%20as%20the%20muscle%20for%20the%20SERA%20gang.%0a%0a%23SolvewithShylock`" rel="noreferrer" onClick={handlePuzzleDownload}>
+              <a target="_blank" href="https://twitter.com/intent/tweet?text=The%20more%20I%20dig%20%40shylocknft%2C%20the%20more%20ruthless%20and%20vicious%20the%20SERA%20gang%20is%20starting%20to%20look.%0a%0aI%20assume%20we%20are%20gonna%20need%20reinforcements%20after%20witnessing%20Alexei%2C%20a%20Russian%20mobster%20who%20serves%20as%20the%20muscle%20for%20the%20SERA%20gang.%0a%0a%23SolvewithShylock" rel="noreferrer" onClick={handlePuzzleDownload}>
                   <button className='enter-btn'>{`>> Tweet <<`} </button>
                   </a>
             </div>
