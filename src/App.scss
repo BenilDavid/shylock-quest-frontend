@@ -151,6 +151,10 @@
                 bottom: -10px;
               }
             }
+            .days-box:nth-child(1){
+              border: 1px solid #fff !important;
+              color: #fff !important;
+            }
             .unlocked-day {
               cursor: pointer;
               border: 1px solid #fff;
@@ -401,7 +405,6 @@
 
 .qr-code-container {
   .qr-code-image {
-    width: 200px;
     height: 200px;
   }
 }

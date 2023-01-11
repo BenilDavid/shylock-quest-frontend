@@ -35,7 +35,7 @@ function QuestImagePage() {
             <div className='image-container my-2'>
               <img className='puzzle-image' src={PuzzleImage} alt="" />
               <div className="d-flex justify-content-center align-items-center">
-              <a className='mx-2' href="https://twitter.com/intent/tweet?text=Here%20is%20the%20piece%20of%20Intel%20%40shylocknft%2C%20that%20you're%20looking%20for.%20%20%20%0a%0aIt%20is%20about%20Gregory%2C%20a%20formidable%20Eastern%20European%20mafia%20boss%20who%20controls%20the%20SERA%20gang%E2%80%99s%20operations%20in%20Europe.%20%20%20%0a%0a%23SolvewithShylock" onClick={handleDownload}>
+              <a className='mx-2' href="https://twitter.com/intent/tweet?text=The%20more%20I%20dig%20%40shylocknft%2C%20the%20more%20ruthless%20and%20vicious%20the%20SERA%20gang%20is%20starting%20to%20look.%0a%0aI%20assume%20we%20are%20gonna%20need%20reinforcements%20after%20witnessing%20Alexei%2C%20a%20Russian%20mobster%20who%20serves%20as%20the%20muscle%20for%20the%20SERA%20gang.%0a%0a%23SolvewithShylock" onClick={handleDownload}>
                   <button className='download-btn enter-btn mt-3 mx-2'>{`>> Tweet <<`} </button>
                   </a>
               </div>

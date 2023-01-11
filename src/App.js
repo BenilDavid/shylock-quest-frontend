@@ -8,6 +8,7 @@ import whiteLock from './Assets/white-lock.png';
 // import metamaskIcon from './Assets/fox.png';
 // import twitterBlueIcon from './Assets/twitter-blue.png';
 // import QR_Code from './Assets/qr-code.jpeg';
+import PuzzleImage from './Assets/puzzle-2.png';
 import tickIcon from './Assets/checked.png';
 import InfoIcon from './Assets/information-button.png'
 import ReactPlayer from 'react-player';
@@ -20,7 +21,7 @@ import 'animate.css';
 import AnalogClock from 'analog-clock-react';
 import Modal from "./components/common/Modal";
 import PulseLoader from "react-spinners/PulseLoader";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // import { setCookie, getCookie, deleteCookie } from "./Utils/common";
 // firebase
 
@@ -35,7 +36,7 @@ export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 const WindowSize = "600";
 
 function App() {
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   const address = useAddress();
   const provider = new TwitterAuthProvider();
 
@@ -208,12 +209,12 @@ function App() {
     {
       id: 1,
       day: 1,
-      isOpen: true,
+      isOpen: false,
     },
     {
       id: 2,
       day: 2,
-      isOpen: false,
+      isOpen: true,
     },
     {
       id: 3,
@@ -311,8 +312,8 @@ function App() {
     }, 500);
   }
 
-  const onDayClicked = (id) => {
-    setportionCount(id);
+  const onDayClicked = () => {
+    setportionCount(1);
   }
 
   const handleFormData = ({ target: { name, value } }) => {
@@ -364,7 +365,7 @@ function App() {
     // console.log(isRecordedData);
     if (isRecordedData.length === 0) {
       if (window.innerWidth < WindowSize) {
-        if (formData.answer === "6969" && formData.twitterUserName !== "" && formData.alias !== "") {
+        if ((formData.answer === "3" || formData.answer === "03" || formData.answer.toLowerCase() === "three") && formData.twitterUserName !== "" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
@@ -378,7 +379,7 @@ function App() {
           }, 500);
         }
       } else {
-        if (formData.answer === "6969" && formData.alias !== "") {
+        if ((formData.answer === "3" || formData.answer === "03" || formData.answer.toLowerCase() === "three") && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
@@ -397,12 +398,12 @@ function App() {
     }
   }
 
-  // const handleQrDownload = () => {
-  //   const a = document.createElement('a');
-  //   a.href = QR_Code;
-  //   a.download = 'puzzle_1.jpg';
-  //   a.click();
-  // }
+  const handlePuzzleDownload = () => {
+    const a = document.createElement('a');
+    a.href = PuzzleImage;
+    a.download = 'Shylock’s Quest Day 2.jpg';
+    a.click();
+  }
 
   const jasperVideoEnded = () => {
     setHideVideo(true);
@@ -494,7 +495,7 @@ function App() {
                         <div style={{ height: "80%" }} className="d-flex align-items-center">
                           <div className="days-container">
                             {daysData.map(({ id, day, isOpen }) => {
-                              return <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={isOpen ? () => onDayClicked(id) : ""}>
+                              return <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={isOpen ? () => onDayClicked() : ""}>
                                 {!isOpen ?
                                   <img className="locked-image" src={whiteLock} alt="" />
                                   : ""}
@@ -524,7 +525,7 @@ function App() {
                       {/* <div className="my-2" id="timer-value"></div> */}
                       <div className="upper-portion-2">
                         <div className="riddle-container">
-                          <div className="riddle-heading">{'<<Quest: 1>>'}</div>
+                          <div className="riddle-heading">{'<<Quest: 2>>'}</div>
                           <Typewriter
                             onInit={(typewriter) => {
                               typewriter
@@ -665,14 +666,14 @@ function App() {
           >
             <div className="orange-text text-center mt-2">Your answer is recorded successfully.</div>
             <div className="orange-text text-center my-2"> Confirm your entry below</div>
-            {/* <div className="qr-code-container d-flex align-items-center justify-content-center">
-              <img className="qr-code-image" src={QR_Code} alt="" />
-            </div> */}
+            <div className="qr-code-container d-flex align-items-center justify-content-center">
+              <img className="qr-code-image" src={PuzzleImage} alt="" />
+            </div>
             <div className="d-flex justify-content-center align-items-center my-3">
               {/* <button className="enter-btn me-2" onClick={handleQrDownload}> Download QR </button> */}
-              <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button>
+              {/* <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button> */}
               {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
-              <a target="_blank" href="https://twitter.com/intent/tweet?text=Here%20is%20the%20piece%20of%20Intel%20%40shylocknft%2C%20that%20you're%20looking%20for.%20%20%20%0a%0aIt%20is%20about%20Gregory%2C%20a%20formidable%20Eastern%20European%20mafia%20boss%20who%20controls%20the%20SERA%20gang%E2%80%99s%20operations%20in%20Europe.%20%20%20%0a%0a%23SolvewithShylock" rel="noreferrer">
+              <a target="_blank" href="`https://twitter.com/intent/tweet?text=The%20more%20I%20dig%20%40shylocknft%2C%20the%20more%20ruthless%20and%20vicious%20the%20SERA%20gang%20is%20starting%20to%20look.%0a%0aI%20assume%20we%20are%20gonna%20need%20reinforcements%20after%20witnessing%20Alexei%2C%20a%20Russian%20mobster%20who%20serves%20as%20the%20muscle%20for%20the%20SERA%20gang.%0a%0a%23SolvewithShylock`" rel="noreferrer" onClick={handlePuzzleDownload}>
                   <button className='enter-btn'>{`>> Tweet <<`} </button>
                   </a>
             </div>
