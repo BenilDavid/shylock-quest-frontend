@@ -397,12 +397,12 @@ function App() {
     }
   }
 
-  const handleQrDownload = () => {
-    const a = document.createElement('a');
-    a.href = QR_Code;
-    a.download = 'puzzle_1.jpg';
-    a.click();
-  }
+  // const handleQrDownload = () => {
+  //   const a = document.createElement('a');
+  //   a.href = QR_Code;
+  //   a.download = 'puzzle_1.jpg';
+  //   a.click();
+  // }
 
   const jasperVideoEnded = () => {
     setHideVideo(true);
