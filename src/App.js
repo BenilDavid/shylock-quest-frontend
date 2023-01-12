@@ -8,7 +8,7 @@ import whiteLock from './Assets/white-lock.png';
 // import metamaskIcon from './Assets/fox.png';
 // import twitterBlueIcon from './Assets/twitter-blue.png';
 // import QR_Code from './Assets/qr-code.jpeg';
-import PuzzleImage from './Assets/puzzle-2-BW.png';
+import PuzzleImage from './Assets/puzzle-3.png';
 import tickIcon from './Assets/checked.png';
 import InfoIcon from './Assets/information-button.png'
 import ReactPlayer from 'react-player';
@@ -165,7 +165,7 @@ function App() {
   // timer function
   const setTimerFunction = () => {
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 13, 2023 00:40:00").getTime();
+    var countDownDate = new Date("Jan 13, 2023 23:30:00").getTime();
 
     // Update the count down every 1 second
     var x = setInterval(function () {
@@ -214,12 +214,12 @@ function App() {
     {
       id: 2,
       day: 2,
-      isOpen: true,
+      isOpen: false,
     },
     {
       id: 3,
       day: 3,
-      isOpen: false,
+      isOpen: true,
     },
     {
       id: 4,
@@ -365,7 +365,7 @@ function App() {
     // console.log(isRecordedData);
     if (isRecordedData.length === 0) {
       if (window.innerWidth < WindowSize) {
-        if ((formData.answer === "3" || formData.answer === "03" || formData.answer.toLowerCase() === "three") && formData.twitterUserName !== "" && formData.alias !== "") {
+        if (formData.answer.toLowerCase() === "kyoto" && formData.twitterUserName !== "" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
@@ -379,7 +379,7 @@ function App() {
           }, 500);
         }
       } else {
-        if ((formData.answer === "3" || formData.answer === "03" || formData.answer.toLowerCase() === "three") && formData.alias !== "") {
+        if (formData.answer.toLowerCase() === "kyoto" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
@@ -401,7 +401,7 @@ function App() {
   const handlePuzzleDownload = () => {
     const a = document.createElement('a');
     a.href = PuzzleImage;
-    a.download = 'Shylock’s Quest Day 2.jpg';
+    a.download = 'Shylock’s Quest Day 3.jpg';
     a.click();
   }
 
@@ -525,7 +525,7 @@ function App() {
                       {/* <div className="my-2" id="timer-value"></div> */}
                       <div className="upper-portion-2">
                         <div className="riddle-container">
-                          <div className="riddle-heading">{'<<Quest: 2>>'}</div>
+                          <div className="riddle-heading">{'<<Quest: 3>>'}</div>
                           <Typewriter
                             onInit={(typewriter) => {
                               typewriter
@@ -558,8 +558,8 @@ function App() {
                                 <label className="col-sm-4 align-self-center col-form-label mt-3">Twitter :</label>
                                 <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                                   <input className="input-field" type="text" placeholder="@shylocknft" name="twitterUserName" value={formData.twitterUserName} onChange={handleFormData} />
-                                  <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
-                                  </a>
+                                  {/* <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
+                                  </a> */}
                                 </div>
                               </>
                               :
@@ -567,13 +567,13 @@ function App() {
                             <label className="col-sm-4 align-self-center col-form-label mt-3">Your Detective Alias Name :</label>
                             <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                               <input className="input-field" type="text" placeholder="Agent Shylock" name="alias" value={formData.alias} onChange={handleFormData} />
-                              <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
-                              </a>
+                              {/* <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
+                              </a> */}
                             </div>
                             <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
                             <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                               <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
-                              <a target="_blank" href="https://twitter.com/shylocknft/status/1608533440567332865?s=46&t=w0JnU_q69sjn_owgvhB_tg" rel="noreferrer">
+                              <a target="_blank" href="https://twitter.com/shylocknft/status/1607407431394656256?s=46&t=nEDp7qYzREcy1BhJpMEuqg" rel="noreferrer">
                                 <img className="info-button" src={InfoIcon} alt="info-button" />
                               </a>
                             </div>
@@ -673,7 +673,7 @@ function App() {
               <button className="enter-btn me-2" onClick={handlePuzzleDownload}> Download </button>
               {/* <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button> */}
               {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
-              <a target="_blank" href="https://twitter.com/intent/tweet?text=The%20more%20I%20dig%20%40shylocknft%2C%20the%20more%20ruthless%20and%20vicious%20the%20SERA%20gang%20is%20starting%20to%20look.%0a%0aI%20assume%20we%20are%20gonna%20need%20reinforcements%20after%20witnessing%20Alexei%2C%20a%20Russian%20mobster%20who%20serves%20as%20the%20muscle%20for%20the%20SERA%20gang.%0a%0a%23SolvewithShylock" rel="noreferrer">
+              <a target="_blank" href="https://twitter.com/intent/tweet?text=You%20know%20what%20%40shylocknft%2C%20the%20list%20keeps%20getting%20longer%20as%20you%20can%20see%20another%20charismatic%20and%20ambitious%20mafia%20boss%2C%20Lance%20who%20controls%20the%20SERA%20gang's%20operations%20in%20the%20United%20States.%0a%0a%23SolvewithShylock" rel="noreferrer">
                   <button className='enter-btn'>{`>> Tweet <<`}</button>
                   </a>
             </div>
