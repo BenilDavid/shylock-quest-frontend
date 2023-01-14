@@ -363,7 +363,7 @@ function App() {
     // console.log(isRecordedData);
     if (isRecordedData.length === 0) {
       if (window.innerWidth < WindowSize) {
-        if (formData.answer.toLowerCase() === "green" && formData.twitterUserName !== "" && formData.alias !== "") {
+        if (formData.answer.toLowerCase() === "locker" && formData.twitterUserName !== "" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
@@ -377,7 +377,7 @@ function App() {
           }, 500);
         }
       } else {
-        if (formData.answer.toLowerCase() === "green" && formData.alias !== "") {
+        if (formData.answer.toLowerCase() === "locker" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
