@@ -8,7 +8,7 @@ import whiteLock from './Assets/white-lock.png';
 // import metamaskIcon from './Assets/fox.png';
 // import twitterBlueIcon from './Assets/twitter-blue.png';
 // import QR_Code from './Assets/qr-code.jpeg';
-import PuzzleImage from './Assets/puzzle-4-BW.png';
+import PuzzleImage from './Assets/puzzle-5.png';
 import tickIcon from './Assets/checked.png';
 import InfoIcon from './Assets/information-button.png'
 import ReactPlayer from 'react-player';
@@ -163,7 +163,7 @@ function App() {
   // timer function
   const setTimerFunction = () => {
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 14, 2023 23:30:00").getTime();
+    var countDownDate = new Date("Jan 15, 2023 23:30:00").getTime();
 
     // Update the count down every 1 second
     var x = setInterval(function () {
@@ -222,12 +222,12 @@ function App() {
     {
       id: 4,
       day: 4,
-      isOpen: true,
+      isOpen: false,
     },
     {
       id: 5,
       day: 5,
-      isOpen: false,
+      isOpen: true,
     },
     {
       id: 6,
@@ -399,7 +399,7 @@ function App() {
   const handlePuzzleDownload = () => {
     const a = document.createElement('a');
     a.href = PuzzleImage;
-    a.download = 'Shylock’s Quest Day 4.jpg';
+    a.download = 'Shylock’s Quest Day 5.jpg';
     a.click();
   }
 
@@ -523,7 +523,7 @@ function App() {
                       {/* <div className="my-2" id="timer-value"></div> */}
                       <div className="upper-portion-2">
                         <div className="riddle-container">
-                          <div className="riddle-heading">{'<<Quest: 4>>'}</div>
+                          <div className="riddle-heading">{'<<Quest: 5>>'}</div>
                           <Typewriter
                             onInit={(typewriter) => {
                               typewriter
@@ -571,7 +571,7 @@ function App() {
                             <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
                             <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                               <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
-                              <a target="_blank" href="https://twitter.com/shylocknft/status/1604180496463802370?s=46&t=XwwXy1fHaMPVrdiyoPMUjg" rel="noreferrer">
+                              <a target="_blank" href="https://twitter.com/shylocknft/status/1609252924743618567?s=46&t=EX6T-RNSDD9S3ThGlmVKEA" rel="noreferrer">
                                 <img className="info-button" src={InfoIcon} alt="info-button" />
                               </a>
                             </div>
@@ -671,7 +671,7 @@ function App() {
               <button className="enter-btn me-2" onClick={handlePuzzleDownload}> Download </button>
               {/* <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button> */}
               {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
-              <a target="_blank" href="https://twitter.com/intent/tweet?text=You%20gotta%20be%20kidding%20me%20%40shylocknft%20the%20SERA%20Gang%20has%20its%20wings%20widespread%20across%20the%20globe%20with%20Masaru%2C%20a%20Japanese%20mafia%20boss%20who%20controls%20their%20operations%20in%20Asia.%0a%0a%23SolvewithShylock" rel="noreferrer">
+              <a target="_blank" href="https://twitter.com/intent/tweet?text=Give%20me%20a%20break%20%40shylocknft%2C%20I%20need%20to%20regroup%20myself%20before%20presenting%20you%20the%20Xavier%2C%20a%20suave%20and%20sophisticated%20French%20mafia%20boss%20who%20runs%20the%20SERA%20Gang's%20operations%20in%20Europe.%0a%0a%23SolvewithShylock" rel="noreferrer">
                   <button className='enter-btn'>{`>> Tweet <<`}</button>
                   </a>
             </div>

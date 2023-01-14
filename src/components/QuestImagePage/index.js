@@ -1,5 +1,5 @@
 import React from 'react'
-import PuzzleImage from '../../Assets/puzzle-1-BW.png';
+import PuzzleImage from '../../Assets/puzzle-5-BW.png';
 import './QuestImagePage.scss';
 import logo from '../../shylock-logo.png';
 import twitterIcon from '../../twitter.png';
