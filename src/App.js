@@ -8,7 +8,7 @@ import whiteLock from './Assets/white-lock.png';
 // import metamaskIcon from './Assets/fox.png';
 // import twitterBlueIcon from './Assets/twitter-blue.png';
 // import QR_Code from './Assets/qr-code.jpeg';
-import PuzzleImage from './Assets/puzzle-5.png';
+import PuzzleImage from './Assets/puzzle-5-BW.png';
 import tickIcon from './Assets/checked.png';
 import InfoIcon from './Assets/information-button.png'
 import ReactPlayer from 'react-player';
