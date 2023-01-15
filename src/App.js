@@ -8,7 +8,7 @@ import whiteLock from './Assets/white-lock.png';
 // import metamaskIcon from './Assets/fox.png';
 // import twitterBlueIcon from './Assets/twitter-blue.png';
 // import QR_Code from './Assets/qr-code.jpeg';
-import PuzzleImage from './Assets/puzzle-5-BW.png';
+import PuzzleImage from './Assets/puzzle-6.jpeg';
 import tickIcon from './Assets/checked.png';
 import InfoIcon from './Assets/information-button.png'
 import ReactPlayer from 'react-player';
@@ -163,7 +163,7 @@ function App() {
   // timer function
   const setTimerFunction = () => {
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 15, 2023 23:30:00").getTime();
+    var countDownDate = new Date("Jan 16, 2023 23:30:00").getTime();
 
     // Update the count down every 1 second
     var x = setInterval(function () {
@@ -227,12 +227,12 @@ function App() {
     {
       id: 5,
       day: 5,
-      isOpen: true,
+      isOpen: false,
     },
     {
       id: 6,
       day: 6,
-      isOpen: false,
+      isOpen: true,
     }
   ]
 
@@ -242,7 +242,6 @@ function App() {
       signInWithPopup(authentication, provider)
         .then((result) => {
           const user = result.user;
-          // console.log(user.twitterUsername);
           setUser(user);
         }).catch((error) => {
           console.log(error);
@@ -363,7 +362,7 @@ function App() {
     // console.log(isRecordedData);
     if (isRecordedData.length === 0) {
       if (window.innerWidth < WindowSize) {
-        if (formData.answer.toLowerCase() === "locker" && formData.twitterUserName !== "" && formData.alias !== "") {
+        if (formData.answer.toLowerCase() === "boat" && formData.twitterUserName !== "" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
@@ -377,7 +376,7 @@ function App() {
           }, 500);
         }
       } else {
-        if (formData.answer.toLowerCase() === "locker" && formData.alias !== "") {
+        if (formData.answer.toLowerCase() === "boat" && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
@@ -399,7 +398,7 @@ function App() {
   const handlePuzzleDownload = () => {
     const a = document.createElement('a');
     a.href = PuzzleImage;
-    a.download = 'Shylock’s Quest Day 5.jpg';
+    a.download = 'Shylock’s Quest Day 6.jpg';
     a.click();
   }
 
@@ -523,7 +522,7 @@ function App() {
                       {/* <div className="my-2" id="timer-value"></div> */}
                       <div className="upper-portion-2">
                         <div className="riddle-container">
-                          <div className="riddle-heading">{'<<Quest: 5>>'}</div>
+                          <div className="riddle-heading">{'<<Quest: 6>>'}</div>
                           <Typewriter
                             onInit={(typewriter) => {
                               typewriter
@@ -571,7 +570,7 @@ function App() {
                             <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
                             <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                               <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
-                              <a target="_blank" href="https://twitter.com/shylocknft/status/1609252924743618567?s=46&t=EX6T-RNSDD9S3ThGlmVKEA" rel="noreferrer">
+                              <a target="_blank" href="https://twitter.com/shylocknft/status/1614681586393583617?s=20&t=uN062ZENBK_0Ry7gJeTTVg" rel="noreferrer">
                                 <img className="info-button" src={InfoIcon} alt="info-button" />
                               </a>
                             </div>
@@ -671,7 +670,7 @@ function App() {
               <button className="enter-btn me-2" onClick={handlePuzzleDownload}> Download </button>
               {/* <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button> */}
               {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
-              <a target="_blank" href="https://twitter.com/intent/tweet?text=Give%20me%20a%20break%20%40shylocknft%2C%20I%20need%20to%20regroup%20myself%20before%20presenting%20you%20the%20Xavier%2C%20a%20suave%20and%20sophisticated%20French%20mafia%20boss%20who%20runs%20the%20SERA%20Gang's%20operations%20in%20Europe.%0a%0a%23SolvewithShylock" rel="noreferrer">
+              <a target="_blank" href="https://twitter.com/intent/tweet?text=There%20you%20go%20%40shylocknft%2C%20guess%20who%20I've%20found%20in%20the%20final%20piece%20of%20the%20jigsaw%2C%20Cent%20(aka)%20Grim%20Reaper%2C%20who%20is%20the%20Head%20of%20the%20SERA%20Gang.%20He's%20one%20hell%20of%20a%20force%20to%20be%20reckoned%20with.%0a%0a%23SolvewithShylock" rel="noreferrer">
                   <button className='enter-btn'>{`>> Tweet <<`}</button>
                   </a>
             </div>
