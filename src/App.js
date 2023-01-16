@@ -14,7 +14,7 @@ import InfoIcon from './Assets/information-button.png'
 import ReactPlayer from 'react-player';
 import axios from 'axios';
 import Bgm from './Audio/shylock-bgm.mp3';
-import JasperVoiceWave from './Audio/audio-wave.mp4';
+import JasperVoiceWave from './Audio/jasper-quest-end.mp4';
 import question1 from './Audio/questions/question.mp4';
 import Typewriter from 'typewriter-effect';
 import 'animate.css';
@@ -26,8 +26,10 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { signOut, getRedirectResult, signInWithRedirect, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import { authentication } from './firebase-config';
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
-import Web3 from 'web3'
+import Web3 from 'web3';
 // import Timer from "./components/common/Timer";
+// import { Tooltip } from 'react-tooltip';
+// import 'react-tooltip/dist/react-tooltip.css';
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -45,6 +47,7 @@ function App() {
   let [loading, setLoading] = useState(false);
   const [isOpenLogin, setisOpenLogin] = useState(false);
   const [isOpenSubmitPopup, setisOpenSubmitPopup] = useState(false);
+  const [isOpenDayPopup, setisOpenDayPopup] = useState(false);
   const [isAllreadyRecordedData, setIsAllreadyRecordedData] = useState(false);
   const [isWrongAnswer, setIsWrongAnswer] = useState(false);
   const [hideVideo, setHideVideo] = useState(false);
@@ -90,12 +93,12 @@ function App() {
   )
 
   useEffect(() => {
-   setTimeout(() => {
-    setIsAllreadyRecordedData(false);
-    setIsWrongAnswer(false);
-   }, 3000);
+    setTimeout(() => {
+      setIsAllreadyRecordedData(false);
+      setIsWrongAnswer(false);
+    }, 3000);
   }, [isAllreadyRecordedData, isWrongAnswer])
-  
+
   useEffect(() => {
     setTimerFunction();
 
@@ -232,7 +235,7 @@ function App() {
     {
       id: 6,
       day: 6,
-      isOpen: true,
+      isOpen: false,
     }
   ]
 
@@ -309,9 +312,9 @@ function App() {
     }, 500);
   }
 
-  const onDayClicked = () => {
-    setportionCount(1);
-  }
+  // const onDayClicked = () => {
+  //   setportionCount(1);
+  // }
 
   const handleFormData = ({ target: { name, value } }) => {
     setFormData({ ...formData, [name]: value })
@@ -467,10 +470,10 @@ function App() {
                       <Typewriter
                         onInit={(typewriter) => {
                           typewriter
-                            .pauseFor(400)
-                            .typeString(" Agents, the time has come. It is not possible for Detective Shylock to visit The Office anytime soon as he seeks your assistance in gathering the photographic evidences about the SERA and their allies.")
-                            .pauseFor(1000)
-                            .typeString(" Let’s get to work.")
+                            // .pauseFor(400)
+                            .typeString(" Agents, as Shylock enters The Hideout you will be posed with more interesting and intriguing missions to solve. But before that, Shylock would like to reward the Agents exclusively for their support in helping him identify the members of the SERA Gang.")
+                            // .pauseFor(1000)
+                            // .typeString(" Let’s get to work.")
                             .start();
                         }}
                         options={{
@@ -492,7 +495,8 @@ function App() {
                         <div style={{ height: "80%" }} className="d-flex align-items-center">
                           <div className="days-container">
                             {daysData.map(({ id, day, isOpen }) => {
-                              return <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={isOpen ? () => onDayClicked() : ""}>
+                              return <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={() => setisOpenDayPopup(!isOpenDayPopup)}>
+                                {/* <Tooltip className="custom-tooltip" anchorId={`day-${day}`}  /> */}
                                 {!isOpen ?
                                   <img className="locked-image" src={whiteLock} alt="" />
                                   : ""}
@@ -671,8 +675,21 @@ function App() {
               {/* <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button> */}
               {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
               <a target="_blank" href="https://twitter.com/intent/tweet?text=There%20you%20go%20%40shylocknft%2C%20guess%20who%20I've%20found%20in%20the%20final%20piece%20of%20the%20jigsaw%2C%20Cent%20(aka)%20Grim%20Reaper%2C%20who%20is%20the%20Head%20of%20the%20SERA%20Gang.%20He's%20one%20hell%20of%20a%20force%20to%20be%20reckoned%20with.%0a%0a%23SolvewithShylock" rel="noreferrer">
-                  <button className='enter-btn'>{`>> Tweet <<`}</button>
-                  </a>
+                <button className='enter-btn'>{`>> Tweet <<`}</button>
+              </a>
+            </div>
+          </Modal>
+          <Modal
+            isOpen={isOpenDayPopup}
+            toggle={() => setisOpenDayPopup(!isOpenDayPopup)}
+            size="md"
+            headTitle="CHAPTER LOADING..."
+          >
+            <div className="orange-text text-center mt-2">Keep an eye out. The Hideout will be revealed soon.</div>
+            <div className="d-flex justify-content-center align-items-center my-3">
+              <a target="_blank" href="https://twitter.com/intent/tweet?text=Bring%20it%20on.%20We%20are%20waiting%20%40shylocknft.%0a%0a%23SolvewithShylock" rel="noreferrer">
+                <button className='enter-btn'>{`>> Tweet <<`}</button>
+              </a>
             </div>
           </Modal>
         </div>

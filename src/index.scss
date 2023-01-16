@@ -139,3 +139,9 @@ body {
 .fs-7{
 font-size: 0.9rem;
 }
+
+.custom-tooltip{
+  width: clamp(160px, 220px, 300px) !important;
+  font-size: clamp(0.8rem, 2.3vw, 1rem) !important; 
+  background-color: #0f0f0f !important;
+}

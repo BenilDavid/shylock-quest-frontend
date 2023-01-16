@@ -23,6 +23,7 @@
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.7",
+    "react-tooltip": "^5.5.1",
     "react-twitter-auth": "0.0.13",
     "reactstrap": "^9.1.5",
     "typewriter-effect": "^2.19.0",
