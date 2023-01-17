@@ -491,7 +491,7 @@ function App() {
                       </div>
 
                       <div className="col-lg-6 days-box-container my-3">
-                        <span className="days-heading">Daily Quests</span>
+                        <span className="days-heading">Quests</span>
                         <div style={{ height: "80%" }} className="d-flex align-items-center">
                           <div className="days-container">
                             {daysData.map(({ id, day, isOpen }) => {
