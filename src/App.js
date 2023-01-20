@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { signOut, getRedirectResult, signInWithRedirect, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import { authentication } from './firebase-config';
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
-import Web3 from 'web3';
+// import Web3 from 'web3';
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -88,9 +88,9 @@ function App() {
 
   }, [])
 
-  useEffect(() => {
-    getBalance();
-  }, [address])
+  // useEffect(() => {
+  //   getBalance();
+  // }, [address])
 
   useEffect(() => {
     console.log("address", address);
@@ -100,15 +100,15 @@ function App() {
     // })
   }, [user, address])
 
-  const getBalance = async () => {
-    const web3 = new Web3(window.ethereum)
-    const accounts = await web3.eth.getAccounts()
-    const balance = await web3.eth.getBalance(accounts[0])
-    const etherBalance = web3.utils.fromWei(balance, 'ether')
-    // setFormData((prev) => {
-    //   return { ...prev, "walletAmount": etherBalance }
-    // })
-  }
+  // const getBalance = async () => {
+  //   const web3 = new Web3(window.ethereum)
+  //   const accounts = await web3.eth.getAccounts()
+  //   const balance = await web3.eth.getBalance(accounts[0])
+  //   const etherBalance = web3.utils.fromWei(balance, 'ether')
+  //   setFormData((prev) => {
+  //     return { ...prev, "walletAmount": etherBalance }
+  //   })
+  // }
 
   const updateClock = () => {
     let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
