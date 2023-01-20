@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import QuestImagePage from './components/QuestImagePage/index';
+import QuestionPage from './components/QuestionPage/index';
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,6 +18,7 @@ root.render(
         <Routes>
           <Route exact path="/" element={<App />} />
           <Route exact path="/quest-lore" element={<QuestImagePage />} />
+          <Route exact path="/chapter/:id" element={<QuestionPage />} />
         </Routes>
       </BrowserRouter>
     </ThirdwebProvider>
