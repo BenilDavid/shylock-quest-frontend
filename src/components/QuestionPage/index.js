@@ -7,7 +7,7 @@ import twitterIcon from '../../twitter.png';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
 import Bgm from '../../Audio/shylock-bgm.mp3';
-import question1 from '../../Audio/questions/question.mp4';
+import question1 from '../../Audio/questions/question_look.mp4';
 import Typewriter from 'typewriter-effect';
 import 'animate.css';
 import Modal from "../common/Modal";
@@ -17,14 +17,12 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 
-const WindowSize = "600";
+const WindowSize = "1000";
 
 const QuestionPage = () => {
   let navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
-  // const data = state ? state.data : null;
-
   let [loading, setLoading] = useState(false);
   const [isOpenSubmitPopup, setisOpenSubmitPopup] = useState(false);
   const [shakeSubmit, setShakeSubmit] = useState(false);
@@ -32,7 +30,6 @@ const QuestionPage = () => {
   const [isWrongAnswer, setIsWrongAnswer] = useState(false);
   const [isAllreadyRecordedData, setIsAllreadyRecordedData] = useState(false);
   const [isUserRecordCreated, setIsUserRecordCreated] = useState([]);
-
   const [timer, setTimer] = useState({
     hours: "",
     minutes: "",
@@ -71,7 +68,7 @@ const QuestionPage = () => {
     '10': 'answerTen'
   }
   const correctAnswers = {
-    '1': 'one',
+    '1': 'jasper',
     '2': 'two',
     '3': 'three',
     '4': 'four',
@@ -81,28 +78,16 @@ const QuestionPage = () => {
     '8': 'eight',
     '9': 'nine',
     '10': 'ten',
-    //...and so on for all cases
   }
   useEffect(() => {
     getAllRecords();
     setTimerFunction();
   }, [])
 
-  // useEffect(() => {
-  //   console.log(location);
-  //   console.log(params.id);
-  // }, [location, params])
-
-  // useEffect(() => {
-  //   console.log(isUserRecordCreated);
-  //   console.log(formData);
-  // }, [isUserRecordCreated])
-
   useEffect(() => {
     console.log(allRecords);
     checkUserExist();
   }, [allRecords])
-
 
   useEffect(() => {
     setTimeout(() => {
@@ -158,7 +143,7 @@ const QuestionPage = () => {
 
   // timer function
   const setTimerFunction = () => {
-    var countDownDate = new Date("Jan 21, 2023 23:59:59").getTime();
+    var countDownDate = new Date("Jan 30, 2023 23:59:59").getTime();
 
     var x = setInterval(function () {
       var now = new Date().getTime();
@@ -190,21 +175,21 @@ const QuestionPage = () => {
   }
 
   const checkUserExist = () => {
-    console.log(allRecords);
+    // console.log(allRecords);
     const isUserRecordCreated = allRecords.filter(({ metamaskId, twitter }) => {
       if (twitter === null) {
         if (formData.metamaskId === metamaskId) {
           return metamaskId;
         }
-      } else if (formData.metamaskId === metamaskId || formData.twitter.uid === twitter.uid) {
+      } else if (formData.metamaskId === metamaskId || formData.twitter[0].uid === twitter[0].uid) {
         return metamaskId;
       }
     });
-    console.log("user exist", isUserRecordCreated);
+    // console.log("user exist", isUserRecordCreated);
     setIsUserRecordCreated(isUserRecordCreated);
     if (isUserRecordCreated.length !== 0) {
       setFormData((prev) => {
-        return { ...prev, "alias": isUserRecordCreated[0].alias }
+        return { ...prev, "alias": isUserRecordCreated[0].alias, "twitterUserName": isUserRecordCreated[0].twitterUserName }
       })
     }
   }
@@ -214,11 +199,11 @@ const QuestionPage = () => {
 
     if (isUserRecordCreated.length === 0) {
       if (params.id in correctAnswers) {
-        if (formData.answer.toLowerCase() === correctAnswers[params.id] && formData.alias !== "") {
+        if (formData.answer.toLowerCase() === correctAnswers[params.id] && formData.alias !== "" && formData.twitterUserName !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
-        else if (formData.answer !== "" && formData.alias !== "") {
+        else if (formData.answer !== "" && formData.alias !== "" && formData.twitterUserName !== "") {
           setIsWrongAnswer(true);
         }
         else {
@@ -248,12 +233,12 @@ const QuestionPage = () => {
   }
 
   return (
-    <div className="App">
+    <div className="question-container">
       <div className="app-container">
 
         <div className="header d-flex">
           <div className="twitter-id back-btn ms-3">
-            <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => navigate('/')}>
+            <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => navigate('/chapter', { state: { metamaskId: location?.state?.metamaskId, twitterData: location?.state?.twitterData, walletAmount: location?.state?.walletAmount } })}>
               <span>{'<<'}</span>
             </div>
           </div>
@@ -266,102 +251,104 @@ const QuestionPage = () => {
               : ""}
           </div>
         </div>
+        {window.innerWidth > WindowSize ?
+          <>
+            <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} />
 
-        <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} />
+            <div className="internal-content">
 
-        <div className="internal-content">
+              <div className="my-2 me-3" id="timer-value">
+                <span className="hour-box">{timer.hours}</span><span className="timer-colen">:</span>
+                <span className="minute-box">{timer.minutes}</span><span className="timer-colen">:</span>
+                <span className="second-box">{timer.seconds}</span>
+              </div>
+              {/* <div className="my-2" id="timer-value"></div> */}
+              <div className="upper-portion-2">
+                <div className="riddle-container">
+                  <div className="riddle-heading">{`<<Quest: ${params?.id}>>`}</div>
+                  <Typewriter
+                    onInit={(typewriter) => {
+                      typewriter
+                        .typeString("Look out for the clues and complete the mission.")
+                        .start();
+                    }}
+                    options={{
+                      loop: false,
+                      delay: 40,
+                      pauseFor: 100000,
+                    }}
+                  />
+                  <ReactPlayer className={`jasper-video`} url={question1} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true}
+                  // onEnded={jasperVideoEnded} 
+                  />
+                </div>
+              </div>
 
-          <div className="my-2 me-3" id="timer-value">
-            <span className="hour-box">{timer.hours}</span><span className="timer-colen">:</span>
-            <span className="minute-box">{timer.minutes}</span><span className="timer-colen">:</span>
-            <span className="second-box">{timer.seconds}</span>
-          </div>
-          {/* <div className="my-2" id="timer-value"></div> */}
-          <div className="upper-portion-2">
-            <div className="riddle-container">
-              <div className="riddle-heading">{`<<Quest: ${params?.id}>>`}</div>
-              <Typewriter
-                onInit={(typewriter) => {
-                  typewriter
-                    .typeString("Agents, you must seek for the hidden clues and enter them down here before getting your hands on the evidence.")
-                    // .callFunction(() => {
-                    //   setTypingAudio(false);
-                    // })
-                    .start();
-                }}
-                options={{
-                  loop: false,
-                  delay: 40,
-                  pauseFor: 100000,
-                }}
-              />
-              <ReactPlayer className={`jasper-video`} url={question1} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true}
-              // onEnded={jasperVideoEnded} 
-              />
-            </div>
-          </div>
+              <div className="row bottom-portion-2">
+                <div className="col-lg-5 col-md-12 form-box py-2 px-4">
 
-          <div className="row bottom-portion-2">
-            <div className="col-lg-5 col-md-12 form-box py-2 px-4">
-
-              <div className="form-group row">
-                {window.innerWidth < WindowSize ?
-                  <>
+                  <div className="form-group row">
+                  
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Twitter :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
-                      <input className="input-field" type="text" placeholder="@shylocknft" name="twitterUserName" value={formData.twitterUserName} onChange={handleFormData} />
+                      {isUserRecordCreated.length !== 0 && formData.twitterUserName !== "" ?
+                        <span className="text-center">{formData.twitterUserName}</span>
+                        :
+                        <input className="input-field" type="text" placeholder="@shylocknft" name="twitterUserName" value={formData.twitterUserName} onChange={handleFormData} />
+                      }
                     </div>
-                  </>
-                  :
-                  ""}
-                <label className="col-sm-4 align-self-center col-form-label mt-3">Your Detective Alias Name :</label>
-                <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
-                  {isUserRecordCreated.length !== 0 && formData.alias !== "" ?
-                    formData.alias
-                    :
-                    <input className="input-field" type="text" placeholder="Agent Shylock" name="alias" value={formData.alias} onChange={handleFormData} />
-                  }
+              
+                    <label className="col-sm-4 align-self-center col-form-label mt-3">Your Detective Alias Name :</label>
+                    <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
+                      {isUserRecordCreated.length !== 0 && formData.alias !== "" ?
+                        <span className="text-center">{formData.alias}</span>
+                        :
+                        <input className="input-field" type="text" placeholder="Agent Shylock" name="alias" value={formData.alias} onChange={handleFormData} />
+                      }
+                    </div>
+                    <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
+                    <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
+                      <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
+                    </div>
+                  </div>
+                  <button className={`submit-btn d-flex ${shakeSubmit ? "animate__animated animate__shakeX" : ""}`} onClick={() => submitButton()}>
+                    <span className="me-2">Submit</span>
+                    <PulseLoader
+                      color={"#ff8012"}
+                      loading={loading}
+                      cssOverride={{
+                        display: "block",
+                        margin: "0 auto",
+                        borderColor: "#fff",
+                      }}
+                      size={10}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                    />
+                  </button>
+                  <div className="orange-text align-self-center text-center fs-7"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}{isWrongAnswer ? "<<Nice try, but that's not quite right. Look at the clue again.>>" : ""}
+                  </div>
                 </div>
-                <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
-                <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
-                  <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
+
+                <div className="col-lg-7 col-md-12 rules-box">
+                  <div className="rules-heading">{'<<PROTOCOLS>>'}</div>
+                  <div className="rules">
+                    <ul>
+                      <li>Answers should be relevant to the lore and does not contain any NSFW words. (1x Entry)</li>
+                      <li>Follow and Turn on notifications for both <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a> to get regular updates and also to increase your chances of becoming an Agent. (2x Entry)</li>
+                      <li>Share your mystery-solving experience by uploading the Evidence image and Tag 3 potential Agents on your Twitter with whom you can join together to solve the case with Shylock. (3x Entry)</li>
+                    </ul>
+                  </div>
+                  <p className="attention-notes">⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
+                  <p className="tac my-2">{'<<T&C applied>>'}</p>
                 </div>
               </div>
-              <button className={`submit-btn d-flex ${shakeSubmit ? "animate__animated animate__shakeX" : ""}`} onClick={() => submitButton()}>
-                <span className="me-2">Submit</span>
-                <PulseLoader
-                  color={"#ff8012"}
-                  loading={loading}
-                  cssOverride={{
-                    display: "block",
-                    margin: "0 auto",
-                    borderColor: "#fff",
-                  }}
-                  size={10}
-                  aria-label="Loading Spinner"
-                  data-testid="loader"
-                />
-              </button>
-              <div className="orange-text align-self-center text-center fs-7"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}{isWrongAnswer ? "<<Nice try, but that's not quite right. Look at the clue again.>>" : ""}
-              </div>
+
             </div>
-
-            <div className="col-lg-7 col-md-12 rules-box">
-              <div className="rules-heading">{'<<PROTOCOLS>>'}</div>
-              <div className="rules">
-                <ul>
-                  <li>Answers should be relevant to the lore and does not contain any NSFW words. (1x Entry)</li>
-                  <li>Follow and Turn on notifications for both <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a> to get regular updates and also to increase your chances of becoming an Agent. (2x Entry)</li>
-                  <li>Share your mystery-solving experience by uploading the Evidence image and Tag 3 potential Agents on your Twitter with whom you can join together to solve the case with Shylock. (3x Entry)</li>
-                </ul>
-              </div>
-              <p className="attention-notes">⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
-              <p className="tac my-2">{'<<T&C applied>>'}</p>
-            </div>
-          </div>
-
-        </div>
-
+          </>
+          :
+          "<<Use Desktop for better experience>>"
+        }
         <div className='footer'>
           <button className="twitter-btn">
             <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">

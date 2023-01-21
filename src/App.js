@@ -3,13 +3,8 @@ import React, { useState, useEffect } from "react";
 import './App.scss';
 import logo from './shylock-logo.png';
 import twitterIcon from './twitter.png';
-import whiteLock from './Assets/white-lock.png';
 // import PuzzleImage from './Assets/puzzle-6-BW.png';
 import tickIcon from './Assets/checked.png';
-import ReactPlayer from 'react-player';
-import Bgm from './Audio/shylock-bgm.mp3';
-import JasperVoiceWave from './Audio/jasper-quest-end.mp4';
-import Typewriter from 'typewriter-effect';
 import 'animate.css';
 import AnalogClock from 'analog-clock-react';
 import Modal from "./components/common/Modal";
@@ -23,7 +18,8 @@ import axios from 'axios';
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
-const WindowSize = "600";
+
+const WindowSize = "1000";
 
 function App() {
   let navigate = useNavigate();
@@ -33,24 +29,9 @@ function App() {
   const [balance, setBalance] = useState(0);
 
   const [isOpenLogin, setisOpenLogin] = useState(false);
-  // const [isOpenSubmitPopup, setisOpenSubmitPopup] = useState(false);
-  const [isOpenDayPopup, setisOpenDayPopup] = useState(false);
-  const [hideVideo, setHideVideo] = useState(false);
-  // const [typingAudio, setTypingAudio] = useState(false);
-  // const [bgmAudio, setBgmAudio] = useState(false);
-  const [portionCount, setportionCount] = useState(-1);
   const [user, setUser] = useState(null);
-  // const [address, setMetaKey] = useState(null);
   const [shake, setShake] = useState(false);
   const [allRecords, setallRecords] = useState([]);
-  // const [formData, setFormData] = useState({
-  //   twitter: null,
-  //   twitterUserName: "",
-  //   metamaskId: "",
-  //   answer: "",
-  //   alias: "",
-  //   walletAmount: ""
-  // });
 
   const [analogClockTime, setAnalogClockTime] = useState(
     {
@@ -137,59 +118,6 @@ function App() {
     )
   }
 
-  const daysData = [
-    {
-      id: 1,
-      day: "HIDEOUT",
-      isOpen: true,
-    },
-    {
-      id: 2,
-      day: "LOCKER",
-      isOpen: true,
-    },
-    {
-      id: 3,
-      day: "HELIPAD",
-      isOpen: true,
-    },
-    {
-      id: 4,
-      day: "MEETAGENTS",
-      isOpen: true,
-    },
-    {
-      id: 5,
-      day: "BIKE",
-      isOpen: true,
-    },
-    {
-      id: 6,
-      day: "CAR CHASE",
-      isOpen: true,
-    },
-    {
-      id: 7,
-      day: "DRAINAGE",
-      isOpen: true,
-    },
-    {
-      id: 8,
-      day: "TUNNEL",
-      isOpen: true,
-    },
-    {
-      id: 9,
-      day: "LIBRARY",
-      isOpen: true,
-    },
-    {
-      id: 10,
-      day: "PRISON",
-      isOpen: true,
-    },
-  ]
-
   const handleTwitterLogin = () => {
 
     if (window.innerWidth >= WindowSize) {
@@ -216,47 +144,16 @@ function App() {
   }
 
   const enterDarkRoom = () => {
-    if (window.innerWidth < WindowSize) {
-      if (address) {
-        Initiation();
-      } else {
-        setShake(true);
-        setTimeout(() => {
-          setShake(false);
-        }, 500);
-      }
+
+    if (address && user) {
+      navigate('/chapter', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } });
+      // Initiation();
     } else {
-      if (address && user) {
-        Initiation();
-      } else {
-        setShake(true);
-        setTimeout(() => {
-          setShake(false);
-        }, 500);
-      }
+      setShake(true);
+      setTimeout(() => {
+        setShake(false);
+      }, 500);
     }
-  }
-
-  const Initiation = () => {
-    setisOpenLogin(false);
-    setTimeout(() => {
-      setportionCount(0);
-    }, 500);
-  }
-
-  // const onDayClicked = () => {
-  //   setportionCount(1);
-  // }
-
-  // const handlePuzzleDownload = () => {
-  //   const a = document.createElement('a');
-  //   a.href = PuzzleImage;
-  //   a.download = 'Shylock’s Quest Day 6.jpg';
-  //   a.click();
-  // }
-
-  const jasperVideoEnded = () => {
-    setHideVideo(true);
   }
 
   return (
@@ -265,11 +162,9 @@ function App() {
         <div className="app-container">
           <div className="header d-flex">
             <div className="twitter-id back-btn ms-3">
-              {portionCount === 1 ? <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => setportionCount(0)}>
-                <span>{'<<'}</span>
-              </div> : ""}
+           
             </div>
-            <div className="logo-container cursor-pointer" onClick={() => setportionCount(-1)}>
+            <div className="logo-container cursor-pointer" onClick={() => navigate('/')}>
               <img src={logo} className="shylock-logo" alt="logo" />
             </div>
             <div className={`metakey me-2 ${address ? "border-orange" : ""}`}>
@@ -278,87 +173,24 @@ function App() {
                 : ""}
             </div>
           </div>
+          {/* <div className="explore-page-content"> */}
 
-          <div className={`begin-btn  ${portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`}>
-            <button className={`initiate-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>BEGIN</button>
-
-            <div className={`fs-7 mt-1 better-experience`}>
-              {window.innerWidth < WindowSize ?
-                "<<Use desktop for better experience>>"
-                : ""}
-            </div>
-          </div>
-
-          {portionCount !== -1 ?
+          {/* {console.log(window.innerWidth)} */}
+          {window.innerWidth > WindowSize ?
             <>
-              <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} />
-            </> : ""
-          }
-          {/* <button className={`initiate-btn  ${portionCount === 0 ? "animate__animated animate__fadeOut d-none" : portionCount !== -1 ? "d-none" : "animate__animated animate__fadeInUp animate__delay-1s"}`} onClick={Initiation}> ENTER THE SHADES </button> */}
-
-          {portionCount !== -1 ?
-            <>
-              {/* <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} /> */}
-
-              <div className="internal-content">
-                {portionCount === 0 ?
-                  <>
-                    <div className="upper-portion-1">
-                      <div className={`video-container ${hideVideo ? "d-none" : ""}`}>
-                        <ReactPlayer className={`jasper-video`} url={JasperVoiceWave} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} onEnded={jasperVideoEnded} />
-                      </div>
-
-                      <Typewriter
-                        onInit={(typewriter) => {
-                          typewriter
-                            // .pauseFor(400)
-                            .typeString(" Agents, as Shylock enters The Hideout you will be posed with more interesting and intriguing missions to solve. But before that, Shylock would like to reward the Agents exclusively for their support in helping him identify the members of the SERA Gang.")
-                            // .pauseFor(1000)
-                            // .typeString(" Let’s get to work.")
-                            .start();
-                        }}
-                        options={{
-                          loop: false,
-                          delay: 40,
-                          pauseFor: 100000,
-                        }}
-                      />
-                    </div>
-                    <div className="row bottom-portion-1">
-                      <div className="col-lg-2 analog-clock my-3">
-                        {/* <Timer /> */}
-                        {/* <div className="my-2" id="timer-value"></div> */}
-                        <AnalogClock {...analogClockTime} />
-                      </div>
-
-                      <div className="col-lg-9 days-box-container my-3">
-                        <span className="days-heading">Quests</span>
-                        <div style={{ height: "80%" }} className="d-flex align-items-center">
-                          <div className="days-container">
-                            {daysData.map(({ id, day, isOpen }) => {
-                              return <>
-                                <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={() => navigate(`/chapter/${id}`, { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
-                                  {/* <Tooltip className="custom-tooltip" anchorId={`day-${day}`}  /> */}
-                                  {!isOpen ?
-                                    <img className="locked-image" src={whiteLock} alt="" />
-                                    : ""}
-                                  <span>{day}</span>
-                                  <div class={`line-arrow-${id}`}></div>
-                                </div>
-                              </>
-                            })}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="col-lg-1 time-box-container my-3">
-                      </div>
-                    </div>
-                  </>
-                  : ""}
+              <div className="analog-clock my-3">
+                <AnalogClock {...analogClockTime} />
               </div>
-            </>
-            : ""}
+
+              <div className={`begin-btn animate__animated animate__fadeInUp animate__delay-1s"`}>
+                <button className={`initiate-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>EXPLORE</button>
+                <div className={`fs-7 mt-1 better-experience`}>
+                </div>
+              </div>
+              </>
+            :
+            "<<Use Desktop for better experience>>"
+          }
 
           <div className='footer'>
             <button className="twitter-btn">
@@ -393,19 +225,6 @@ function App() {
               <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={enterDarkRoom}> THE DARK ROOM </button>
             </div>
             {/* {address && user ? "" : <p className="text-center">connections not verified</p>} */}
-          </Modal>
-          <Modal
-            isOpen={isOpenDayPopup}
-            toggle={() => setisOpenDayPopup(!isOpenDayPopup)}
-            size="md"
-            headTitle="CHAPTER LOADING..."
-          >
-            <div className="orange-text text-center mt-2">Keep an eye out. The Hideout will be revealed soon.</div>
-            <div className="d-flex justify-content-center align-items-center my-3">
-              <a target="_blank" href="https://twitter.com/intent/tweet?text=Bring%20it%20on.%20We%20are%20waiting%20%40shylocknft.%0a%0a%23SolvewithShylock" rel="noreferrer">
-                <button className='enter-btn'>{`>> Tweet <<`}</button>
-              </a>
-            </div>
           </Modal>
         </div>
 

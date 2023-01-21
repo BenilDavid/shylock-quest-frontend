@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import QuestImagePage from './components/QuestImagePage/index';
 import QuestionPage from './components/QuestionPage/index';
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
+import ChapterPage from './components/ChapterPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,8 +18,9 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<App />} />
-          <Route exact path="/quest-lore" element={<QuestImagePage />} />
+          <Route exact path="/chapter" element={<ChapterPage />} />
           <Route exact path="/chapter/:id" element={<QuestionPage />} />
+          <Route exact path="/quest-lore" element={<QuestImagePage />} />
         </Routes>
       </BrowserRouter>
     </ThirdwebProvider>
