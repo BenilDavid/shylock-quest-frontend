@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import './QuestionPage.scss';
 import logo from '../../shylock-logo.png';
@@ -29,6 +31,7 @@ const QuestionPage = () => {
   const [allRecords, setallRecords] = useState([]);
   const [isWrongAnswer, setIsWrongAnswer] = useState(false);
   const [isAllreadyRecordedData, setIsAllreadyRecordedData] = useState(false);
+  const [isUserRecordCreated, setIsUserRecordCreated] = useState([]);
 
   const [timer, setTimer] = useState({
     hours: "",
@@ -41,18 +44,64 @@ const QuestionPage = () => {
     metamaskId: location?.state?.metamaskId,
     answer: "",
     alias: "",
-    walletAmount: ""
+    walletAmount: location?.state?.walletAmount,
+    currentChapterCount: params?.id,
+    answerOne: "",
+    answerTwo: "",
+    answerThree: "",
+    answerFour: "",
+    answerFive: "",
+    answerSix: "",
+    answerSeven: "",
+    answerEight: "",
+    answerNine: "",
+    answerTen: ""
   });
 
+  const answers = {
+    '1': 'answerOne',
+    '2': 'answerTwo',
+    '3': 'answerThree',
+    '4': 'answerFour',
+    '5': 'answerFive',
+    '6': 'answerSix',
+    '7': 'answerSeven',
+    '8': 'answerEight',
+    '9': 'answerNine',
+    '10': 'answerTen'
+  }
+  const correctAnswers = {
+    '1': 'one',
+    '2': 'two',
+    '3': 'three',
+    '4': 'four',
+    '5': 'five',
+    '6': 'six',
+    '7': 'seven',
+    '8': 'eight',
+    '9': 'nine',
+    '10': 'ten',
+    //...and so on for all cases
+  }
   useEffect(() => {
     getAllRecords();
     setTimerFunction();
   }, [])
 
+  // useEffect(() => {
+  //   console.log(location);
+  //   console.log(params.id);
+  // }, [location, params])
+
+  // useEffect(() => {
+  //   console.log(isUserRecordCreated);
+  //   console.log(formData);
+  // }, [isUserRecordCreated])
+
   useEffect(() => {
-    console.log(location);
-    console.log(params.id);
-  }, [location, params])
+    console.log(allRecords);
+    checkUserExist();
+  }, [allRecords])
 
 
   useEffect(() => {
@@ -67,7 +116,7 @@ const QuestionPage = () => {
     try {
       const { data } = await axios.get(`${URL}/api/submit-form/getRecords`);
       setallRecords(data);
-      // console.log(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -76,8 +125,29 @@ const QuestionPage = () => {
   // createRecord
   const handleCreateRecord = async () => {
     try {
-      await axios.post(`${URL}/api/submit-form`, formData);
-      setFormData({ ...formData, answer: "", twitterUserName: "", alias: "" });
+      if (params.id in answers) {
+        await axios.post(`${URL}/api/submit-form`, { ...formData, [answers[params.id]]: formData.answer });
+      } else {
+        console.log("Invalid id")
+      }
+      setFormData({ ...formData, answer: "", twitterUserName: "" });
+      setisOpenSubmitPopup(!isOpenSubmitPopup);
+      setLoading(false);
+      getAllRecords();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // updateRecord
+  const handleUpdateRecord = async (id) => {
+    try {
+      if (params.id in answers) {
+        await axios.patch(`${URL}/api/submit-form/updateRecord?id=${id}`, { [answers[params.id]]: formData.answer });
+      } else {
+        console.log("Invalid id")
+      }
+      setFormData({ ...formData, answer: "" });
       setisOpenSubmitPopup(!isOpenSubmitPopup);
       setLoading(false);
       getAllRecords();
@@ -119,42 +189,32 @@ const QuestionPage = () => {
     setFormData({ ...formData, [name]: value })
   }
 
-  const submitButton = () => {
-    // eslint-disable-next-line array-callback-return
-    const isRecordedData = allRecords.filter(({ metamaskId, twitter, twitterUserName }, index) => {
-      if (window.innerWidth < WindowSize) {
-        if (formData.metamaskId === metamaskId || formData.twitterUserName === twitterUserName) {
+  const checkUserExist = () => {
+    console.log(allRecords);
+    const isUserRecordCreated = allRecords.filter(({ metamaskId, twitter }) => {
+      if (twitter === null) {
+        if (formData.metamaskId === metamaskId) {
           return metamaskId;
         }
-      } else {
-        // console.log(twitter.id);
-        if (twitter === null) {
-          if (formData.metamaskId === metamaskId) {
-            return metamaskId;
-          }
-        } else if (formData.metamaskId === metamaskId || formData.twitter.uid === twitter.uid) {
-          return metamaskId;
-        }
+      } else if (formData.metamaskId === metamaskId || formData.twitter.uid === twitter.uid) {
+        return metamaskId;
       }
     });
-    // console.log(isRecordedData);
-    if (isRecordedData.length === 0) {
-      if (window.innerWidth < WindowSize) {
-        if (formData.answer.toLowerCase() === "boat" && formData.twitterUserName !== "" && formData.alias !== "") {
-          setLoading(!loading);
-          handleCreateRecord();
-        }
-        else if (formData.answer !== "" && formData.twitterUserName !== "" && formData.alias !== "") {
-          setIsWrongAnswer(true);
-        }
-        else {
-          setShakeSubmit(true);
-          setTimeout(() => {
-            setShakeSubmit(false);
-          }, 500);
-        }
-      } else {
-        if (formData.answer.toLowerCase() === "boat" && formData.alias !== "") {
+    console.log("user exist", isUserRecordCreated);
+    setIsUserRecordCreated(isUserRecordCreated);
+    if (isUserRecordCreated.length !== 0) {
+      setFormData((prev) => {
+        return { ...prev, "alias": isUserRecordCreated[0].alias }
+      })
+    }
+  }
+
+  const submitButton = () => {
+    // eslint-disable-next-line array-callback-return
+
+    if (isUserRecordCreated.length === 0) {
+      if (params.id in correctAnswers) {
+        if (formData.answer.toLowerCase() === correctAnswers[params.id] && formData.alias !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
@@ -169,7 +229,21 @@ const QuestionPage = () => {
         }
       }
     } else {
-      setIsAllreadyRecordedData(true);
+      if (params.id in correctAnswers) {
+        if (formData.answer.toLowerCase() === correctAnswers[params.id] && formData.alias !== "") {
+          setLoading(!loading);
+          handleUpdateRecord(isUserRecordCreated[0]._id);
+        }
+        else if (formData.answer !== "" && formData.alias !== "") {
+          setIsWrongAnswer(true);
+        }
+        else {
+          setShakeSubmit(true);
+          setTimeout(() => {
+            setShakeSubmit(false);
+          }, 500);
+        }
+      }
     }
   }
 
@@ -177,21 +251,21 @@ const QuestionPage = () => {
     <div className="App">
       <div className="app-container">
 
-      <div className="header d-flex">
-            <div className="twitter-id back-btn ms-3">
-              <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => navigate('/')}>
-                <span>{'<<'}</span>
-              </div>
+        <div className="header d-flex">
+          <div className="twitter-id back-btn ms-3">
+            <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => navigate('/')}>
+              <span>{'<<'}</span>
             </div>
-            <div className="logo-container cursor-pointer" onClick={() => navigate('/')}>
-              <img src={logo} className="shylock-logo" alt="logo" />
-            </div>
-            <div className={`metakey me-2 ${formData.metamaskId ? "border-orange" : ""}`}>
-                {formData.metamaskId
-                  ? formData.metamaskId.slice(0, 5) + "..." + formData.metamaskId.slice(-5)
-                  : ""}
-              </div>
           </div>
+          <div className="logo-container cursor-pointer" onClick={() => navigate('/')}>
+            <img src={logo} className="shylock-logo" alt="logo" />
+          </div>
+          <div className={`metakey me-2 ${formData.metamaskId ? "border-orange" : ""}`}>
+            {formData.metamaskId
+              ? formData.metamaskId.slice(0, 5) + "..." + formData.metamaskId.slice(-5)
+              : ""}
+          </div>
+        </div>
 
         <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} />
 
@@ -205,7 +279,7 @@ const QuestionPage = () => {
           {/* <div className="my-2" id="timer-value"></div> */}
           <div className="upper-portion-2">
             <div className="riddle-container">
-              <div className="riddle-heading">{'<<Quest: 6>>'}</div>
+              <div className="riddle-heading">{`<<Quest: ${params?.id}>>`}</div>
               <Typewriter
                 onInit={(typewriter) => {
                   typewriter
@@ -242,7 +316,11 @@ const QuestionPage = () => {
                   ""}
                 <label className="col-sm-4 align-self-center col-form-label mt-3">Your Detective Alias Name :</label>
                 <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
-                  <input className="input-field" type="text" placeholder="Agent Shylock" name="alias" value={formData.alias} onChange={handleFormData} />
+                  {isUserRecordCreated.length !== 0 && formData.alias !== "" ?
+                    formData.alias
+                    :
+                    <input className="input-field" type="text" placeholder="Agent Shylock" name="alias" value={formData.alias} onChange={handleFormData} />
+                  }
                 </div>
                 <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
                 <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">

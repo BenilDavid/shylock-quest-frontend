@@ -18,7 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { signOut, getRedirectResult, signInWithRedirect, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
 import { authentication } from './firebase-config';
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
-// import Web3 from 'web3';
+import Web3 from 'web3';
+import axios from 'axios';
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -28,6 +29,8 @@ function App() {
   let navigate = useNavigate();
   const address = useAddress();
   const provider = new TwitterAuthProvider();
+
+  const [balance, setBalance] = useState(0);
 
   const [isOpenLogin, setisOpenLogin] = useState(false);
   // const [isOpenSubmitPopup, setisOpenSubmitPopup] = useState(false);
@@ -39,6 +42,7 @@ function App() {
   const [user, setUser] = useState(null);
   // const [address, setMetaKey] = useState(null);
   const [shake, setShake] = useState(false);
+  const [allRecords, setallRecords] = useState([]);
   // const [formData, setFormData] = useState({
   //   twitter: null,
   //   twitterUserName: "",
@@ -88,27 +92,36 @@ function App() {
 
   }, [])
 
-  // useEffect(() => {
-  //   getBalance();
-  // }, [address])
-
   useEffect(() => {
-    console.log("address", address);
-    console.log("user", user);
-    // setFormData((prev) => {
-    //   return { ...prev, "metamaskId": address, "twitter": user }
-    // })
-  }, [user, address])
+    getBalance();
+    getAllRecords();
+    // eslint-disable-next-line array-callback-return
+    allRecords.map((data) => {
+      if (data.metamaskId === address) {
+        console.log("user already available");
+      }
+    })
+  }, [address])
 
-  // const getBalance = async () => {
-  //   const web3 = new Web3(window.ethereum)
-  //   const accounts = await web3.eth.getAccounts()
-  //   const balance = await web3.eth.getBalance(accounts[0])
-  //   const etherBalance = web3.utils.fromWei(balance, 'ether')
-  //   setFormData((prev) => {
-  //     return { ...prev, "walletAmount": etherBalance }
-  //   })
-  // }
+
+  const getBalance = async () => {
+    const web3 = new Web3(window.ethereum)
+    const accounts = await web3.eth.getAccounts()
+    const balance = await web3.eth.getBalance(accounts[0])
+    const etherBalance = web3.utils.fromWei(balance, 'ether')
+    setBalance(etherBalance);
+  }
+
+  // getAllRecords
+  const getAllRecords = async () => {
+    try {
+      const { data } = await axios.get(`${URL}/api/submit-form/getRecords`);
+      setallRecords(data);
+      // console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const updateClock = () => {
     let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
@@ -312,19 +325,19 @@ function App() {
                       />
                     </div>
                     <div className="row bottom-portion-1">
-                      <div className="col-lg-3 analog-clock my-3">
+                      <div className="col-lg-2 analog-clock my-3">
                         {/* <Timer /> */}
                         {/* <div className="my-2" id="timer-value"></div> */}
                         <AnalogClock {...analogClockTime} />
                       </div>
 
-                      <div className="col-lg-8 days-box-container my-3">
+                      <div className="col-lg-9 days-box-container my-3">
                         <span className="days-heading">Quests</span>
                         <div style={{ height: "80%" }} className="d-flex align-items-center">
                           <div className="days-container">
                             {daysData.map(({ id, day, isOpen }) => {
                               return <>
-                                <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={() => navigate(`/chapter/${id}`, { state: { metamaskId: address, twitterData: user ? user.providerData : 0 } })}>
+                                <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={() => navigate(`/chapter/${id}`, { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
                                   {/* <Tooltip className="custom-tooltip" anchorId={`day-${day}`}  /> */}
                                   {!isOpen ?
                                     <img className="locked-image" src={whiteLock} alt="" />
