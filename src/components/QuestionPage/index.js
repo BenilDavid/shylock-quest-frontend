@@ -266,7 +266,7 @@ const QuestionPage = () => {
               {/* <div className="my-2" id="timer-value"></div> */}
               <div className="upper-portion-2">
                 <div className="riddle-container">
-                  <div className="riddle-heading">{`<<Quest: ${params?.id}>>`}</div>
+                  <div className="riddle-heading">{`<<THE HIDEOUT>>`}</div>
                   <Typewriter
                     onInit={(typewriter) => {
                       typewriter
@@ -288,7 +288,7 @@ const QuestionPage = () => {
               <div className="row bottom-portion-2">
                 <div className="col-lg-5 col-md-12 form-box py-2 px-4">
 
-                  <div className="form-group row">
+                  <div className="form-group mt-5 row">
                   
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Twitter :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
@@ -310,7 +310,7 @@ const QuestionPage = () => {
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                       <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
-                      <a target="_blank" href="https://twitter.com/shylocknft/status/1614681586393583617?s=20&t=uN062ZENBK_0Ry7gJeTTVg" rel="noreferrer">
+                      <a target="_blank" href="https://twitter.com/imjasperai/status/1616888376455757830?s=46&t=rHKMIsuyfk8YlBr8uWJRvg" rel="noreferrer">
                                 <img className="info-button" src={InfoIcon} alt="info-button" />
                               </a>
                     </div>

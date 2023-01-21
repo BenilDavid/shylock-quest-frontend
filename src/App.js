@@ -222,7 +222,7 @@ function App() {
 
             </div>
             <div className="d-flex justify-content-center align-items-center my-3">
-              <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={enterDarkRoom}> THE DARK ROOM </button>
+              <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={enterDarkRoom}> THE JOURNEY </button>
             </div>
             {/* {address && user ? "" : <p className="text-center">connections not verified</p>} */}
           </Modal>

@@ -85,6 +85,7 @@
           width: 80%;
           height: 30%;
           .riddle-container {
+            margin-top: 25px;
             text-align: left;
             @media (max-width: 978px) {
               margin-top: 20px;
@@ -147,6 +148,7 @@
             padding: 0 15px;
             border: 1px solid #fff;
             .rules-heading {
+              margin-top: 15px;
               @media (max-width: 978px) {
                 margin-top: 10px;
               }
@@ -155,10 +157,11 @@
               padding: 0 !important;
             }
             .rules {
+
               // height: 80%;
               // margin-top: 8px;
               text-align: left;
-              font-size: 0.94rem;
+              font-size: 0.96rem;
               display: flex;
               flex-direction: column;
               align-items: center;
@@ -192,7 +195,7 @@
             }
            
             .tac {
-              font-size: 0.81rem;
+              font-size: 0.9rem;
               @media (max-width: 978px) {
                 font-size: 0.92rem;
                 margin-bottom: 10px !important;

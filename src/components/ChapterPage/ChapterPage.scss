@@ -134,7 +134,8 @@
               padding: 20px;
               // height: 80%;
               display: grid;
-              grid-template-columns: repeat(5, 1fr);
+              justify-content: center;
+              grid-template-columns: repeat(5, 160px);
               grid-gap: 30px 10px;
               @media (max-width: 978px) {
                 padding: 0;
@@ -142,7 +143,7 @@
                 // grid-template-columns: repeat(2, 1fr);
               }
               .days-box {
-                width: 130px;
+                // width: 130px;
                 font-size: 0.9rem;
                 height: 50px;
                 margin: 5px 10px;
