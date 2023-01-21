@@ -81,7 +81,7 @@ function ChapterPage() {
     const daysData = [
         {
             id: 1,
-            day: "HIDEOUT",
+            day: "THE HIDEOUT",
             isOpen: true,
         },
         {
@@ -176,9 +176,9 @@ function ChapterPage() {
                                         onInit={(typewriter) => {
                                             typewriter
                                                 // .pauseFor(400)
-                                                .typeString(" Welcome Agents and Recruits. Shylock is thrilled to invite you to take part in this roller coaster adventure of unravelling the lore, and witnessing his attempt at rescuing Ken from the SERA Gang.")
+                                                .typeString(" Welcome Agents and Recruits, Shylock is thrilled to invite you to take part in this roller coaster adventure of unravelling the lore, and witnessing his attempt at rescuing Ken from the SERA Gang.")
                                                 // .pauseFor(1000)
-                                                .typeString("Rules are pretty simple, look out for the clues and complete the mission. Each mission you complete will bring you closer to the most coveted role “AGENT” and also extra rewards. ")
+                                                .typeString(" Rules are pretty simple, look out for the clues and complete the mission. Each mission you complete will bring you closer to the most coveted role “AGENT” and also extra rewards. ")
                                                 .typeString(" We monitor your progress via the tracker, the higher the meter, better the shot at getting recruited. Good luck on your journey.")
                                                 .start();
                                         }}

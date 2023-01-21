@@ -13,6 +13,7 @@ import 'animate.css';
 import Modal from "../common/Modal";
 import PulseLoader from "react-spinners/PulseLoader";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import InfoIcon from '../../Assets/information-button.png'
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -28,13 +29,13 @@ const QuestionPage = () => {
   const [shakeSubmit, setShakeSubmit] = useState(false);
   const [allRecords, setallRecords] = useState([]);
   const [isWrongAnswer, setIsWrongAnswer] = useState(false);
-  const [isAllreadyRecordedData, setIsAllreadyRecordedData] = useState(false);
+  // const [isAllreadyRecordedData, setIsAllreadyRecordedData] = useState(false);
   const [isUserRecordCreated, setIsUserRecordCreated] = useState([]);
-  const [timer, setTimer] = useState({
-    hours: "",
-    minutes: "",
-    seconds: "",
-  });
+  // const [timer, setTimer] = useState({
+  //   hours: "",
+  //   minutes: "",
+  //   seconds: "",
+  // });
   const [formData, setFormData] = useState({
     twitter: location?.state?.twitterData,
     twitterUserName: "",
@@ -81,7 +82,7 @@ const QuestionPage = () => {
   }
   useEffect(() => {
     getAllRecords();
-    setTimerFunction();
+    // setTimerFunction();
   }, [])
 
   useEffect(() => {
@@ -91,10 +92,10 @@ const QuestionPage = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setIsAllreadyRecordedData(false);
+      // setIsAllreadyRecordedData(false);
       setIsWrongAnswer(false);
     }, 3000);
-  }, [isAllreadyRecordedData, isWrongAnswer])
+  }, [ isWrongAnswer])
 
   // getAllRecords
   const getAllRecords = async () => {
@@ -142,33 +143,33 @@ const QuestionPage = () => {
   }
 
   // timer function
-  const setTimerFunction = () => {
-    var countDownDate = new Date("Jan 30, 2023 23:59:59").getTime();
+  // const setTimerFunction = () => {
+  //   var countDownDate = new Date("Jan 30, 2023 23:59:59").getTime();
 
-    var x = setInterval(function () {
-      var now = new Date().getTime();
-      var distance = countDownDate - now;
+  //   var x = setInterval(function () {
+  //     var now = new Date().getTime();
+  //     var distance = countDownDate - now;
 
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      let tempHours = hours.toString().length === 1 ? "0" : "";
-      let tempMinutes = minutes.toString().length === 1 ? "0" : "";
-      let tempSeconds = seconds.toString().length === 1 ? "0" : "";
+  //     let tempHours = hours.toString().length === 1 ? "0" : "";
+  //     let tempMinutes = minutes.toString().length === 1 ? "0" : "";
+  //     let tempSeconds = seconds.toString().length === 1 ? "0" : "";
 
-      setTimer((prev) => {
-        return { ...prev, "hours": tempHours + hours, "minutes": tempMinutes + minutes, "seconds": tempSeconds + seconds }
-      });
+  //     setTimer((prev) => {
+  //       return { ...prev, "hours": tempHours + hours, "minutes": tempMinutes + minutes, "seconds": tempSeconds + seconds }
+  //     });
 
-      if (distance < 0) {
-        clearInterval(x);
-        setTimer((prev) => {
-          return { ...prev, "hours": "00", "minutes": "00", "seconds": "00" }
-        });
-      }
-    }, 1000);
-  }
+  //     if (distance < 0) {
+  //       clearInterval(x);
+  //       setTimer((prev) => {
+  //         return { ...prev, "hours": "00", "minutes": "00", "seconds": "00" }
+  //       });
+  //     }
+  //   }, 1000);
+  // }
 
   const handleFormData = ({ target: { name, value } }) => {
     setFormData({ ...formData, [name]: value })
@@ -257,11 +258,11 @@ const QuestionPage = () => {
 
             <div className="internal-content">
 
-              <div className="my-2 me-3" id="timer-value">
+              {/* <div className="my-2 me-3" id="timer-value">
                 <span className="hour-box">{timer.hours}</span><span className="timer-colen">:</span>
                 <span className="minute-box">{timer.minutes}</span><span className="timer-colen">:</span>
                 <span className="second-box">{timer.seconds}</span>
-              </div>
+              </div> */}
               {/* <div className="my-2" id="timer-value"></div> */}
               <div className="upper-portion-2">
                 <div className="riddle-container">
@@ -292,7 +293,7 @@ const QuestionPage = () => {
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Twitter :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                       {isUserRecordCreated.length !== 0 && formData.twitterUserName !== "" ?
-                        <span className="text-center">{formData.twitterUserName}</span>
+                        <span className="text-center fs-6">{formData.twitterUserName}</span>
                         :
                         <input className="input-field" type="text" placeholder="@shylocknft" name="twitterUserName" value={formData.twitterUserName} onChange={handleFormData} />
                       }
@@ -301,7 +302,7 @@ const QuestionPage = () => {
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Your Detective Alias Name :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                       {isUserRecordCreated.length !== 0 && formData.alias !== "" ?
-                        <span className="text-center">{formData.alias}</span>
+                        <span className="text-center fs-6">{formData.alias}</span>
                         :
                         <input className="input-field" type="text" placeholder="Agent Shylock" name="alias" value={formData.alias} onChange={handleFormData} />
                       }
@@ -309,9 +310,12 @@ const QuestionPage = () => {
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                       <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
+                      <a target="_blank" href="https://twitter.com/shylocknft/status/1614681586393583617?s=20&t=uN062ZENBK_0Ry7gJeTTVg" rel="noreferrer">
+                                <img className="info-button" src={InfoIcon} alt="info-button" />
+                              </a>
                     </div>
                   </div>
-                  <button className={`submit-btn d-flex ${shakeSubmit ? "animate__animated animate__shakeX" : ""}`} onClick={() => submitButton()}>
+                  <button className={`my-4 submit-btn d-flex ${shakeSubmit ? "animate__animated animate__shakeX" : ""}`} onClick={() => submitButton()}>
                     <span className="me-2">Submit</span>
                     <PulseLoader
                       color={"#ff8012"}
@@ -326,7 +330,8 @@ const QuestionPage = () => {
                       data-testid="loader"
                     />
                   </button>
-                  <div className="orange-text align-self-center text-center fs-7"> {isAllreadyRecordedData ? "<<Your Answer is already Recorded.>>" : ""}{isWrongAnswer ? "<<Nice try, but that's not quite right. Look at the clue again.>>" : ""}
+                  <div className="orange-text align-self-center text-center fs-7" style={{height: "60px"}}>
+                    {isWrongAnswer ? "<<Shylock is unable to rescue Ken from the hands of the SERA Gang. Thanks to your fat finger for moving slowly.>>" : ""}
                   </div>
                 </div>
 
@@ -338,8 +343,9 @@ const QuestionPage = () => {
                       <li>Follow and Turn on notifications for both <a target="_blank" className="link" href="https://twitter.com/shylocknft" rel="noreferrer">@shylocknft</a> and <a target="_blank" className="link" href="https://twitter.com/imjasperai" rel="noreferrer">@imjasperai</a> to get regular updates and also to increase your chances of becoming an Agent. (2x Entry)</li>
                       <li>Share your mystery-solving experience by uploading the Evidence image and Tag 3 potential Agents on your Twitter with whom you can join together to solve the case with Shylock. (3x Entry)</li>
                     </ul>
+                    <p className="attention-notes">⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
                   </div>
-                  <p className="attention-notes">⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
+                
                   <p className="tac my-2">{'<<T&C applied>>'}</p>
                 </div>
               </div>
@@ -373,7 +379,7 @@ const QuestionPage = () => {
             {/* <button className="enter-btn me-2" onClick={handlePuzzleDownload}> Download </button> */}
             {/* <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button> */}
             {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
-            <a target="_blank" href="https://twitter.com/intent/tweet?text=There%20you%20go%20%40shylocknft%2C%20guess%20who%20I've%20found%20in%20the%20final%20piece%20of%20the%20jigsaw%2C%20Cent%20(aka)%20Grim%20Reaper%2C%20who%20is%20the%20Head%20of%20the%20SERA%20Gang.%20He's%20one%20hell%20of%20a%20force%20to%20be%20reckoned%20with.%0a%0a%23SolvewithShylock" rel="noreferrer">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%20What%20about%20you%3F%0a%0a%23SolvewithShylock." rel="noreferrer">
               <button className='enter-btn'>{`>> Tweet <<`}</button>
             </a>
           </div>
