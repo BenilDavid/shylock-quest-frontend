@@ -9,9 +9,8 @@ import Bgm from '../../Audio/shylock-bgm.mp3';
 import JasperVoiceWave from '../../Audio/audio wave_1.mp4';
 import Typewriter from 'typewriter-effect';
 import 'animate.css';
-import AnalogClock from 'analog-clock-react';
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from 'axios';
+// import axios from 'axios';
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -23,7 +22,7 @@ function ChapterPage() {
     const { state: { metamaskId, walletAmount, twitterData } } = useLocation();
     const [hideVideo, setHideVideo] = useState(false);
     const [shakeLock, setShakeLock] = useState(false);
-    const [allRecords, setallRecords] = useState([]);
+    // const [allRecords, setallRecords] = useState([]);
     const [analogClockTime, setAnalogClockTime] = useState(
         {
             useCustomTime: true,
@@ -51,19 +50,19 @@ function ChapterPage() {
         }, 1000);
     }, [])
 
-    useEffect(() => {
-        getAllRecords();
-    }, [])
+    // useEffect(() => {
+    //     getAllRecords();
+    // }, [])
 
     // getAllRecords
-    const getAllRecords = async () => {
-        try {
-            const { data } = await axios.get(`${URL}/api/submit-form/getRecords`);
-            setallRecords(data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // const getAllRecords = async () => {
+    //     try {
+    //         const { data } = await axios.get(`${URL}/api/submit-form/getRecords`);
+    //         setallRecords(data);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
     const updateClock = () => {
         let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
