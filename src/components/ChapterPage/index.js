@@ -134,7 +134,7 @@ function ChapterPage() {
     const jasperVideoEnded = () => {
         setHideVideo(true);
     }
-    const handleShakeLock = (id) => {
+    const handleShakeLock = () => {
         setShakeLock(true);
         setTimeout(() => {
             setShakeLock(false);
@@ -196,7 +196,7 @@ function ChapterPage() {
                                             <div className="days-container">
                                                 {daysData.map(({ id, day, isOpen }) => {
                                                     return <>
-                                                        <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={isOpen ? () => navigate(`/chapter/${id}`, { state: { metamaskId: metamaskId, twitterData: twitterData, walletAmount: walletAmount } }) : () => handleShakeLock(id)}>
+                                                        <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={isOpen ? () => navigate(`/chapter/${id}`, { state: { metamaskId: metamaskId, twitterData: twitterData, walletAmount: walletAmount, chapter: day } }) : () => handleShakeLock(id)}>
                                                             {!isOpen ?
                                                                 <img key={id} className={`locked-image-${id} ${shakeLock ? "animate__animated animate__headShake" : ""}`} src={whiteLock} alt="" />
                                                                 : ""}

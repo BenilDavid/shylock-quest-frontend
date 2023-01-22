@@ -266,7 +266,7 @@ const QuestionPage = () => {
               {/* <div className="my-2" id="timer-value"></div> */}
               <div className="upper-portion-2">
                 <div className="riddle-container">
-                  <div className="riddle-heading">{`<<THE HIDEOUT>>`}</div>
+                  <div className="riddle-heading">{`<<${location?.state?.chapter}>>`}</div>
                   <Typewriter
                     onInit={(typewriter) => {
                       typewriter
@@ -379,7 +379,7 @@ const QuestionPage = () => {
             {/* <button className="enter-btn me-2" onClick={handlePuzzleDownload}> Download </button> */}
             {/* <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button> */}
             {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
-            <a target="_blank" href="https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%20What%20about%20you%3F%0a%0a%23SolvewithShylock." rel="noreferrer">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%0a%0a%23SolvewithShylock." rel="noreferrer">
               <button className='enter-btn'>{`>> Tweet <<`}</button>
             </a>
           </div>

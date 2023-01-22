@@ -173,9 +173,7 @@ function App() {
                 : ""}
             </div>
           </div>
-          {/* <div className="explore-page-content"> */}
-
-          {/* {console.log(window.innerWidth)} */}
+        
           {window.innerWidth > WindowSize ?
             <>
               <div className="analog-clock my-3">
