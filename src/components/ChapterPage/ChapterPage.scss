@@ -1,8 +1,8 @@
 @mixin line-arrow() {
     position: absolute;
-    right: -55px;
+    right: -36px;
     display: inline-block;
-    width: 48px; /* adjust as needed */
+    width: 30px; /* adjust as needed */
     height: 6px; /* adjust as needed */
     background-color: #ff8012; /* adjust as needed */
     &:after {
@@ -137,7 +137,7 @@
               display: grid;
               justify-content: center;
               grid-template-columns: repeat(5, 160px);
-              grid-gap: 30px 10px;
+              grid-gap: 35px 25px;
               @media (max-width: 978px) {
                 padding: 0;
                 margin-bottom: 15px;
@@ -168,9 +168,9 @@
                 .line-arrow-3,
                 .line-arrow-5 {
                   @include line-arrow();
-                  width: 28px;
+                  width: 26px;
                   right: auto;
-                  bottom: -22px;
+                  bottom: -24px;
                   transform: rotate(90deg);
                 }
                 .line-arrow-7,

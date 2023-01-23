@@ -29,13 +29,8 @@ const QuestionPage = () => {
   const [shakeSubmit, setShakeSubmit] = useState(false);
   const [allRecords, setallRecords] = useState([]);
   const [isWrongAnswer, setIsWrongAnswer] = useState(false);
-  // const [isAllreadyRecordedData, setIsAllreadyRecordedData] = useState(false);
   const [isUserRecordCreated, setIsUserRecordCreated] = useState([]);
-  // const [timer, setTimer] = useState({
-  //   hours: "",
-  //   minutes: "",
-  //   seconds: "",
-  // });
+
   const [formData, setFormData] = useState({
     twitter: location?.state?.twitterData,
     twitterUserName: "",
@@ -55,6 +50,15 @@ const QuestionPage = () => {
     answerNine: "",
     answerTen: ""
   });
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOptionChange = (e) => {
+    console.log(e.currentTarget.value);
+    setSelectedOption(e.target.value);
+    setFormData((prev) => {
+      return { ...prev, "answer": e.target.value }
+    })
+  }
 
   const answers = {
     '1': 'answerOne',
@@ -70,7 +74,7 @@ const QuestionPage = () => {
   }
   const correctAnswers = {
     '1': 'jasper',
-    '2': 'two',
+    '2': 'left',
     '3': 'three',
     '4': 'four',
     '5': 'five',
@@ -86,7 +90,7 @@ const QuestionPage = () => {
   }, [])
 
   useEffect(() => {
-    console.log(allRecords);
+    // console.log(allRecords);
     checkUserExist();
   }, [allRecords])
 
@@ -95,14 +99,14 @@ const QuestionPage = () => {
       // setIsAllreadyRecordedData(false);
       setIsWrongAnswer(false);
     }, 3000);
-  }, [ isWrongAnswer])
+  }, [isWrongAnswer])
 
   // getAllRecords
   const getAllRecords = async () => {
     try {
       const { data } = await axios.get(`${URL}/api/submit-form/getRecords`);
       setallRecords(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -141,35 +145,6 @@ const QuestionPage = () => {
       console.log(error);
     }
   }
-
-  // timer function
-  // const setTimerFunction = () => {
-  //   var countDownDate = new Date("Jan 30, 2023 23:59:59").getTime();
-
-  //   var x = setInterval(function () {
-  //     var now = new Date().getTime();
-  //     var distance = countDownDate - now;
-
-  //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  //     let tempHours = hours.toString().length === 1 ? "0" : "";
-  //     let tempMinutes = minutes.toString().length === 1 ? "0" : "";
-  //     let tempSeconds = seconds.toString().length === 1 ? "0" : "";
-
-  //     setTimer((prev) => {
-  //       return { ...prev, "hours": tempHours + hours, "minutes": tempMinutes + minutes, "seconds": tempSeconds + seconds }
-  //     });
-
-  //     if (distance < 0) {
-  //       clearInterval(x);
-  //       setTimer((prev) => {
-  //         return { ...prev, "hours": "00", "minutes": "00", "seconds": "00" }
-  //       });
-  //     }
-  //   }, 1000);
-  // }
 
   const handleFormData = ({ target: { name, value } }) => {
     setFormData({ ...formData, [name]: value })
@@ -289,7 +264,7 @@ const QuestionPage = () => {
                 <div className="col-lg-5 col-md-12 form-box py-2 px-4">
 
                   <div className="form-group mt-5 row">
-                  
+
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Twitter :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                       {isUserRecordCreated.length !== 0 && formData.twitterUserName !== "" ?
@@ -298,7 +273,7 @@ const QuestionPage = () => {
                         <input className="input-field" type="text" placeholder="@shylocknft" name="twitterUserName" value={formData.twitterUserName} onChange={handleFormData} />
                       }
                     </div>
-              
+
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Your Detective Alias Name :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                       {isUserRecordCreated.length !== 0 && formData.alias !== "" ?
@@ -309,10 +284,40 @@ const QuestionPage = () => {
                     </div>
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
-                      <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
-                      <a target="_blank" href="https://twitter.com/imjasperai/status/1616888376455757830?s=46&t=rHKMIsuyfk8YlBr8uWJRvg" rel="noreferrer">
-                                <img className="info-button" src={InfoIcon} alt="info-button" />
-                              </a>
+                      {/* <input type="radio" name="leftDoor" value="left" /> */}
+                      {console.log(params.id)}
+                      {params.id === '1' ?
+                        (<>
+                          <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
+                        </>)
+                        : params.id === '2' ?
+                          (<>
+                            <label className={`radio-label ${selectedOption === "Left" ? "checked-radio" : ""}`}>
+                              <input
+                                type="radio"
+                                name="door"
+                                value="Left"
+                                checked={selectedOption === "Left"}
+                                onChange={handleOptionChange}
+                              />
+                              Left</label>
+                            <label className={`radio-label ${selectedOption === "Right" ? "checked-radio" : ""}`}>
+                              <input
+                                type="radio"
+                                name="door"
+                                value="Right"
+                                checked={selectedOption === "Right"}
+                                onChange={handleOptionChange}
+                              />
+                              Right</label>
+                          </>)
+                          : ""
+                      }
+
+
+                      <a target="_blank" href={`${params.id === '1' ? "https://twitter.com/imjasperai/status/1616888376455757830?s=46&t=rHKMIsuyfk8YlBr8uWJRvg" : params.id === '2' ? "https://twitter.com/shylocknft/status/1617593458553950209?s=46&t=w4EMvmzlrhmxODfDbuLtUw" : ""}`} rel="noreferrer">
+                        <img className="info-button" src={InfoIcon} alt="info-button" />
+                      </a>
                     </div>
                   </div>
                   <button className={`my-4 submit-btn d-flex ${shakeSubmit ? "animate__animated animate__shakeX" : ""}`} onClick={() => submitButton()}>
@@ -330,7 +335,7 @@ const QuestionPage = () => {
                       data-testid="loader"
                     />
                   </button>
-                  <div className="orange-text align-self-center text-center fs-7" style={{height: "60px"}}>
+                  <div className="orange-text align-self-center text-center fs-7" style={{ height: "60px" }}>
                     {isWrongAnswer ? "<<Shylock is unable to rescue Ken from the hands of the SERA Gang. Thanks to your fat finger for moving slowly.>>" : ""}
                   </div>
                 </div>
@@ -345,7 +350,7 @@ const QuestionPage = () => {
                     </ul>
                     <p className="attention-notes">⚠️ We have a Bot Prevention System (BPS) in place. Hence do not give multiple entries using different wallets and different Twitter accounts. Our system will detect and remove all entries specific to that IP.</p>
                   </div>
-                
+
                   <p className="tac my-2">{'<<T&C applied>>'}</p>
                 </div>
               </div>
@@ -379,7 +384,7 @@ const QuestionPage = () => {
             {/* <button className="enter-btn me-2" onClick={handlePuzzleDownload}> Download </button> */}
             {/* <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button> */}
             {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
-            <a target="_blank" href="https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%0a%0a%23SolvewithShylock." rel="noreferrer">
+            <a target="_blank" href={`${params.id === '1' ? "https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%0a%0a%23SolvewithShylock." : params.id === '2' ? "https://twitter.com/intent/tweet?text=Detective%20%40shylocknft%20is%20under%20immense%20pressure%20to%20rescue%20Ken%20from%20the%20hands%20of%20The%20SERA%20Gang.%20All%20I'm%20going%20to%20do%20is%20support%20his%20plan%20and%20wait%20for%20my%20chance%20to%20help%20him%20out." : ""}`} rel="noreferrer">
               <button className='enter-btn'>{`>> Tweet <<`}</button>
             </a>
           </div>

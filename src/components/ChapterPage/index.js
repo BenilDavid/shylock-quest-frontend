@@ -85,7 +85,7 @@ function ChapterPage() {
             isOpen: true,
         },
         {
-            id: 2,
+            id: 6,
             day: "LOCKER",
             isOpen: false,
         },
@@ -105,9 +105,9 @@ function ChapterPage() {
             isOpen: false,
         },
         {
-            id: 6,
-            day: "CAR CHASE",
-            isOpen: false,
+            id: 2,
+            day: "THE PLAN",
+            isOpen: true,
         },
         {
             id: 7,
