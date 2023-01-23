@@ -36,7 +36,7 @@ function App() {
   const [analogClockTime, setAnalogClockTime] = useState(
     {
       useCustomTime: true,
-      width: "130px",
+      width: "190px",
       border: true,
       borderColor: "#2e2e2e",
       baseColor: "#000",
