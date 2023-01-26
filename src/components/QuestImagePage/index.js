@@ -1,5 +1,5 @@
 import React from 'react'
-import PuzzleImage from '../../Assets/puzzle-5-BW.png';
+// import PuzzleImage from '../../Assets/puzzle-5-BW.png';
 import './QuestImagePage.scss';
 import logo from '../../shylock-logo.png';
 import twitterIcon from '../../twitter.png';
@@ -8,12 +8,12 @@ import { useNavigate } from "react-router-dom";
 function QuestImagePage() {
   let navigate = useNavigate();
 
-  function handleDownload() {
-    const a = document.createElement('a');
-    a.href = PuzzleImage;
-    a.download = 'Shylock’s Quest Day 1.jpg';
-    a.click();
-  }
+  // function handleDownload() {
+  //   const a = document.createElement('a');
+  //   a.href = PuzzleImage;
+  //   a.download = 'Shylock’s Quest Day 1.jpg';
+  //   a.click();
+  // }
 
   function goToHomePage() {
     navigate('/');
@@ -33,11 +33,11 @@ function QuestImagePage() {
 
           <div className="d-flex align-items-center justify-content-center">
             <div className='image-container my-2'>
-              <img className='puzzle-image' src={PuzzleImage} alt="" />
+              {/* <img className='puzzle-image' src={PuzzleImage} alt="" /> */}
               <div className="d-flex justify-content-center align-items-center">
-              <a className='mx-2' href="https://twitter.com/intent/tweet?text=The%20more%20I%20dig%20%40shylocknft%2C%20the%20more%20ruthless%20and%20vicious%20the%20SERA%20gang%20is%20starting%20to%20look.%0a%0aI%20assume%20we%20are%20gonna%20need%20reinforcements%20after%20witnessing%20Alexei%2C%20a%20Russian%20mobster%20who%20serves%20as%20the%20muscle%20for%20the%20SERA%20gang.%0a%0a%23SolvewithShylock" onClick={handleDownload}>
+              {/* <a className='mx-2' href="https://twitter.com/intent/tweet?text=The%20more%20I%20dig%20%40shylocknft%2C%20the%20more%20ruthless%20and%20vicious%20the%20SERA%20gang%20is%20starting%20to%20look.%0a%0aI%20assume%20we%20are%20gonna%20need%20reinforcements%20after%20witnessing%20Alexei%2C%20a%20Russian%20mobster%20who%20serves%20as%20the%20muscle%20for%20the%20SERA%20gang.%0a%0a%23SolvewithShylock" onClick={handleDownload}>
                   <button className='download-btn enter-btn mt-3 mx-2'>{`>> Tweet <<`} </button>
-                  </a>
+                  </a> */}
               </div>
             </div>
           </div>

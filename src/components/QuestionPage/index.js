@@ -14,6 +14,9 @@ import Modal from "../common/Modal";
 import PulseLoader from "react-spinners/PulseLoader";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import InfoIcon from '../../Assets/information-button.png'
+import { motion } from "framer-motion";
+import imageWithKey from '../../Assets/chapterImages/chapterThreeOrig.png';
+import imageWithoutKey from '../../Assets/chapterImages/chapterThreeWithoutKey.png';
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -26,6 +29,7 @@ const QuestionPage = () => {
   const params = useParams();
   let [loading, setLoading] = useState(false);
   const [isOpenSubmitPopup, setisOpenSubmitPopup] = useState(false);
+  const [isOpenImagePopup, setisOpenImagePopup] = useState(false);
   const [shakeSubmit, setShakeSubmit] = useState(false);
   const [allRecords, setallRecords] = useState([]);
   const [isWrongAnswer, setIsWrongAnswer] = useState(false);
@@ -75,14 +79,39 @@ const QuestionPage = () => {
   const correctAnswers = {
     '1': 'jasper',
     '2': 'left',
-    '3': 'three',
-    '4': 'four',
-    '5': 'five',
-    '6': 'six',
-    '7': 'seven',
-    '8': 'eight',
-    '9': 'nine',
-    '10': 'ten',
+    '3': formData.answer.toLowerCase(),
+    '4': '',
+    '5': '',
+    '6': '',
+    '7': '',
+    '8': '',
+    '9': '',
+    '10': '',
+  }
+  const links = {
+    '1': "https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%0a%0a%23SolvewithShylock.",
+    '2': "https://twitter.com/intent/tweet?text=Detective%20%40shylocknft%20is%20under%20immense%20pressure%20to%20rescue%20Ken%20from%20the%20hands%20of%20The%20SERA%20Gang%20All%20I'm%20going%20to%20do%20is%20support%20his%20plan%20and%20wait%20for%20my%20chance%20to%20help%20him%20out.%0a%0a%23SolvewithShylock",
+    '3': 'https://twitter.com/intent/tweet?text=I%20have%20helped%20%40shylocknft%20find%20the%20missing%20clue.%20But%2C%20where%20does%20it%20lead%20to%3F%0a%0a%23SolvewithShylock',
+    '4': '',
+    '5': '',
+    '6': '',
+    '7': '',
+    '8': '',
+    '9': '',
+    '10': '',
+  }
+  
+  const infoLink = {
+    '1': "https://twitter.com/imjasperai/status/1616888376455757830?s=46&t=rHKMIsuyfk8YlBr8uWJRvg",
+    '2': "https://twitter.com/shylocknft/status/1617593458553950209?s=46&t=w4EMvmzlrhmxODfDbuLtUw",
+    '3': '',
+    '4': '',
+    '5': '',
+    '6': '',
+    '7': '',
+    '8': '',
+    '9': '',
+    '10': '',
   }
   useEffect(() => {
     getAllRecords();
@@ -208,12 +237,39 @@ const QuestionPage = () => {
     }
   }
 
+  const intentTweetButton = () => {
+    if (params.id in links) {
+      return <a target="_blank" href={links[params.id]} rel="noreferrer">
+        <button className='enter-btn'>{`>> Tweet <<`}</button>
+      </a>
+    }
+  }
+
+  const infoButton = () => {
+    if (params.id in infoLink) {
+      if (params.id === '3') {
+        return <div onClick={() => setisOpenImagePopup(!isOpenImagePopup)}>
+          <img className="info-button" src={InfoIcon} alt="info-button" />
+        </div>
+      } else {
+        return <a target="_blank" href={infoLink[params.id]} rel="noreferrer">
+          <img className="info-button" src={InfoIcon} alt="info-button" />
+        </a>
+      }
+    }
+  }
+
   return (
-    <div className="question-container">
+    <motion.div
+      className="question-container"
+      initial={{ opacity: 0, transition: { duration: 0.6 } }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.6 } }}
+    >
       <div className="app-container">
 
         <div className="header d-flex">
-          <div className="twitter-id back-btn ms-3">
+          <div className="twitter-id back-btn ms-4">
             <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => navigate('/chapter', { state: { metamaskId: location?.state?.metamaskId, twitterData: location?.state?.twitterData, walletAmount: location?.state?.walletAmount } })}>
               <span>{'<<'}</span>
             </div>
@@ -221,7 +277,7 @@ const QuestionPage = () => {
           <div className="logo-container cursor-pointer" onClick={() => navigate('/')}>
             <img src={logo} className="shylock-logo" alt="logo" />
           </div>
-          <div className={`metakey me-2 ${formData.metamaskId ? "border-orange" : ""}`}>
+          <div className={`metakey me-4 ${formData.metamaskId ? "border-orange" : ""}`}>
             {formData.metamaskId
               ? formData.metamaskId.slice(0, 5) + "..." + formData.metamaskId.slice(-5)
               : ""}
@@ -285,7 +341,7 @@ const QuestionPage = () => {
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                       {/* <input type="radio" name="leftDoor" value="left" /> */}
-                      {console.log(params.id)}
+                      {/* {console.log(params.id)} */}
                       {params.id === '1' ?
                         (<>
                           <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
@@ -311,13 +367,12 @@ const QuestionPage = () => {
                               />
                               Right</label>
                           </>)
-                          : ""
+                          : params.id === '3' ?
+                            <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
+                            : ""
                       }
 
-
-                      <a target="_blank" href={`${params.id === '1' ? "https://twitter.com/imjasperai/status/1616888376455757830?s=46&t=rHKMIsuyfk8YlBr8uWJRvg" : params.id === '2' ? "https://twitter.com/shylocknft/status/1617593458553950209?s=46&t=w4EMvmzlrhmxODfDbuLtUw" : ""}`} rel="noreferrer">
-                        <img className="info-button" src={InfoIcon} alt="info-button" />
-                      </a>
+                      {infoButton()}
                     </div>
                   </div>
                   <button className={`my-4 submit-btn d-flex ${shakeSubmit ? "animate__animated animate__shakeX" : ""}`} onClick={() => submitButton()}>
@@ -378,20 +433,32 @@ const QuestionPage = () => {
           <div className="orange-text text-center mt-2">Your answer is recorded successfully.</div>
           <div className="orange-text text-center my-2"> Confirm your entry below</div>
           <div className="qr-code-container d-flex align-items-center justify-content-center">
-            {/* <img className="qr-code-image" src={PuzzleImage} alt="" /> */}
           </div>
           <div className="d-flex justify-content-center align-items-center my-3">
-            {/* <button className="enter-btn me-2" onClick={handlePuzzleDownload}> Download </button> */}
-            {/* <button className="enter-btn me-2" onClick={() => navigate('/quest-lore')}> Reveal Evidence </button> */}
-            {/* <button className={`enter-btn`} onClick={() => setisOpenSubmitPopup(!isOpenSubmitPopup)}> Close </button> */}
-            <a target="_blank" href={`${params.id === '1' ? "https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%0a%0a%23SolvewithShylock." : params.id === '2' ? "https://twitter.com/intent/tweet?text=Detective%20%40shylocknft%20is%20under%20immense%20pressure%20to%20rescue%20Ken%20from%20the%20hands%20of%20The%20SERA%20Gang.%20All%20I'm%20going%20to%20do%20is%20support%20his%20plan%20and%20wait%20for%20my%20chance%20to%20help%20him%20out.%0a%0a%23SolvewithShylock" : ""}`} rel="noreferrer">
-              <button className='enter-btn'>{`>> Tweet <<`}</button>
-            </a>
+            {intentTweetButton()}
           </div>
+        </Modal>
+        <Modal
+          isOpen={isOpenImagePopup}
+          toggle={() => setisOpenImagePopup(!isOpenImagePopup)}
+          size="xl"
+          headTitle=""
+        >
+          <div className="orange-text my-2 ms-1 fs-3">SPOT THE MISSSING CLUE</div>
+          <div className="qr-code-container d-flex align-items-center justify-content-between">
+            <img className="qr-code-image m-2" src={imageWithKey} alt="" />
+            <img className="qr-code-image m-2" src={imageWithoutKey} alt="" />
+          </div>
+          <div className="d-flex justify-content-center align-items-center my-3">
+            <button className="enter-btn" onClick={() => setisOpenImagePopup(!isOpenImagePopup)}>
+              Close
+            </button>
+          </div>
+
         </Modal>
       </div>
 
-    </div>
+    </motion.div>
   )
 }
 

@@ -8,6 +8,7 @@ import tickIcon from './Assets/checked.png';
 import 'animate.css';
 import AnalogClock from 'analog-clock-react';
 import Modal from "./components/common/Modal";
+// import Popup from "./components/common/Popup";
 import { useNavigate } from "react-router-dom";
 // firebase
 import { signOut, getRedirectResult, signInWithRedirect, signInWithPopup, TwitterAuthProvider } from "firebase/auth";
@@ -15,6 +16,7 @@ import { authentication } from './firebase-config';
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import Web3 from 'web3';
 import axios from 'axios';
+import { motion } from "framer-motion";
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -158,16 +160,20 @@ function App() {
 
   return (
     <>
-      <div className="App">
+      <motion.div className="App" 
+      initial={{opacity: 0, transition: {duration: 0.8} }}
+      animate={{opacity: 1}}
+      exit={{ opacity: 0 , transition: {duration: 0.8} }}
+      >
         <div className="app-container">
           <div className="header d-flex">
-            <div className="twitter-id back-btn ms-3">
+            <div className="twitter-id back-btn ms-4">
            
             </div>
             <div className="logo-container cursor-pointer" onClick={() => navigate('/')}>
               <img src={logo} className="shylock-logo" alt="logo" />
             </div>
-            <div className={`metakey me-2 ${address ? "border-orange" : ""}`}>
+            <div className={`metakey me-4 ${address ? "border-orange" : ""}`}>
               {address
                 ? address.slice(0, 5) + "..." + address.slice(-5)
                 : ""}
@@ -181,7 +187,10 @@ function App() {
               </div>
 
               <div className={`begin-btn animate__animated animate__fadeInUp animate__delay-1s"`}>
-                <button className={`initiate-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>EXPLORE</button>
+                <button className={`initiate-btn glowing-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>
+                <span class='glowing-txt'>E<span class='faulty-letter'>X</span>PLORE</span>
+                  {/* EXPLORE */}
+                  </button>
                 <div className={`fs-7 mt-1 better-experience`}>
                 </div>
               </div>
@@ -214,7 +223,6 @@ function App() {
                 <div className={`twitter-box ${user ? "border-green" : ""}`} onClick={!user ? handleTwitterLogin : handleTwitterLogout}>
                   {user ? <img className="tick-icon" src={tickIcon} alt="" /> : ""}
                   <span>{user ? "Connected" : "Connect Twitter"}</span>
-                  {/* <img className="ms-4 twitter-icon" src={twitterBlueIcon} alt="" /> */}
                 </div>
               }
 
@@ -222,11 +230,18 @@ function App() {
             <div className="d-flex justify-content-center align-items-center my-3">
               <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={enterDarkRoom}> THE JOURNEY </button>
             </div>
-            {/* {address && user ? "" : <p className="text-center">connections not verified</p>} */}
-          </Modal>
+          </Modal>  
+
+          {/* <Popup
+            isOpen={isOpenLogin}
+            toggle={() => setisOpenLogin(!isOpenLogin)}
+            size="md"
+            headTitle="CONNECT"
+          >
+          </Popup> */}
         </div>
 
-      </div>
+      </motion.div>
     </>
   );
 }

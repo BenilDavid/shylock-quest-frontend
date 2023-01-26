@@ -14,12 +14,12 @@ const Modal = ({
 }) => {
   return (
     <Modals isOpen={isOpen} toggle={toggle} size={size} centered={true}>
-      {headTitle !== "" && (
+      {/* {headTitle !== "" && ( */}
         <div className="modal_head">
           <b className="text-center">{headTitle}</b>
           {closeIcon && <img className="cursor-pointer close-btn" src={close} alt="close" onClick={toggle}></img>}
         </div>
-      )}
+      {/* )} */}
       <ModalBody className={className}>
         {children}
       </ModalBody>

@@ -11,6 +11,7 @@ import Typewriter from 'typewriter-effect';
 import 'animate.css';
 import { useNavigate, useLocation } from "react-router-dom";
 // import axios from 'axios';
+import { motion } from "framer-motion";
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -85,22 +86,22 @@ function ChapterPage() {
             isOpen: true,
         },
         {
-            id: 6,
+            id: 4,
             day: "LOCKER",
             isOpen: false,
         },
         {
-            id: 3,
+            id: 5,
             day: "HELIPAD",
             isOpen: false,
         },
         {
-            id: 4,
+            id: 8,
             day: "MEETAGENTS",
             isOpen: false,
         },
         {
-            id: 5,
+            id: 9,
             day: "BIKE",
             isOpen: false,
         },
@@ -110,17 +111,17 @@ function ChapterPage() {
             isOpen: true,
         },
         {
-            id: 7,
-            day: "DRAINAGE",
-            isOpen: false,
+            id: 3,
+            day: "EXTRACTION",
+            isOpen: true,
         },
         {
-            id: 8,
+            id: 6,
             day: "TUNNEL",
             isOpen: false,
         },
         {
-            id: 9,
+            id: 7,
             day: "LIBRARY",
             isOpen: false,
         },
@@ -143,10 +144,14 @@ function ChapterPage() {
 
     return (
         <>
-            <div className="chapter-container">
+            <motion.div className="chapter-container"
+                initial={{ opacity: 0 , transition: {duration: 0.8} }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 , transition: {duration: 0.8} }}
+            >
                 <div className="app-container">
                     <div className="header d-flex">
-                        <div className="twitter-id back-btn ms-3">
+                        <div className="twitter-id back-btn ms-4">
                             <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => navigate('/')}>
                                 <span>{'<<'}</span>
                             </div>
@@ -154,7 +159,7 @@ function ChapterPage() {
                         <div className="logo-container cursor-pointer" onClick={() => navigate('/')}>
                             <img src={logo} className="shylock-logo" alt="logo" />
                         </div>
-                        <div className={`metakey me-2 ${metamaskId ? "border-orange" : ""}`}>
+                        <div className={`metakey me-4 ${metamaskId ? "border-orange" : ""}`}>
                             {metamaskId
                                 ? metamaskId.slice(0, 5) + "..." + metamaskId.slice(-5)
                                 : ""}
@@ -225,7 +230,7 @@ function ChapterPage() {
                     </div>
                 </div>
 
-            </div>
+            </motion.div>
         </>
     );
 }

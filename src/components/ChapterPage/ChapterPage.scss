@@ -1,417 +1,426 @@
 @mixin line-arrow() {
+  position: absolute;
+  right: -36px;
+  display: inline-block;
+  width: 30px; /* adjust as needed */
+  height: 6px; /* adjust as needed */
+  background-color: #ff8012; /* adjust as needed */
+  animation: glow 1s ease-in-out infinite;
+
+  &:after {
+    content: "";
     position: absolute;
-    right: -36px;
-    display: inline-block;
-    width: 30px; /* adjust as needed */
-    height: 6px; /* adjust as needed */
-    background-color: #ff8012; /* adjust as needed */
-    &:after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: -14px;
-      margin-top: -10px; /* adjust as needed */
-      border-width: 10px; /* adjust as needed */
-      border-style: solid;
-      border-color: transparent transparent transparent #ff8012; /* adjust as needed */
-    }
+    top: 50%;
+    right: -14px;
+    margin-top: -10px; /* adjust as needed */
+    border-width: 10px; /* adjust as needed */
+    border-style: solid;
+    border-color: transparent transparent transparent #ff8012; /* adjust as needed */
   }
-  
-  .chapter-container {
-    text-align: center;
-    width: 100%;
-    /* background-color: #191919; */
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: #ff8012;
-    /* background-color: #191919; */
-    @media (max-width: 1000px) {
-      // height: 620px;
-      height: 100vh;
-    }
-  
-    .app-container {
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      /* align-items: center; */
-      justify-content: space-between;
-      align-items: center;
-      width: 95%;
-      height: 90%;
-      min-height: 94vh;
-      margin: 20px;
-      border: 1px solid #ff8012;
-      /* border: 1px solid #d5a46b; */
-      border-radius: 5px;
-      position: relative;
-  
-      .jasper-video {
-        z-index: 1;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 120px !important;
-        height: 120px !important;
-        video {
-          border-radius: 10px;
-        }
-        @media (max-width: 978px) {
-          width: 90px !important;
-          height: 90px !important;
-        }
-      }
-      .header {
-        margin-top: 15px;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-        .twitter-id {
-          width: 120px;
-        }
-        .logo-container {
-          z-index: 100;
-          .shylock-logo {
-            // margin: 20px 0 0 0;
-            height: 12vmin;
-            pointer-events: none;
-          }
-        }
-        .metakey {
-          width: 120px;
-          font-size: 1rem;
-          margin-right: 1rem;
-          @media (max-width: 478px) {
-            font-size: 0.7rem;
-            width: 90px;
-            margin: 0 6px 0 6px;
-          }
-        }
-      }
-  
-      .internal-content {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-        .upper-portion-1 {
-          width: 80%;
-          margin-top: 30px;
-          z-index: 100;
-          min-height: 210px;
-        //   height: 30%;
-        //   min-height: 130px;
-          @media (max-width: 978px) {
-            // margin-top: 20px;
-            min-height: 180px;
-          }
-        }
-        .bottom-portion-1 {
-          width: 80%;
-        //   height: 70%;
-          // display: grid;
-          // grid-template-columns: 200px 1fr 200px;
-          // grid-gap: 10px;
-          color: #fff;
-  
-          .analog-clock {
-            display: flex;
-            // flex-direction: column;
-            align-items: center;
-            justify-content: center;
-          }
-          .days-box-container {
-            margin-top: 20px;
-            padding: 15px;
-            // width: 50%;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            .days-container {
-              width: 100%;
-              padding: 20px;
-              // height: 80%;
-              display: grid;
-              justify-content: center;
-              grid-template-columns: repeat(5, 160px);
-              grid-gap: 35px 25px;
-              @media (max-width: 978px) {
-                padding: 0;
-                margin-bottom: 15px;
-                // grid-template-columns: repeat(2, 1fr);
-              }
-              .days-box {
-                // width: 130px;
-                font-size: 0.9rem;
-                height: 50px;
-                margin: 5px 10px;
-                border: 1px solid #fff;
-                border-radius: 5px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: relative;
-                //   .line-arrow {
-                //     @include line-arrow();
-                // }
-  
-                .line-arrow-2,
-                .line-arrow-4,
-                .line-arrow-6,
-                .line-arrow-8 {
-                  @include line-arrow();
-                }
-                .line-arrow-1,
-                .line-arrow-3,
-                .line-arrow-5 {
-                  @include line-arrow();
-                  width: 26px;
-                  right: auto;
-                  bottom: -24px;
-                  transform: rotate(90deg);
-                }
-                .line-arrow-7,
-                .line-arrow-9 {
-                  @include line-arrow();
-                  width: 28px;
-                  right: auto;
-                  top: -22px;
-                  transform: rotate(270deg);
-                }
-  
-                @media (max-width: 978px) {
-                  font-size: 0.8rem;
-                }
-                [class^='locked-image-'] {
-                  width: 25px;
-                  height: 25px;
-                  position: absolute;
-                  top: 25%;
-                  left: 40%;
-                  // transform: translate(-50%, -50%);
-                }
-              }
-  
-              // .days-box:nth-child(1), .days-box:nth-child(2), .days-box:nth-child(3), .days-box:nth-child(4), .days-box:nth-child(5){
-              //   border: 1px solid #fff !important;
-              //   color: #fff !important;
-              // }
-              .unlocked-day {
-                cursor: pointer;
-                border: 1px solid #fff;
-                color: #fff;
-              }
-              .locked-day {
-                cursor: pointer;
-                border: 1px solid #ff8012;
-                color: #ff8012;
-              }
-            }
-          }
-          .time-box-container {
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            // border: 1px solid #fff;
-          }
-        }
-      }
-    }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #ff8012;
   }
-  
-  .Typewriter__wrapper {
-    font-size: 1rem;
+  to {
+    box-shadow: 0 0 20px #ff8012;
+    // transform: translateX(3px);
   }
-  
-  .intent-tweet,
-  .initiate-btn {
-    font-size: calc(10px + 1vmin);
-    cursor: pointer;
-    padding: 5px 12px;
-    color: #ff8012;
-    outline: none;
-    border: 1px solid #ff8012;
-    border-radius: 3px;
-    background-color: transparent;
+}
+
+.chapter-container {
+  text-align: center;
+  width: 100%;
+  background-color: #000;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #ff8012;
+  @media (max-width: 1000px) {
+    height: 100vh;
   }
-  .begin-btn {
-    display: grid;
-    place-content: center;
-  
-    @media (max-width: 1010px) {
-      margin: 178px 0;
-    }
-    @media (max-width: 420px) {
-      margin: 80% 0;
-    }
-    .initiate-btn {
-      width: fit-content;
-      justify-self: center;
-    }
-  }
-  
-  .intent-tweet-link {
-    animation-delay: 6s;
-    .intent-tweet a {
-      text-decoration: none;
-      color: #ff8012;
-    }
-  }
-  
-  // footer
-  .footer {
-    padding: 10px 10px;
-    display: flex;
-    justify-content: center;
-  
-    .twitter-btn {
-      z-index: 100;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      position: relative;
-      outline: none;
-      border: 1px solid #fff;
-      border-radius: 50%;
-      background-color: transparent;
-      /* animation-delay: 6s; */
-      .twitter-logo {
-        width: 20px;
-        height: 20px;
-        position: absolute;
-        left: 10px;
-        top: 12px;
-      }
-    }
-  }
-  
-  // modal
-  .modal-dialog {
-    justify-content: center !important;
-  }
-  .modal-content {
-    width: 92% !important;
-  }
-  .login-box {
-    width: 100%;
+
+  .app-container {
+    z-index: 100;
     display: flex;
     flex-direction: column;
-    color: #ff8012;
-    .metamask-box,
-    .twitter-box {
-      cursor: pointer;
+    /* align-items: center; */
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    height: 90%;
+    min-height: 94vh;
+    margin: 20px;
+    border: 1px solid #ff8012;
+    /* border: 1px solid #d5a46b; */
+    border-radius: 5px;
+    position: relative;
+
+    .jasper-video {
+      z-index: 1;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 120px !important;
+      height: 120px !important;
+      video {
+        border-radius: 10px;
+      }
+      @media (max-width: 978px) {
+        width: 90px !important;
+        height: 90px !important;
+      }
+    }
+    .header {
+      margin-top: 15px;
       width: 100%;
-      background-color: #000;
-      border: 1px solid #ff8012;
-      border-radius: 5px;
-      margin: 10px 0;
-      height: 50px;
-      display: flex;
-      // flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      position: relative;
-  
-      @media (max-width: 420px) {
-        height: 50px;
+      .twitter-id {
+        width: 120px;
       }
-      span {
-        font-weight: 500;
-      }
-      .twitter-icon {
-        width: 25px;
-        height: 25px;
-      }
-      .meta-text {
-        text-align: center;
-        position: absolute;
-        bottom: 0;
-        // left: 0;
-        font-size: 0.69rem;
-        @media (max-width: 420px) {
-          font-size: 0.5rem;
+      .logo-container {
+        z-index: 100;
+        .shylock-logo {
+          // margin: 20px 0 0 0;
+          height: 12vmin;
+          pointer-events: none;
         }
       }
-  
-      .tick-icon {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 20px;
+      .metakey {
+        padding: 8px 0;
+        width: 120px;
+        font-size: 1rem;
+        @media (max-width: 478px) {
+          font-size: 0.7rem;
+          width: 90px;
+          margin: 0 6px 0 6px;
+        }
+      }
+    }
+
+    .internal-content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      .upper-portion-1 {
+        width: 80%;
+        margin-top: 30px;
+        z-index: 100;
+        min-height: 210px;
+        //   height: 30%;
+        //   min-height: 130px;
+        @media (max-width: 978px) {
+          // margin-top: 20px;
+          min-height: 180px;
+        }
+      }
+      .bottom-portion-1 {
+        width: 80%;
+        //   height: 70%;
+        // display: grid;
+        // grid-template-columns: 200px 1fr 200px;
+        // grid-gap: 10px;
+        color: #fff;
+
+        .analog-clock {
+          display: flex;
+          // flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        .days-box-container {
+          margin-top: 20px;
+          padding: 15px;
+          // width: 50%;
+          border: 1px solid #fff;
+          border-radius: 5px;
+          .days-container {
+            width: 100%;
+            padding: 20px;
+            // height: 80%;
+            display: grid;
+            justify-content: center;
+            grid-template-columns: repeat(5, 160px);
+            grid-gap: 35px 25px;
+            @media (max-width: 978px) {
+              padding: 0;
+              margin-bottom: 15px;
+              // grid-template-columns: repeat(2, 1fr);
+            }
+            .days-box {
+              // width: 130px;
+              font-size: 0.9rem;
+              height: 50px;
+              margin: 5px 10px;
+              border: 1px solid #fff;
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+              //   .line-arrow {
+              //     @include line-arrow();
+              // }
+
+              .line-arrow-2,
+              .line-arrow-4,
+              .line-arrow-6,
+              .line-arrow-8 {
+                @include line-arrow();
+              }
+              .line-arrow-1,
+              .line-arrow-5 {
+                @include line-arrow();
+                width: 26px;
+                right: auto;
+                bottom: -24px;
+                transform: rotate(90deg);
+              }
+              .line-arrow-3,
+              .line-arrow-7,
+              .line-arrow-9 {
+                @include line-arrow();
+                width: 28px;
+                right: auto;
+                top: -24px;
+                transform: rotate(270deg);
+              }
+
+              @media (max-width: 978px) {
+                font-size: 0.8rem;
+              }
+              [class^="locked-image-"] {
+                width: 25px;
+                height: 25px;
+                position: absolute;
+                top: 25%;
+                left: 40%;
+                // transform: translate(-50%, -50%);
+              }
+            }
+
+            // .days-box:nth-child(1), .days-box:nth-child(2), .days-box:nth-child(3), .days-box:nth-child(4), .days-box:nth-child(5){
+            //   border: 1px solid #fff !important;
+            //   color: #fff !important;
+            // }
+            .unlocked-day {
+              cursor: pointer;
+              border: 1px solid #fff;
+              color: #fff;
+            }
+            .locked-day {
+              cursor: pointer;
+              border: 1px solid #ff8012;
+              color: #ff8012;
+            }
+          }
+        }
+        .time-box-container {
+          z-index: 100;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.8rem;
+          // border: 1px solid #fff;
+        }
       }
     }
   }
-  
-  .qr-code-container {
-    .qr-code-image {
-      height: 200px;
-    }
+}
+
+.Typewriter__wrapper {
+  font-size: 1rem;
+}
+
+.intent-tweet,
+.initiate-btn {
+  font-size: calc(10px + 1vmin);
+  cursor: pointer;
+  padding: 5px 12px;
+  color: #ff8012;
+  outline: none;
+  border: 1px solid #ff8012;
+  border-radius: 3px;
+  background-color: transparent;
+}
+.begin-btn {
+  display: grid;
+  place-content: center;
+
+  @media (max-width: 1010px) {
+    margin: 178px 0;
   }
-  
-  // connect wallet
-  .css-55ygxk {
+  @media (max-width: 420px) {
+    margin: 80% 0;
+  }
+  .initiate-btn {
+    width: fit-content;
+    justify-self: center;
+  }
+}
+
+.intent-tweet-link {
+  animation-delay: 6s;
+  .intent-tweet a {
+    text-decoration: none;
+    color: #ff8012;
+  }
+}
+
+// footer
+.footer {
+  padding: 10px 10px;
+  display: flex;
+  justify-content: center;
+
+  .twitter-btn {
+    z-index: 100;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
     position: relative;
-    border-radius: 5px !important;
-    padding: 0.75em 1.25em;
-    padding-right: 0.75em;
-    padding-left: 1.25em;
-    font-size: 1em;
-    font-weight: 500 !important;
-    letter-spacing: 0.5px;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 0.5em;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: space-evenly;
-    -ms-flex-pack: space-evenly;
-    -webkit-justify-content: space-evenly;
-    justify-content: space-evenly;
-    color: #ff8012 !important;
-    border: 1px solid #ff8012 !important;
-    background: #000;
-    &:hover {
-      background-color: #000 !important;
-    }
-    svg {
-      display: none !important;
+    outline: none;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background-color: transparent;
+    /* animation-delay: 6s; */
+    .twitter-logo {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: 10px;
+      top: 12px;
     }
   }
-  
-  .css-1bnwz7w {
+}
+
+// modal
+.modal-dialog {
+  justify-content: center !important;
+}
+.modal-content {
+  width: 92% !important;
+}
+.login-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #ff8012;
+  .metamask-box,
+  .twitter-box {
+    cursor: pointer;
+    width: 100%;
+    background-color: #000;
+    border: 1px solid #ff8012;
+    border-radius: 5px;
+    margin: 10px 0;
+    height: 50px;
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    border-radius: 5px !important;
-    padding: 0.75em 1.25em;
-    padding-right: 0.75em;
-    padding-left: 0.75em;
-    font-size: 1em;
-    font-weight: 500 !important;
-    letter-spacing: 0.5px;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 0.5em;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: space-evenly;
-    -ms-flex-pack: space-evenly;
-    -webkit-justify-content: space-evenly;
-    justify-content: space-evenly;
-    color: #ff8012 !important;
-    border: 1px solid #377037 !important;
-    background: #000;
+
+    @media (max-width: 420px) {
+      height: 50px;
+    }
+    span {
+      font-weight: 500;
+    }
+    .twitter-icon {
+      width: 25px;
+      height: 25px;
+    }
+    .meta-text {
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      // left: 0;
+      font-size: 0.69rem;
+      @media (max-width: 420px) {
+        font-size: 0.5rem;
+      }
+    }
+
+    .tick-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 20px;
+    }
   }
-  
+}
+
+.qr-code-container {
+  .qr-code-image {
+    height: 200px;
+  }
+}
+
+// connect wallet
+.css-55ygxk {
+  position: relative;
+  border-radius: 5px !important;
+  padding: 0.75em 1.25em;
+  padding-right: 0.75em;
+  padding-left: 1.25em;
+  font-size: 1em;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5em;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+  color: #ff8012 !important;
+  border: 1px solid #ff8012 !important;
+  background: #000;
+  &:hover {
+    background-color: #000 !important;
+  }
+  svg {
+    display: none !important;
+  }
+}
+
+.css-1bnwz7w {
+  position: relative;
+  border-radius: 5px !important;
+  padding: 0.75em 1.25em;
+  padding-right: 0.75em;
+  padding-left: 0.75em;
+  font-size: 1em;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5em;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+  color: #ff8012 !important;
+  border: 1px solid #377037 !important;
+  background: #000;
+}
