@@ -1,22 +1,25 @@
 @mixin line-arrow() {
+  width: 34px;
   position: absolute;
-  right: -36px;
-  display: inline-block;
-  width: 30px; /* adjust as needed */
-  height: 6px; /* adjust as needed */
-  background-color: #ff8012; /* adjust as needed */
-  animation: glow 1s ease-in-out infinite;
+  right: -40px;
+  // display: inline-block;
+  // width: 30px; /* adjust as needed */
+  // height: 6px; /* adjust as needed */
+  // background-color: #ff8012; /* adjust as needed */
+  // animation: glow 1s ease-in-out infinite;
+  -webkit-filter: drop-shadow(0 0 7px #ff8012);
+  filter: drop-shadow(0 0 7px #ff8012);
 
-  &:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -14px;
-    margin-top: -10px; /* adjust as needed */
-    border-width: 10px; /* adjust as needed */
-    border-style: solid;
-    border-color: transparent transparent transparent #ff8012; /* adjust as needed */
-  }
+  // &:after {
+  //   content: "";
+  //   position: absolute;
+  //   top: 50%;
+  //   right: -14px;
+  //   margin-top: -10px; /* adjust as needed */
+  //   border-width: 10px; /* adjust as needed */
+  //   border-style: solid;
+  //   border-color: transparent transparent transparent #ff8012; /* adjust as needed */
+  // }
 }
 
 @keyframes glow {
@@ -177,18 +180,18 @@
               .line-arrow-1,
               .line-arrow-5 {
                 @include line-arrow();
-                width: 26px;
+                // width: 26px;
                 right: auto;
-                bottom: -24px;
+                bottom: -41px;
                 transform: rotate(90deg);
               }
               .line-arrow-3,
               .line-arrow-7,
               .line-arrow-9 {
                 @include line-arrow();
-                width: 28px;
+                // width: 28px;
                 right: auto;
-                top: -24px;
+                top: -40px;
                 transform: rotate(270deg);
               }
 

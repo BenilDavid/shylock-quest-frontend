@@ -12,6 +12,7 @@ import 'animate.css';
 import { useNavigate, useLocation } from "react-router-dom";
 // import axios from 'axios';
 import { motion } from "framer-motion";
+import lineArrow from "../../Assets/line-arrow.png";
 
 export const URL = process.env.REACT_APP_SERVER_URL;
 export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
@@ -207,9 +208,11 @@ function ChapterPage() {
                                                                 : ""}
                                                             <span>{isOpen ? day : ""}</span>
                                                             {isOpen ?
-                                                                <div className={`line-arrow-${id}`}></div>
+                                                            <img className={`line-arrow-${id}`} src={lineArrow} alt="" />
+                                                                // <div className={`line-arrow-${id}`}></div>
                                                                 : ""}
                                                         </div>
+                                                        
                                                     </>
                                                 })}
                                             </div>
