@@ -35,6 +35,7 @@ const QuestionPage = () => {
   const [isWrongAnswer, setIsWrongAnswer] = useState(false);
   const [isUserRecordCreated, setIsUserRecordCreated] = useState([]);
 
+  console.log(params);
   const [formData, setFormData] = useState({
     twitter: location?.state?.twitterData,
     twitterUserName: "",
@@ -42,7 +43,7 @@ const QuestionPage = () => {
     answer: "",
     alias: "",
     walletAmount: location?.state?.walletAmount,
-    currentChapterCount: params?.id,
+    currentChapterCount: params?.day,
     answerOne: "",
     answerTwo: "",
     answerThree: "",
@@ -65,9 +66,9 @@ const QuestionPage = () => {
   }
 
   const answers = {
-    '1': 'answerOne',
-    '2': 'answerTwo',
-    '3': 'answerThree',
+    'the-hideout': 'answerOne',
+    'the-plan': 'answerTwo',
+    'extraction': 'answerThree',
     '4': 'answerFour',
     '5': 'answerFive',
     '6': 'answerSix',
@@ -77,9 +78,9 @@ const QuestionPage = () => {
     '10': 'answerTen'
   }
   const correctAnswers = {
-    '1': 'jasper',
-    '2': 'left',
-    '3': formData.answer.toLowerCase(),
+    'the-hideout': 'jasper',
+    'the-plan': 'left',
+    'extraction': formData.answer.toLowerCase(),
     '4': '',
     '5': '',
     '6': '',
@@ -89,9 +90,9 @@ const QuestionPage = () => {
     '10': '',
   }
   const links = {
-    '1': "https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%0a%0a%23SolvewithShylock.",
-    '2': "https://twitter.com/intent/tweet?text=Detective%20%40shylocknft%20is%20under%20immense%20pressure%20to%20rescue%20Ken%20from%20the%20hands%20of%20The%20SERA%20Gang%20All%20I'm%20going%20to%20do%20is%20support%20his%20plan%20and%20wait%20for%20my%20chance%20to%20help%20him%20out.%0a%0a%23SolvewithShylock",
-    '3': 'https://twitter.com/intent/tweet?text=I%20have%20helped%20%40shylocknft%20find%20the%20missing%20clue.%20But%2C%20where%20does%20it%20lead%20to%3F%0a%0a%23SolvewithShylock',
+    'the-hideout': "https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%0a%0a%23SolvewithShylock.",
+    'the-plan': "https://twitter.com/intent/tweet?text=Detective%20%40shylocknft%20is%20under%20immense%20pressure%20to%20rescue%20Ken%20from%20the%20hands%20of%20The%20SERA%20Gang%20All%20I'm%20going%20to%20do%20is%20support%20his%20plan%20and%20wait%20for%20my%20chance%20to%20help%20him%20out.%0a%0a%23SolvewithShylock",
+    'extraction': 'https://twitter.com/intent/tweet?text=I%20have%20helped%20%40shylocknft%20find%20the%20missing%20clue.%20But%2C%20where%20does%20it%20lead%20to%3F%0a%0a%23SolvewithShylock',
     '4': '',
     '5': '',
     '6': '',
@@ -102,9 +103,9 @@ const QuestionPage = () => {
   }
   
   const infoLink = {
-    '1': "https://twitter.com/imjasperai/status/1616888376455757830?s=46&t=rHKMIsuyfk8YlBr8uWJRvg",
-    '2': "https://twitter.com/shylocknft/status/1617593458553950209?s=46&t=w4EMvmzlrhmxODfDbuLtUw",
-    '3': '',
+    'the-hideout': "https://twitter.com/imjasperai/status/1616888376455757830?s=46&t=rHKMIsuyfk8YlBr8uWJRvg",
+    'the-plan': "https://twitter.com/shylocknft/status/1617593458553950209?s=46&t=w4EMvmzlrhmxODfDbuLtUw",
+    'extraction': '',
     '4': '',
     '5': '',
     '6': '',
@@ -144,8 +145,8 @@ const QuestionPage = () => {
   // createRecord
   const handleCreateRecord = async () => {
     try {
-      if (params.id in answers) {
-        await axios.post(`${URL}/api/submit-form`, { ...formData, [answers[params.id]]: formData.answer });
+      if (params.day in answers) {
+        await axios.post(`${URL}/api/submit-form`, { ...formData, [answers[params.day]]: formData.answer });
       } else {
         console.log("Invalid id")
       }
@@ -161,8 +162,8 @@ const QuestionPage = () => {
   // updateRecord
   const handleUpdateRecord = async (id) => {
     try {
-      if (params.id in answers) {
-        await axios.patch(`${URL}/api/submit-form/updateRecord?id=${id}`, { [answers[params.id]]: formData.answer });
+      if (params.day in answers) {
+        await axios.patch(`${URL}/api/submit-form/updateRecord?id=${id}`, { [answers[params.day]]: formData.answer });
       } else {
         console.log("Invalid id")
       }
@@ -203,8 +204,8 @@ const QuestionPage = () => {
     // eslint-disable-next-line array-callback-return
 
     if (isUserRecordCreated.length === 0) {
-      if (params.id in correctAnswers) {
-        if (formData.answer.toLowerCase() === correctAnswers[params.id] && formData.alias !== "" && formData.twitterUserName !== "") {
+      if (params.day in correctAnswers) {
+        if (formData.answer.toLowerCase() === correctAnswers[params.day] && formData.alias !== "" && formData.twitterUserName !== "") {
           setLoading(!loading);
           handleCreateRecord();
         }
@@ -219,8 +220,8 @@ const QuestionPage = () => {
         }
       }
     } else {
-      if (params.id in correctAnswers) {
-        if (formData.answer.toLowerCase() === correctAnswers[params.id] && formData.alias !== "") {
+      if (params.day in correctAnswers) {
+        if (formData.answer.toLowerCase() === correctAnswers[params.day] && formData.alias !== "") {
           setLoading(!loading);
           handleUpdateRecord(isUserRecordCreated[0]._id);
         }
@@ -238,21 +239,21 @@ const QuestionPage = () => {
   }
 
   const intentTweetButton = () => {
-    if (params.id in links) {
-      return <a target="_blank" href={links[params.id]} rel="noreferrer">
+    if (params.day in links) {
+      return <a target="_blank" href={links[params.day]} rel="noreferrer">
         <button className='enter-btn'>{`>> Tweet <<`}</button>
       </a>
     }
   }
 
   const infoButton = () => {
-    if (params.id in infoLink) {
-      if (params.id === '3') {
+    if (params.day in infoLink) {
+      if (params.day === 'extraction') {
         return <div onClick={() => setisOpenImagePopup(!isOpenImagePopup)}>
           <img className="info-button" src={InfoIcon} alt="info-button" />
         </div>
       } else {
-        return <a target="_blank" href={infoLink[params.id]} rel="noreferrer">
+        return <a target="_blank" href={infoLink[params.day]} rel="noreferrer">
           <img className="info-button" src={InfoIcon} alt="info-button" />
         </a>
       }
@@ -341,12 +342,12 @@ const QuestionPage = () => {
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
                       {/* <input type="radio" name="leftDoor" value="left" /> */}
-                      {/* {console.log(params.id)} */}
-                      {params.id === '1' ?
+                      {/* {console.log(params.day)} */}
+                      {params.day === 'the-hideout' ?
                         (<>
                           <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
                         </>)
-                        : params.id === '2' ?
+                        : params.day === 'the-plan' ?
                           (<>
                             <label className={`radio-label ${selectedOption === "Left" ? "checked-radio" : ""}`}>
                               <input
@@ -367,7 +368,7 @@ const QuestionPage = () => {
                               />
                               Right</label>
                           </>)
-                          : params.id === '3' ?
+                          : params.day === 'extraction' ?
                             <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
                             : ""
                       }
