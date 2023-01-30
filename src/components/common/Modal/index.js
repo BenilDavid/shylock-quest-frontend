@@ -13,8 +13,10 @@ const Modal = ({
   className = "modal-bg",
 }) => {
   return (
-    <Modals isOpen={isOpen} toggle={toggle} size={size} centered={true}>
-      {/* {headTitle !== "" && ( */}
+    <Modals isOpen={isOpen} toggle={toggle} size={size} centered={true} 
+    // modalClassName={`${!isOpen ? 'out' : "one"}`}
+    >
+      {/* {headTitle !== "" && ( */}  
         <div className="modal_head">
           <b className="text-center">{headTitle}</b>
           {closeIcon && <img className="cursor-pointer close-btn" src={close} alt="close" onClick={toggle}></img>}

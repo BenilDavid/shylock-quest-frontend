@@ -12,11 +12,10 @@ const AnimatedRoutes = () => {
     return (
         <div>
             <AnimatePresence>
-                {console.log(location)}
                 <Routes location={location} key={location.pathname} >
                     <Route exact path="/" element={<App />} />
-                    <Route exact path="/chapter" element={<ChapterPage />} />
-                    <Route exact path="/chapter/:id" element={<QuestionPage />} />
+                    <Route exact path="/explore" element={<ChapterPage />} />
+                    <Route exact path="/explore/:day" element={<QuestionPage />} />
                     <Route exact path="/quest-lore" element={<QuestImagePage />} />
                 </Routes>
             </AnimatePresence>

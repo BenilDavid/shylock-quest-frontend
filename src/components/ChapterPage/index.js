@@ -174,6 +174,7 @@ function ChapterPage() {
                             <div className="internal-content">
 
                                 <div className="upper-portion-1">
+                                    
                                     <div className={`video-container ${hideVideo ? "d-none" : ""}`}>
                                         <ReactPlayer className={`jasper-video`} url={JasperVoiceWave} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} onEnded={jasperVideoEnded} />
                                     </div>
@@ -202,7 +203,7 @@ function ChapterPage() {
                                             <div className="days-container">
                                                 {daysData.map(({ id, day, isOpen }) => {
                                                     return <>
-                                                        <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={isOpen ? () => navigate(`/chapter/${id}`, { state: { metamaskId: metamaskId, twitterData: twitterData, walletAmount: walletAmount, chapter: day } }) : () => handleShakeLock(id)}>
+                                                        <div key={id} className={`days-box ${isOpen ? "unlocked-day" : "locked-day"}`} onClick={isOpen ? () => navigate(`/explore/${day.toLowerCase().replace(" ", "-")}`, { state: { metamaskId: metamaskId, twitterData: twitterData, walletAmount: walletAmount, chapter: day } }) : () => handleShakeLock(id)}>
                                                             {!isOpen ?
                                                                 <img key={id} className={`locked-image-${id} ${shakeLock ? "animate__animated animate__headShake" : ""}`} src={whiteLock} alt="" />
                                                                 : ""}

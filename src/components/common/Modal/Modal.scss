@@ -24,3 +24,47 @@ background-color: #0f0f0f !important;
 }
 
 }
+
+.one {
+  transform:scaleY(.01) scaleX(0);
+  animation:unfoldIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  .modal-background {
+    .modal {
+      transform:scale(0);
+      animation: zoomIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    }
+  }
+}
+.out {
+  transform:scale(1) !important;
+  animation:unfoldOut 1s .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards !important;
+  .modal-background {
+    .modal {
+      animation: zoomOut 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards !important;
+    }
+  }
+}
+
+@keyframes unfoldIn {
+  0% {
+    transform:scaleY(.005) scaleX(0);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfoldOut {
+  0% {
+    transform:scaleY(1) scaleX(1);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(.005) scaleX(0);
+  }
+}

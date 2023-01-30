@@ -100,7 +100,6 @@ function App() {
     try {
       const { data } = await axios.get(`${URL}/api/submit-form/getRecords`);
       setallRecords(data);
-      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -148,7 +147,7 @@ function App() {
   const enterDarkRoom = () => {
 
     if (address && user) {
-      navigate('/chapter', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } });
+      navigate('/explore', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } });
       // Initiation();
     } else {
       setShake(true);

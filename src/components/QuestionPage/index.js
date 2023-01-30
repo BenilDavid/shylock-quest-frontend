@@ -270,7 +270,7 @@ const QuestionPage = () => {
 
         <div className="header d-flex">
           <div className="twitter-id back-btn ms-4">
-            <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => navigate('/chapter', { state: { metamaskId: location?.state?.metamaskId, twitterData: location?.state?.twitterData, walletAmount: location?.state?.walletAmount } })}>
+            <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => navigate('/explore', { state: { metamaskId: location?.state?.metamaskId, twitterData: location?.state?.twitterData, walletAmount: location?.state?.walletAmount } })}>
               <span>{'<<'}</span>
             </div>
           </div>
