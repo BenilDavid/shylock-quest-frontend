@@ -88,22 +88,22 @@ function ChapterPage() {
         },
         {
             id: 4,
-            day: "LOCKER",
-            isOpen: false,
+            day: "THE ROUTE",
+            isOpen: true,
         },
         {
             id: 5,
-            day: "HELIPAD",
+            day: "",
             isOpen: false,
         },
         {
             id: 8,
-            day: "MEETAGENTS",
+            day: "",
             isOpen: false,
         },
         {
             id: 9,
-            day: "BIKE",
+            day: "",
             isOpen: false,
         },
         {
@@ -118,17 +118,17 @@ function ChapterPage() {
         },
         {
             id: 6,
-            day: "TUNNEL",
+            day: "",
             isOpen: false,
         },
         {
             id: 7,
-            day: "LIBRARY",
+            day: "",
             isOpen: false,
         },
         {
             id: 10,
-            day: "PRISON",
+            day: "",
             isOpen: false,
         },
     ]

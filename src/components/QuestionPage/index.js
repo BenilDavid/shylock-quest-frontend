@@ -35,7 +35,6 @@ const QuestionPage = () => {
   const [isWrongAnswer, setIsWrongAnswer] = useState(false);
   const [isUserRecordCreated, setIsUserRecordCreated] = useState([]);
 
-  console.log(params);
   const [formData, setFormData] = useState({
     twitter: location?.state?.twitterData,
     twitterUserName: "",
@@ -69,7 +68,7 @@ const QuestionPage = () => {
     'the-hideout': 'answerOne',
     'the-plan': 'answerTwo',
     'extraction': 'answerThree',
-    '4': 'answerFour',
+    'the-route': 'answerFour',
     '5': 'answerFive',
     '6': 'answerSix',
     '7': 'answerSeven',
@@ -81,7 +80,7 @@ const QuestionPage = () => {
     'the-hideout': 'jasper',
     'the-plan': 'left',
     'extraction': formData.answer.toLowerCase(),
-    '4': '',
+    'the-route': 'sewer 2',
     '5': '',
     '6': '',
     '7': '',
@@ -89,11 +88,12 @@ const QuestionPage = () => {
     '9': '',
     '10': '',
   }
+
   const links = {
     'the-hideout': "https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%0a%0a%23SolvewithShylock.",
     'the-plan': "https://twitter.com/intent/tweet?text=Detective%20%40shylocknft%20is%20under%20immense%20pressure%20to%20rescue%20Ken%20from%20the%20hands%20of%20The%20SERA%20Gang%20All%20I'm%20going%20to%20do%20is%20support%20his%20plan%20and%20wait%20for%20my%20chance%20to%20help%20him%20out.%0a%0a%23SolvewithShylock",
     'extraction': 'https://twitter.com/intent/tweet?text=I%20have%20helped%20%40shylocknft%20find%20the%20missing%20clue.%20But%2C%20where%20does%20it%20lead%20to%3F%0a%0a%23SolvewithShylock',
-    '4': '',
+    'the-route': 'https://twitter.com/intent/tweet?text=The%20route%20is%20paved%20for%20%40shylocknft%2C%20as%20the%20rescue%20mission%20is%20edging%20closer%20than%20ever.%0a%0a%23SolvewithShylock',
     '5': '',
     '6': '',
     '7': '',
@@ -101,12 +101,12 @@ const QuestionPage = () => {
     '9': '',
     '10': '',
   }
-  
+
   const infoLink = {
     'the-hideout': "https://twitter.com/imjasperai/status/1616888376455757830?s=46&t=rHKMIsuyfk8YlBr8uWJRvg",
     'the-plan': "https://twitter.com/shylocknft/status/1617593458553950209?s=46&t=w4EMvmzlrhmxODfDbuLtUw",
     'extraction': '',
-    '4': '',
+    'the-route': 'https://twitter.com/shylocknft/status/1620469599270760452?s=46&t=vn6OZpIm4oLsGsEfDC7ZLg',
     '5': '',
     '6': '',
     '7': '',
@@ -341,38 +341,30 @@ const QuestionPage = () => {
                     </div>
                     <label className="col-sm-4 align-self-center col-form-label mt-3">Answer :</label>
                     <div className="col-sm-8 align-self-center d-flex align-items-center mt-3">
-                      {/* <input type="radio" name="leftDoor" value="left" /> */}
-                      {/* {console.log(params.day)} */}
-                      {params.day === 'the-hideout' ?
+                      {params.day === 'the-plan' ?
                         (<>
-                          <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
+                          <label className={`radio-label ${selectedOption === "Left" ? "checked-radio" : ""}`}>
+                            <input
+                              type="radio"
+                              name="door"
+                              value="Left"
+                              checked={selectedOption === "Left"}
+                              onChange={handleOptionChange}
+                            />
+                            Left</label>
+                          <label className={`radio-label ${selectedOption === "Right" ? "checked-radio" : ""}`}>
+                            <input
+                              type="radio"
+                              name="door"
+                              value="Right"
+                              checked={selectedOption === "Right"}
+                              onChange={handleOptionChange}
+                            />
+                            Right</label>
                         </>)
-                        : params.day === 'the-plan' ?
-                          (<>
-                            <label className={`radio-label ${selectedOption === "Left" ? "checked-radio" : ""}`}>
-                              <input
-                                type="radio"
-                                name="door"
-                                value="Left"
-                                checked={selectedOption === "Left"}
-                                onChange={handleOptionChange}
-                              />
-                              Left</label>
-                            <label className={`radio-label ${selectedOption === "Right" ? "checked-radio" : ""}`}>
-                              <input
-                                type="radio"
-                                name="door"
-                                value="Right"
-                                checked={selectedOption === "Right"}
-                                onChange={handleOptionChange}
-                              />
-                              Right</label>
-                          </>)
-                          : params.day === 'extraction' ?
-                            <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
-                            : ""
+                        :
+                        <input className="input-field" type="text" placeholder="Answer" name="answer" value={formData.answer} onChange={handleFormData} />
                       }
-
                       {infoButton()}
                     </div>
                   </div>
