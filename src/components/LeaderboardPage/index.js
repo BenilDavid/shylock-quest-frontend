@@ -8,18 +8,18 @@ import './LeaderboardPage.scss';
 const LeaderboardPage = () => {
     let navigate = useNavigate();
 
-    const leaderboardData = [
-        {
-            rank : 1,
-            twitter : "mark",
-            correctAnswer : 4
-        },
-         {
-            rank : 2,
-            twitter : "Jacob",
-            correctAnswer : 3
-        },
-    ]
+    // const leaderboardData = [
+    //     {
+    //         rank : 1,
+    //         twitter : "mark",
+    //         correctAnswer : 4
+    //     },
+    //      {
+    //         rank : 2,
+    //         twitter : "Jacob",
+    //         correctAnswer : 3
+    //     },
+    // ]
 
     return (
         <div>
