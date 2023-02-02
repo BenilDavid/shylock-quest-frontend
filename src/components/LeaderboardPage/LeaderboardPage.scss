@@ -1,0 +1,18 @@
+
+.outer-table{
+    padding: 10px;
+    color: #ff8012;
+
+    .custom-table{
+    border: 1px solid #ff8012;
+    border-radius: 5px;
+    border-collapse: separate !important;
+    
+        th{
+            color: #fff;
+        }
+        tr{
+            height: 45px;
+        }
+    }
+}

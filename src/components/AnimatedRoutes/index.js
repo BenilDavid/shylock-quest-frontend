@@ -5,6 +5,7 @@ import QuestionPage from '../QuestionPage/index';
 import ChapterPage from '../ChapterPage';
 import App from '../../App';
 import { AnimatePresence } from "framer-motion";
+import LeaderboardPage from '../LeaderboardPage';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -17,6 +18,7 @@ const AnimatedRoutes = () => {
                     <Route exact path="/explore" element={<ChapterPage />} />
                     <Route exact path="/explore/:day" element={<QuestionPage />} />
                     <Route exact path="/quest-lore" element={<QuestImagePage />} />
+                    <Route exact path="/leaderboard" element={<LeaderboardPage />} />
                 </Routes>
             </AnimatePresence>
         </div>
