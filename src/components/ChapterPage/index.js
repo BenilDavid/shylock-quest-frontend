@@ -93,7 +93,7 @@ function ChapterPage() {
         },
         {
             id: 5,
-            day: "",
+            day: "THE REVEAL",
             isOpen: false,
         },
         {
@@ -118,12 +118,12 @@ function ChapterPage() {
         },
         {
             id: 6,
-            day: "",
+            day: "THE CHOPPER",
             isOpen: false,
         },
         {
             id: 7,
-            day: "",
+            day: "CRASH",
             isOpen: false,
         },
         {

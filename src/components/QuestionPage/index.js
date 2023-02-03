@@ -69,47 +69,51 @@ const QuestionPage = () => {
     'the-plan': 'answerTwo',
     'extraction': 'answerThree',
     'the-route': 'answerFour',
-    '5': 'answerFive',
-    '6': 'answerSix',
-    '7': 'answerSeven',
+    'the-reveal': 'answerFive',
+    'the-chopper': 'answerSix',
+    'crash': 'answerSeven',
     '8': 'answerEight',
     '9': 'answerNine',
     '10': 'answerTen'
   }
+
+  // correct answer
   const correctAnswers = {
     'the-hideout': 'jasper',
     'the-plan': 'left',
     'extraction': formData.answer.toLowerCase(),
     'the-route': 'sewer 2',
-    '5': '',
-    '6': '',
-    '7': '',
+    'the-reveal': formData.answer.toLowerCase(),
+    'the-chopper': formData.answer.toLowerCase(),
+    'crash': '',
     '8': '',
     '9': '',
     '10': '',
   }
 
+  // intent tweet link
   const links = {
     'the-hideout': "https://twitter.com/intent/tweet?text=Completed%20my%20first%20mission%20teaming%20up%20with%20%40shylocknft.%20I%20cannot%20wait%20to%20see%20the%20downfall%20of%20the%20SERA%20Gang.%0a%0a%23SolvewithShylock.",
     'the-plan': "https://twitter.com/intent/tweet?text=Detective%20%40shylocknft%20is%20under%20immense%20pressure%20to%20rescue%20Ken%20from%20the%20hands%20of%20The%20SERA%20Gang%20All%20I'm%20going%20to%20do%20is%20support%20his%20plan%20and%20wait%20for%20my%20chance%20to%20help%20him%20out.%0a%0a%23SolvewithShylock",
     'extraction': 'https://twitter.com/intent/tweet?text=I%20have%20helped%20%40shylocknft%20find%20the%20missing%20clue.%20But%2C%20where%20does%20it%20lead%20to%3F%0a%0a%23SolvewithShylock',
     'the-route': 'https://twitter.com/intent/tweet?text=The%20route%20is%20paved%20for%20%40shylocknft%2C%20as%20the%20rescue%20mission%20is%20edging%20closer%20than%20ever.%0a%0a%23SolvewithShylock',
-    '5': '',
-    '6': '',
-    '7': '',
+    'the-reveal': 'https://twitter.com/intent/tweet?text=After%20witnessing%20the%20real%20identity%20of%20%40shylocknft%2C%20the%20SERA%20Gang%20is%20going%20to%20cause%20more%20trouble%20than%20ever%20to%20him%20on%20his%20way%20to%20prison.%0a%0a%23SolvewithShylock',
+    'the-chopper': 'https://twitter.com/intent/tweet?text=%40shylocknft%20is%20racing%20against%20time%2C%20as%20he%20takes%20the%20chopper%20to%20leave%20the%20hideout.%0a%0a%23SolvewithShylock',
+    'crash': 'https://twitter.com/intent/tweet?text=Whatttt!!%20Mid-air%20collision.%20%40shylocknft%20are%20you%20there%3F%3F%0a%0a%23SolvewithShylock',
     '8': '',
     '9': '',
     '10': '',
   }
 
+  // info button link
   const infoLink = {
     'the-hideout': "https://twitter.com/imjasperai/status/1616888376455757830?s=46&t=rHKMIsuyfk8YlBr8uWJRvg",
     'the-plan': "https://twitter.com/shylocknft/status/1617593458553950209?s=46&t=w4EMvmzlrhmxODfDbuLtUw",
     'extraction': '',
     'the-route': 'https://twitter.com/shylocknft/status/1620469599270760452?s=46&t=vn6OZpIm4oLsGsEfDC7ZLg',
-    '5': '',
-    '6': '',
-    '7': '',
+    'the-reveal': '',
+    'the-chopper': '',
+    'crash': '',
     '8': '',
     '9': '',
     '10': '',
