@@ -85,7 +85,7 @@ const QuestionPage = () => {
     'the-route': 'sewer 2',
     'the-reveal': formData.answer.toLowerCase(),
     'the-chopper': formData.answer.toLowerCase(),
-    'crash': '',
+    'crash': formData.answer.toLowerCase(),
     '8': '',
     '9': '',
     '10': '',
