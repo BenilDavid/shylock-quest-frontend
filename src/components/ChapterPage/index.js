@@ -93,8 +93,8 @@ function ChapterPage() {
         },
         {
             id: 5,
-            day: "THE REVEAL",
-            isOpen: false,
+            day: "THE PLOT",
+            isOpen: true,
         },
         {
             id: 8,
