@@ -70,7 +70,7 @@ const QuestionPage = () => {
     'extraction': 'answerThree',
     'the-route': 'answerFour',
     'the-plot': 'answerFive',
-    'the-chopper': 'answerSix',
+    'execution': 'answerSix',
     'crash': 'answerSeven',
     '8': 'answerEight',
     '9': 'answerNine',
@@ -84,7 +84,7 @@ const QuestionPage = () => {
     'extraction': formData.answer.toLowerCase(),
     'the-route': 'sewer 2',
     'the-plot': 'helicopter',
-    'the-chopper': formData.answer.toLowerCase(),
+    'execution': '300 miles',
     'crash': formData.answer.toLowerCase(),
     '8': '',
     '9': '',
@@ -98,11 +98,12 @@ const QuestionPage = () => {
     'extraction': 'https://twitter.com/intent/tweet?text=I%20have%20helped%20%40shylocknft%20find%20the%20missing%20clue.%20But%2C%20where%20does%20it%20lead%20to%3F%0a%0a%23SolvewithShylock',
     'the-route': 'https://twitter.com/intent/tweet?text=The%20route%20is%20paved%20for%20%40shylocknft%2C%20as%20the%20rescue%20mission%20is%20edging%20closer%20than%20ever.%0a%0a%23SolvewithShylock',
     'the-plot': 'https://twitter.com/intent/tweet?text=%40shylocknft%20is%20racing%20against%20time%2C%20as%20he%20takes%20the%20chopper%20to%20leave%20the%20hideout.%0a%0a%23SolvewithShylock',
-    'the-chopper': '',
+    'execution': 'https://twitter.com/intent/tweet?text=Whatttt!!%20A%20missile%20is%20approaching%20%40shylocknft%20%E2%80%98s%20chopper.%20Looks%20like%20the%20SERA%20Gang%20sensed%20the%20danger%20and%20wants%20to%20silence%20him.%0a%0a%23SolvewithShylock',
     'crash': '',
     '8': '',
     '9': '',
     '10': '',
+
   }
 
   // info button link
@@ -112,7 +113,7 @@ const QuestionPage = () => {
     'extraction': '',
     'the-route': 'https://twitter.com/shylocknft/status/1620469599270760452?s=46&t=vn6OZpIm4oLsGsEfDC7ZLg',
     'the-plot': 'https://twitter.com/shylocknft/status/1624472237884739585?s=46&t=2_oZeLntp5V34nmZNte-aQ',
-    'the-chopper': '',
+    'execution': 'https://twitter.com/shylocknft/status/1625209887226748928?s=46&t=eU4cztvu2Vr__SlPp4NmWQ',
     'crash': '',
     '8': '',
     '9': '',

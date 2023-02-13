@@ -118,8 +118,8 @@ function ChapterPage() {
         },
         {
             id: 6,
-            day: "THE CHOPPER",
-            isOpen: false,
+            day: "EXECUTION",
+            isOpen: true,
         },
         {
             id: 7,
