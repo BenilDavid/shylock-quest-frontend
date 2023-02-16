@@ -1,33 +1,19 @@
+$color_1: #ff8012;
+
 @mixin line-arrow() {
   width: 34px;
   position: absolute;
   right: -40px;
-  // display: inline-block;
-  // width: 30px; /* adjust as needed */
-  // height: 6px; /* adjust as needed */
-  // background-color: #ff8012; /* adjust as needed */
-  // animation: glow 1s ease-in-out infinite;
-  -webkit-filter: drop-shadow(0 0 7px #ff8012);
-  filter: drop-shadow(0 0 7px #ff8012);
-
-  // &:after {
-  //   content: "";
-  //   position: absolute;
-  //   top: 50%;
-  //   right: -14px;
-  //   margin-top: -10px; /* adjust as needed */
-  //   border-width: 10px; /* adjust as needed */
-  //   border-style: solid;
-  //   border-color: transparent transparent transparent #ff8012; /* adjust as needed */
-  // }
+  -webkit-filter: drop-shadow(0 0 7px $color_1);
+  filter: drop-shadow(0 0 7px $color_1);
 }
 
 @keyframes glow {
   from {
-    box-shadow: 0 0 10px #ff8012;
+    box-shadow: 0 0 10px $color_1;
   }
   to {
-    box-shadow: 0 0 20px #ff8012;
+    box-shadow: 0 0 20px $color_1;
     // transform: translateX(3px);
   }
 }
@@ -41,7 +27,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #ff8012;
+  color: $color_1;
   @media (max-width: 1000px) {
     height: 100vh;
   }
@@ -57,7 +43,9 @@
     height: 90%;
     min-height: 94vh;
     margin: 20px;
-    border: 1px solid #ff8012;
+    border: 1px solid $color_1;
+	box-shadow: inset 0px 0px 0.3em 0px $color_1, 0px 0px 0.3em 0px $color_1;
+
     /* border: 1px solid #d5a46b; */
     border-radius: 5px;
     position: relative;
@@ -65,12 +53,12 @@
     .jasper-video {
       z-index: 1;
       position: absolute;
-      bottom: 0;
-      right: 0;
+      bottom: 5px;
+      right: 5px;
       width: 120px !important;
       height: 120px !important;
       video {
-        border-radius: 10px;
+        border-radius: 50%;
       }
       @media (max-width: 978px) {
         width: 90px !important;
@@ -219,8 +207,8 @@
             }
             .locked-day {
               cursor: pointer;
-              border: 1px solid #ff8012;
-              color: #ff8012;
+              border: 1px solid $color_1;
+              color: $color_1;
             }
           }
         }
@@ -247,9 +235,9 @@
   font-size: calc(10px + 1vmin);
   cursor: pointer;
   padding: 5px 12px;
-  color: #ff8012;
+  color: $color_1;
   outline: none;
-  border: 1px solid #ff8012;
+  border: 1px solid $color_1;
   border-radius: 3px;
   background-color: transparent;
 }
@@ -273,7 +261,7 @@
   animation-delay: 6s;
   .intent-tweet a {
     text-decoration: none;
-    color: #ff8012;
+    color: $color_1;
   }
 }
 
@@ -315,13 +303,13 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  color: #ff8012;
+  color: $color_1;
   .metamask-box,
   .twitter-box {
     cursor: pointer;
     width: 100%;
     background-color: #000;
-    border: 1px solid #ff8012;
+    border: 1px solid $color_1;
     border-radius: 5px;
     margin: 10px 0;
     height: 50px;
@@ -390,8 +378,8 @@
   -ms-flex-pack: space-evenly;
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
-  color: #ff8012 !important;
-  border: 1px solid #ff8012 !important;
+  color: $color_1 !important;
+  border: 1px solid $color_1 !important;
   background: #000;
   &:hover {
     background-color: #000 !important;
@@ -423,7 +411,7 @@
   -ms-flex-pack: space-evenly;
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
-  color: #ff8012 !important;
+  color: $color_1 !important;
   border: 1px solid #377037 !important;
   background: #000;
 }

@@ -1,3 +1,5 @@
+$color_1: #ff8012;
+
 .question-container {
     text-align: center;
     width: 100%;
@@ -7,7 +9,7 @@
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: #ff8012;
+    color: $color_1;
  
     .app-container {
       z-index: 100;
@@ -20,7 +22,8 @@
       height: 90%;
       min-height: 94vh;
       margin: 20px;
-      border: 1px solid #ff8012;
+      border: 1px solid $color_1;
+	box-shadow: inset 0px 0px 0.3em 0px $color_1, 0px 0px 0.3em 0px $color_1;
       /* border: 1px solid #d5a46b; */
       border-radius: 5px;
       position: relative;
@@ -28,12 +31,12 @@
       .jasper-video {
         z-index: -1;
         position: absolute;
-        bottom: 0;
-        right: 0;
+        bottom: 5px;
+        right: 5px;
         width: 120px !important;
         height: 120px !important;
         video{
-          border-radius: 10px;
+          border-radius: 50%;
         }
         @media (max-width: 978px) {
           width: 90px !important;
@@ -213,9 +216,9 @@ width: 90%;
     font-size: calc(10px + 1vmin);
     cursor: pointer;
     padding: 5px 12px;
-    color: #ff8012;
+    color: $color_1;
     outline: none;
-    border: 1px solid #ff8012;
+    border: 1px solid $color_1;
     border-radius: 3px;
     background-color: transparent;
   }
@@ -239,7 +242,7 @@ width: 90%;
     animation-delay: 6s;
     .intent-tweet a {
       text-decoration: none;
-      color: #ff8012;
+      color: $color_1;
     }
   }
   
@@ -282,13 +285,13 @@ width: 90%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    color: #ff8012;
+    color: $color_1;
     .metamask-box,
     .twitter-box {
       cursor: pointer;
       width: 100%;
       background-color: #000;
-      border: 1px solid #ff8012;
+      border: 1px solid $color_1;
       border-radius: 5px;
       margin: 10px 0;
       height: 50px;
@@ -330,7 +333,7 @@ width: 90%;
   
   .qr-code-container {
     .qr-code-image {
-      border: 1px solid #ff8012;
+      border: 1px solid $color_1;
       height: 264px !important;
       width: 470px;
     }
@@ -359,8 +362,8 @@ width: 90%;
     -ms-flex-pack: space-evenly;
     -webkit-justify-content: space-evenly;
     justify-content: space-evenly;
-    color: #ff8012 !important;
-    border: 1px solid #ff8012 !important;
+    color: $color_1 !important;
+    border: 1px solid $color_1 !important;
     background: #000;
     &:hover {
       background-color: #000 !important;
@@ -392,7 +395,7 @@ width: 90%;
     -ms-flex-pack: space-evenly;
     -webkit-justify-content: space-evenly;
     justify-content: space-evenly;
-    color: #ff8012 !important;
+    color: $color_1 !important;
     border: 1px solid #377037 !important;
     background: #000;
   }

@@ -27,7 +27,6 @@ function App() {
   let navigate = useNavigate();
   const address = useAddress();
   const provider = new TwitterAuthProvider();
-
   const [balance, setBalance] = useState(0);
 
   const [isOpenLogin, setisOpenLogin] = useState(false);
@@ -159,26 +158,32 @@ function App() {
 
   return (
     <>
-      <motion.div className="App" 
-      initial={{opacity: 0, transition: {duration: 0.8} }}
-      animate={{opacity: 1}}
-      exit={{ opacity: 0 , transition: {duration: 0.8} }}
+      <motion.div className="App"
+        initial={{ opacity: 0, transition: { duration: 0.8 } }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0, transition: { duration: 0.8 } }}
       >
         <div className="app-container">
           <div className="header d-flex">
             <div className="twitter-id back-btn ms-4">
-           
+
             </div>
             <div className="logo-container cursor-pointer" onClick={() => navigate('/')}>
               <img src={logo} className="shylock-logo" alt="logo" />
             </div>
-            <div className={`metakey me-4 ${address ? "border-orange" : ""}`}>
-              {address
-                ? address.slice(0, 5) + "..." + address.slice(-5)
-                : ""}
+            <div className="right-header-links">
+              <button className="wallet-checker-btn dapp_btn me-4" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
+                Wallet Checker
+              </button>
+              <div className={`metakey me-4 ${address ? "border-orange" : ""}`}>
+                {address
+                  ? address.slice(0, 5) + "..." + address.slice(-5)
+                  : ""}
+              </div>
             </div>
+
           </div>
-        
+
           {window.innerWidth > WindowSize ?
             <>
               <div className="analog-clock my-3">
@@ -187,13 +192,13 @@ function App() {
 
               <div className={`begin-btn animate__animated animate__fadeInUp animate__delay-1s"`}>
                 <button className={`initiate-btn glowing-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>
-                <span class='glowing-txt'>E<span class='faulty-letter'>X</span>PLORE</span>
+                  <span class='glowing-txt'>E<span class='faulty-letter'>X</span>PLORE</span>
                   {/* EXPLORE */}
-                  </button>
+                </button>
                 <div className={`fs-7 mt-1 better-experience`}>
                 </div>
               </div>
-              </>
+            </>
             :
             "<<Use Desktop for better experience>>"
           }
@@ -229,8 +234,22 @@ function App() {
             <div className="d-flex justify-content-center align-items-center my-3">
               <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={enterDarkRoom}> THE JOURNEY </button>
             </div>
-          </Modal>  
+          </Modal>
 
+          {/* <Modal
+            isOpen={isOpenWalletChecker}
+            toggle={() => setisOpenWalletChecker(!isOpenWalletChecker)}
+            size="md"
+            headTitle="WHITELIST CHECKER"
+          >
+            <div className='d-flex'>
+              <input type="text" className="input-field me-2" name='whiteListAddress' value={addressChecker} onChange={handleSearchChange} />
+              <button className="dapp_btn" onClick={handleCheckAddress}>Check</button>
+            </div>
+            <div className={`mt-2 ${isWhiteListUser === 'whiteList' ? "green-text" : isWhiteListUser === 'notWhiteList' ? "red-text" : ""}`}>
+              {isWhiteListUser === 'whiteList' ? "Congratulations you are whiteListed" : isWhiteListUser === 'notWhiteList' ? "Sorry, you are not Whitelisted" : ""}
+            </div>
+          </Modal> */}
           {/* <Popup
             isOpen={isOpenLogin}
             toggle={() => setisOpenLogin(!isOpenLogin)}

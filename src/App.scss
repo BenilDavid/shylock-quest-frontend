@@ -1,10 +1,13 @@
+$header-btn-width: 300px;
+$color_1: #ff8012;
+
 @mixin line-arrow() {
   position: absolute;
   right: -55px;
   display: inline-block;
   width: 48px; /* adjust as needed */
   height: 6px; /* adjust as needed */
-  background-color: #ff8012; /* adjust as needed */
+  background-color: $color_1; /* adjust as needed */
   &:after {
     content: "";
     position: absolute;
@@ -13,7 +16,7 @@
     margin-top: -10px; /* adjust as needed */
     border-width: 10px; /* adjust as needed */
     border-style: solid;
-    border-color: transparent transparent transparent #ff8012; /* adjust as needed */
+    border-color: transparent transparent transparent $color_1; /* adjust as needed */
   }
 }
 
@@ -26,7 +29,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #ff8012;
+  color: $color_1;
   /* background-color: #191919; */
   // @media (max-width: 1000px) {
   //   // height: 620px;
@@ -43,7 +46,9 @@
     width: 95%;
     height: 90%;
     margin: 20px;
-    border: 1px solid #ff8012;
+    border: 1px solid $color_1;
+    box-shadow: inset 0px 0px 0.3em 0px $color_1, 0px 0px 0.3em 0px $color_1;
+
     /* border: 1px solid #d5a46b; */
     border-radius: 5px;
     position: relative;
@@ -69,7 +74,7 @@
       justify-content: space-between;
       align-items: center;
       .twitter-id {
-        width: 120px;
+        width: $header-btn-width;
       }
       .logo-container {
         z-index: 100;
@@ -79,15 +84,24 @@
           pointer-events: none;
         }
       }
-      .metakey {
-        width: 120px;
-        padding: 8px;
-        font-size: 1rem;
-        margin-right: 1rem;
-        @media (max-width: 478px) {
-          font-size: 0.7rem;
-          width: 90px;
-          margin: 0 6px 0 6px;
+      .right-header-links {
+        display: flex;
+        align-items: center;
+        width: $header-btn-width;
+        .wallet-checker-btn{
+          -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
+          -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
+          text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
+        }
+        .metakey {
+          padding: 8px;
+          font-size: 1rem;
+          margin-right: 1rem;
+          @media (max-width: 478px) {
+            font-size: 0.7rem;
+            width: 90px;
+            margin: 0 6px 0 6px;
+          }
         }
       }
     }
@@ -181,7 +195,7 @@
               @media (max-width: 978px) {
                 font-size: 0.8rem;
               }
-              [class^='locked-image-'] {
+              [class^="locked-image-"] {
                 width: 25px;
                 height: 25px;
                 position: absolute;
@@ -202,8 +216,8 @@
             }
             .locked-day {
               cursor: pointer;
-              border: 1px solid #ff8012;
-              color: #ff8012;
+              border: 1px solid $color_1;
+              color: $color_1;
             }
           }
         }
@@ -230,9 +244,9 @@
   font-size: calc(10px + 1vmin);
   cursor: pointer;
   padding: 5px 12px;
-  color: #ff8012;
+  color: $color_1;
   outline: none;
-  border: 1px solid #ff8012;
+  border: 1px solid $color_1;
   border-radius: 3px;
   background-color: transparent;
 }
@@ -256,7 +270,7 @@
   animation-delay: 6s;
   .intent-tweet a {
     text-decoration: none;
-    color: #ff8012;
+    color: $color_1;
   }
 }
 
@@ -298,13 +312,13 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  color: #ff8012;
+  color: $color_1;
   .metamask-box,
   .twitter-box {
     cursor: pointer;
     width: 100%;
     background-color: #000;
-    border: 1px solid #ff8012;
+    border: 1px solid $color_1;
     border-radius: 5px;
     margin: 10px 0;
     height: 50px;
@@ -373,8 +387,8 @@
   -ms-flex-pack: space-evenly;
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
-  color: #ff8012 !important;
-  border: 1px solid #ff8012 !important;
+  color: $color_1 !important;
+  border: 1px solid $color_1 !important;
   background: #000;
   &:hover {
     background-color: #000 !important;
@@ -406,7 +420,7 @@
   -ms-flex-pack: space-evenly;
   -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
-  color: #ff8012 !important;
+  color: $color_1 !important;
   border: 1px solid #377037 !important;
   background: #000;
 }

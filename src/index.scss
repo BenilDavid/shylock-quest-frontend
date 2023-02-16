@@ -1,16 +1,15 @@
-
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 /* @import url('./fonts/SherlockVintage.woff'); */
 
 @font-face {
   font-family: sherlockVintage;
-  src: url('./fonts/SherlockVintage.woff');
+  src: url("./fonts/SherlockVintage.woff");
 }
 
 body {
   margin: 0;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #000000 !important;
@@ -19,30 +18,28 @@ body {
   background: linear-gradient(0deg, #1f0b00 0%, #000000 100%); */
 }
 
-// .d-none{
-//   display: none;
-// }
+$color_1: #ff8012;
 
-.input-field{
+.input-field {
   // width: 280px;
   width: 100%;
-  color: #ff8012 !important;
+  color: $color_1 !important;
   background-color: #000000 !important;
   outline: none;
   padding: 10px 10px;
   font-size: 1rem;
-  border: 1px solid #ff8012 !important;
+  border: 1px solid $color_1 !important;
   border-radius: 5px;
-  &::placeholder{
+  &::placeholder {
     color: #ff811285;
   }
 }
 
-.orange-text{
-  color: #ff8012;
+.orange-text {
+  color: $color_1;
   font-size: 1rem;
 }
-.submit-btn{
+.submit-btn {
   font-weight: 600;
   cursor: pointer;
   text-align: center;
@@ -51,63 +48,79 @@ body {
   padding: 5px 15px;
   margin: 10px 0;
   font-size: 1rem;
-  color: #ff8012;
-  border: 1px solid #ff8012;
+  color: $color_1;
+  border: 1px solid $color_1;
   border-radius: 5px;
-  &:hover{
-    background-color: #ff8012;
+  &:hover {
+    background-color: $color_1;
     color: #000000;
   }
   @media (max-width: 978px) {
     margin: 30px 0 10px 0;
-
   }
 }
 
-.link{
+.link {
   text-decoration: none;
   color: #fff;
-  &:hover{
+  &:hover {
     color: #fff;
   }
 }
 
-.enter-btn{
+.enter-btn {
   font-size: calc(10px + 1vmin);
   cursor: pointer;
   padding: 5px 12px;
-  color: #ff8012;
+  color: $color_1;
   outline: none;
-  border: 1px solid #ff8012;
+  border: 1px solid $color_1;
+  border-radius: 3px;
+  background-color: #000;
+}
+.dapp_btn {
+  font-size: calc(10px + 1vmin);
+  cursor: pointer;
+  padding: 5px 12px;
+  color: $color_1;
+  outline: none;
+  border: 1px solid $color_1;
+  box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
   border-radius: 3px;
   background-color: #000;
 }
 
-.cursor-pointer{
+.wallet-checker-btn {
+	
+}
+
+.cursor-pointer {
   cursor: pointer !important;
 }
 
-.border-green{
+.border-green {
   border: 1px solid #377037 !important;
 }
-.border-orange{
-  border: 1px solid #ff8012 !important;
+.border-orange {
+  border: 1px solid $color_1 !important;
 }
 
-.back-arrow{
+.back-arrow {
   cursor: pointer;
   width: fit-content;
   padding: 0 8px;
   border-radius: 5px;
-  border: 1px solid #ff8012;
+  border: 1px solid $color_1;
 }
 
-#timer-value{
+#timer-value {
   font-size: 1.4rem;
   align-self: flex-end;
   display: flex;
   // margin-right: 30px;
-  .hour-box, .minute-box, .second-box{
+  .hour-box,
+  .minute-box,
+  .second-box {
     text-decoration: line-through;
     text-decoration-color: #000;
     text-decoration-thickness: 0.5px;
@@ -121,10 +134,10 @@ body {
     border-radius: 5px;
     @media (max-width: 978px) {
       width: 28px;
-    height: 34px;
+      height: 34px;
     }
   }
-  .timer-colen{
+  .timer-colen {
     margin: 0 2px;
     font-size: 1.6rem;
     @media (max-width: 978px) {
@@ -134,215 +147,216 @@ body {
 
   @media (max-width: 978px) {
     margin-right: 10px;
-  font-size: 1rem;
+    font-size: 1rem;
   }
 }
 
-.fs-7{
-font-size: 0.9rem;
+.fs-7 {
+  font-size: 0.9rem;
 }
 
-.custom-tooltip{
+.custom-tooltip {
   width: clamp(160px, 220px, 300px) !important;
-  font-size: clamp(0.8rem, 2.3vw, 1rem) !important; 
+  font-size: clamp(0.8rem, 2.3vw, 1rem) !important;
   background-color: #0f0f0f !important;
 }
 
 // .................................................
 
 input[type="radio"] {
-	display: none;
+  display: none;
 }
 
-.radio-label{
-    display: inline-block;
-    padding: 5px 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    border: 1px solid #ff8012;
-    border-radius: 5px;
-    margin-right: 8px;
+.radio-label {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid $color_1;
+  border-radius: 5px;
+  margin-right: 8px;
 }
 
-.checked-radio{
-  background-color: #ff8012;
+.checked-radio {
+  background-color: $color_1;
   color: #000;
 }
 
 // ......................................................
 // glow
-$color_1: #ff8012;
+// $color_1: #ff8012;
 $color_2: rgba(0, 0, 0, 0.8);
 $font-family_1: "Raleway", sans-serif;
 $background-color_1: #ff8012;
 
 @import "https://fonts.googleapis.com/css?family=Raleway";
 @keyframes faulty-flicker {
-	0% {
-		opacity: 0.1;
-	}
-	2% {
-		opacity: 0.1;
-	}
-	4% {
-		opacity: 0.5;
-	}
-	19% {
-		opacity: 0.5;
-	}
-	21% {
-		opacity: 0.1;
-	}
-	23% {
-		opacity: 1;
-	}
-	80% {
-		opacity: 0.5;
-	}
-	83% {
-		opacity: 0.4;
-	}
-	87% {
-		opacity: 1;
-	}
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 0.1;
+  }
+  4% {
+    opacity: 0.5;
+  }
+  19% {
+    opacity: 0.5;
+  }
+  21% {
+    opacity: 0.1;
+  }
+  23% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  83% {
+    opacity: 0.4;
+  }
+  87% {
+    opacity: 1;
+  }
 }
 @keyframes text-flicker {
-	0% {
-		opacity: 0.1;
-	}
-	2% {
-		opacity: 1;
-	}
-	8% {
-		opacity: 0.1;
-	}
-	9% {
-		opacity: 1;
-	}
-	12% {
-		opacity: 0.1;
-	}
-	20% {
-		opacity: 1;
-	}
-	25% {
-		opacity: 0.3;
-	}
-	30% {
-		opacity: 1;
-	}
-	70% {
-		opacity: 0.7;
-	}
-	72% {
-		opacity: 0.2;
-	}
-	77% {
-		opacity: 0.9;
-	}
-	100% {
-		opacity: 0.9;
-	}
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 1;
+  }
+  8% {
+    opacity: 0.1;
+  }
+  9% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  72% {
+    opacity: 0.2;
+  }
+  77% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.9;
+  }
 }
 @keyframes border-flicker {
-	0% {
-		opacity: 0.1;
-	}
-	2% {
-		opacity: 1;
-	}
-	4% {
-		opacity: 0.1;
-	}
-	8% {
-		opacity: 1;
-	}
-	70% {
-		opacity: 0.7;
-	}
-	100% {
-		opacity: 1;
-	}
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 1;
+  }
+  4% {
+    opacity: 0.1;
+  }
+  8% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .glowing-btn {
-	position: relative;
-	color: $color_1;
-	cursor: pointer;
-	padding: 0.35em 1em;
-	border: 0.15em solid $color_1;
-	border-radius: 0.45em;
-	background: none;
-	perspective: 2em;
-	font-family: $font-family_1;
-	font-size: 2em;
-	font-weight: 900;
-	letter-spacing: 0.6em;
-	-webkit-box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
-	-moz-box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
-	box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
-	animation: border-flicker 2s linear infinite;
-	&::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		opacity: 0.7;
-		filter: blur(1em);
-		transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
-		background: $color_1;
-		pointer-events: none;
-	}
-	&::after {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		opacity: 0;
-		z-index: -1;
-		background-color: $background-color_1;
-		box-shadow: 0 0 2em 0.2em $color_1;
-		transition: opacity 100ms linear;
-	}
-	&:hover {
-		color: $color_2;
-		text-shadow: none;
-		animation: none;
-		.glowing-txt {
-			animation: none;
-		}
-		.faulty-letter {
-			animation: none;
-			text-shadow: none;
-			opacity: 1;
-		}
-		&:before {
-			filter: blur(1.5em);
-			opacity: 1;
-		}
-		&:after {
-			opacity: 1;
-		}
-	}
+  position: relative;
+  color: $color_1;
+  cursor: pointer;
+  padding: 0.35em 1em;
+  border: 0.15em solid $color_1;
+  border-radius: 0.45em;
+  background: none;
+  perspective: 2em;
+  font-family: $font-family_1;
+  font-size: 2em;
+  font-weight: 900;
+  letter-spacing: 0.6em;
+  -webkit-box-shadow: inset 0px 0px 0.5em 0px $color_1,
+    0px 0px 0.5em 0px $color_1;
+  -moz-box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
+  box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
+  animation: border-flicker 2s linear infinite;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.7;
+    filter: blur(1em);
+    transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
+    background: $color_1;
+    pointer-events: none;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    z-index: -1;
+    background-color: $background-color_1;
+    box-shadow: 0 0 2em 0.2em $color_1;
+    transition: opacity 100ms linear;
+  }
+  &:hover {
+    color: $color_2;
+    text-shadow: none;
+    animation: none;
+    .glowing-txt {
+      animation: none;
+    }
+    .faulty-letter {
+      animation: none;
+      text-shadow: none;
+      opacity: 1;
+    }
+    &:before {
+      filter: blur(1.5em);
+      opacity: 1;
+    }
+    &:after {
+      opacity: 1;
+    }
+  }
 }
 .glowing-txt {
-	float: left;
-	margin-right: -0.8em;
-	-webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
-	-moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
-	text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
-	animation: text-flicker 3s linear infinite;
+  float: left;
+  margin-right: -0.8em;
+  -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
+  -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
+  animation: text-flicker 3s linear infinite;
 }
 .faulty-letter {
-	opacity: 0.5;
-	animation: faulty-flicker 2s linear infinite;
+  opacity: 0.5;
+  animation: faulty-flicker 2s linear infinite;
 }
 @media only screen and (max-width: 600px) {
-	.glowing-btn {
-		font-size: 1em;
-	}
+  .glowing-btn {
+    font-size: 1em;
+  }
 }
