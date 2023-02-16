@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import logo from '../../shylock-logo.png';
 import twitterIcon from '../../twitter.png';
 // import ReactPlayer from 'react-player';
