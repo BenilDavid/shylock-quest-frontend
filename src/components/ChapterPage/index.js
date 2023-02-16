@@ -124,7 +124,7 @@ function ChapterPage() {
         {
             id: 7,
             day: "CRASH",
-            isOpen: false,
+            isOpen: true,
         },
         {
             id: 10,
