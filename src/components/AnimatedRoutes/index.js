@@ -8,6 +8,8 @@ import { AnimatePresence } from "framer-motion";
 import LeaderboardPage from '../LeaderboardPage';
 import WalletCheckerPage from '../WalletCheckerPage';
 import MintingDapp from '../MintingDapp';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -24,6 +26,7 @@ const AnimatedRoutes = () => {
                     <Route exact path="/quest-lore" element={<QuestImagePage />} />
                     <Route exact path="/leaderboard" element={<LeaderboardPage />} />
                 </Routes>
+                <ToastContainer />
             </AnimatePresence>
         </div>
     )

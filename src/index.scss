@@ -90,10 +90,6 @@ $color_1: #ff8012;
   background-color: #000;
 }
 
-.wallet-checker-btn {
-	
-}
-
 .cursor-pointer {
   cursor: pointer !important;
 }
@@ -103,6 +99,8 @@ $color_1: #ff8012;
 }
 .border-orange {
   border: 1px solid $color_1 !important;
+  box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
+  border-radius: 5px;
 }
 
 .back-arrow {
@@ -111,6 +109,7 @@ $color_1: #ff8012;
   padding: 0 8px;
   border-radius: 5px;
   border: 1px solid $color_1;
+  box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
 }
 
 #timer-value {
@@ -154,7 +153,9 @@ $color_1: #ff8012;
 .fs-7 {
   font-size: 0.9rem;
 }
-
+.bg-transparent{
+  background-color: transparent !important;
+}
 .custom-tooltip {
   width: clamp(160px, 220px, 300px) !important;
   font-size: clamp(0.8rem, 2.3vw, 1rem) !important;

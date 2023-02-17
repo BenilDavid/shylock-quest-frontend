@@ -1,33 +1,67 @@
 $color_1: #ff8012;
 
-.object {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: red;
-  position: absolute;
-  right: 15px;
-  top: 10px;
-}
+.circle-loop-video{
+  z-index: -1;
+  width: 100% !important;
+  height: 0 !important;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  position: relative;
 
-.tunnel {
-  height: 200px;
-  width: 50px;
-//   background-color: green;
-  border: 2px solid $color_1;
-  border-top: none;
+// position: absolute;
+// top: 0;
+// left: 0;
+// width: 100%;
+video{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+}
+.dapp_header{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.dapp_footer{
   position: absolute;
   bottom: 0;
-  &::before {
-    content: "";
-    height: 20px;
-    width: 48px;
-    position: absolute;
-    top: -8px;
-    left: -1px;
-    border: 2px solid $color_1;
-    border-radius: 50%;
-    // background-color: blue;
-    // transform: rotate(90deg);
+  // left: 0;
+}
+
+.main-container{
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 2px solid #fff;
+  border-radius: 5px;
+  min-width: 60%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .minting-box{
+    height: 350px;
+    // border: 2px solid #fff;
+    // border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
   }
+}
+.token-input-container {
+  .token-value {
+    min-width: 40px;
+  }
+}
+
+.progress{
+  width: 70% !important;
+  height: 25px !important;
+  border: 1px solid #ff8012 !important;
+  background: #000 !important;
+}
+
+.progress-bar{
+  background-color: #ff8012 !important;
 }
