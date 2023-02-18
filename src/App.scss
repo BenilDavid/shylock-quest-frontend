@@ -24,7 +24,8 @@ $color_1: #ff8012;
   text-align: center;
   width: 100%;
   /* background-color: #191919; */
-  height: 100vh;
+  min-height: 100vh;
+  // height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,6 +46,7 @@ $color_1: #ff8012;
     align-items: center;
     width: 100%;
     height: 90%;
+    min-height: 94vh;
     margin: 20px;
     border: 1px solid $color_1;
     // box-shadow: inset 0px 0px 0.3em 0px $color_1, 0px 0px 0.3em 0px $color_1;
@@ -87,6 +89,7 @@ $color_1: #ff8012;
       .right-header-links {
         display: flex;
         align-items: center;
+        justify-content: end;
         width: $header-btn-width;
         // .wallet-checker-btn{
         //   -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
