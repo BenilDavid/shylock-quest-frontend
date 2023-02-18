@@ -1,67 +1,89 @@
 $color_1: #ff8012;
 $color_2: rgba(0, 0, 0, 0.8);
 
-.wallet-checker-box{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40%;
-    min-height: 150px;
-    padding: 10px 20px;
-    // border: 2px solid #fff;
-    border-radius: 5px;
-    .msg-box{
-        font-size: 20px;
-        // background-color: #ff8012;
-        color: #fff;
-    }
-}
-
-
-.glowing-box {
-    position: relative;
-    color: $color_1;
-    cursor: pointer;
-    padding: 0.35em 1em;
-    border: 0.15em solid $color_1;
-    border-radius: 0.25em;
-    background: none;
-    perspective: 2em;
-    // font-family: $font-family_1;
-    // font-size: 2em;
+.wallet-checker-box {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  // min-height: 150px;
+  padding: 10px 20px;
+  // border: 2px solid #fff;
+  border-radius: 5px;
+  @media (max-width: 700px) {
+    width: 85%;
+  }
+  .msg-box {
+    font-size: 20px;
+    // background-color: #ff8012;
+    color: #fff;
+  }
+  .check-btn {
     font-weight: 600;
-    // letter-spacing: 0.6em;
-    -webkit-box-shadow: inset 0px 0px 0.5em 0px $color_1,
-      0px 0px 0.5em 0px $color_1;
-    -moz-box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
-    box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
-    animation: border-flicker 2s linear infinite;
-   
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      opacity: 1;
-      z-index: -1;
-      background-color: $color_1;
-      box-shadow: 0 0 2em 0.2em $color_1;
-      transition: opacity 100ms linear;
-    }
     &:hover {
-      color: $color_2;
-      text-shadow: none;
-      animation: none;
-      .glowing-txt {
-        animation: none;
-      }
-      .faulty-letter {
-        animation: none;
-        text-shadow: none;
-        opacity: 1;
-      }
+      background-color: $color_1;
+      color: #000000;
     }
   }
+}
 
+.wl-video {
+  width: 70% !important;
+  height: 70% !important;
+  @media (max-width: 600px) {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.collect-btn {
+  animation-delay: 10s;
+}
+
+.glowing-box {
+  position: relative;
+  color: $color_1;
+  cursor: pointer;
+  padding: 0.35em 1em;
+  border: 0.15em solid $color_1;
+  border-radius: 0.25em;
+  background: none;
+  perspective: 2em;
+  // font-family: $font-family_1;
+  // font-size: 2em;
+  font-weight: 600;
+  // letter-spacing: 0.6em;
+  -webkit-box-shadow: inset 0px 0px 0.5em 0px $color_1,
+    0px 0px 0.5em 0px $color_1;
+  -moz-box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
+  box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
+  animation: border-flicker 2s linear infinite;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    z-index: -1;
+    background-color: $color_1;
+    box-shadow: 0 0 2em 0.2em $color_1;
+    transition: opacity 100ms linear;
+  }
+  &:hover {
+    color: $color_2;
+    text-shadow: none;
+    animation: none;
+    .glowing-txt {
+      animation: none;
+    }
+    .faulty-letter {
+      animation: none;
+      text-shadow: none;
+      opacity: 1;
+    }
+  }
+}

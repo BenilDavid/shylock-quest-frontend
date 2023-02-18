@@ -105,8 +105,18 @@ function App() {
   }
 
   const updateClock = () => {
+    // let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+    // let date = new Date(ausTime);
+
     let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
     let date = new Date(ausTime);
+    // let utcTime = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+    // let utcDateString = utcTime.toUTCString();
+    
+    // console.log(utcDateString);
+//     let now = new Date();
+// let date = new Date(now.getTime() + now.getTimezoneOffset() * 60000).toLocaleString();
+// console.log(date);
 
     setAnalogClockTime(
       {
@@ -174,7 +184,7 @@ function App() {
               <img src={logo} className="shylock-logo" alt="logo" />
             </div>
             <div className="right-header-links">
-              <button className="wallet-checker-btn dapp_btn me-4" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
+              <button className="dapp_btn me-4" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
                 Wallet Checker
               </button>
               <div className={`metakey me-4 ${address ? "border-orange" : ""}`}>

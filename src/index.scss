@@ -9,7 +9,7 @@
 
 body {
   margin: 0;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "IBM Plex Mono", monospace !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #000000 !important;
@@ -37,6 +37,10 @@ $color_1: #ff8012;
 
 .orange-text {
   color: $color_1;
+  font-size: 1rem;
+}
+.white-text {
+  color: #fff;
   font-size: 1rem;
 }
 .submit-btn {
@@ -84,8 +88,8 @@ $color_1: #ff8012;
   padding: 5px 12px;
   color: $color_1;
   outline: none;
-  border: 1px solid $color_1;
-  box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
+  border: 2px solid $color_1;
+  // box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
   border-radius: 3px;
   background-color: #000;
 }
@@ -95,11 +99,15 @@ $color_1: #ff8012;
 }
 
 .border-green {
-  border: 1px solid #377037 !important;
+  border: 2px solid #377037 !important;
+}
+
+.border-white {
+  border: 2px solid #fff !important;
 }
 .border-orange {
-  border: 1px solid $color_1 !important;
-  box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
+  border: 2px solid $color_1 !important;
+  // box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
   border-radius: 5px;
 }
 
@@ -108,8 +116,8 @@ $color_1: #ff8012;
   width: fit-content;
   padding: 0 8px;
   border-radius: 5px;
-  border: 1px solid $color_1;
-  box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
+  border: 2px solid $color_1;
+  // box-shadow: inset 0px 0px 0.5em 0px $color_1, 0px 0px 0.5em 0px $color_1;
 }
 
 #timer-value {

@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import logo from '../../shylock-logo.png';
 import twitterIcon from '../../twitter.png';
-// import ReactPlayer from 'react-player';
-// import Typewriter from 'typewriter-effect';
+import Bgm from '../../Audio/shylock-bgm.mp3';
+import ReactPlayer from 'react-player';
+import Typewriter from 'typewriter-effect';
+import WCJasperWave from '../../Video/wallet-checker-jasper.mp4';
+import WLVideo from '../../Video/rolling.mp4';
 import 'animate.css';
 import { useNavigate, useLocation } from "react-router-dom";
 // import axios from 'axios';
 import { motion } from "framer-motion";
 import './WalletCheckerPage.scss';
 
-const WindowSize = "1000";
-
 const WalletCheckerPage = () => {
     let navigate = useNavigate();
     const { state: { metamaskId } } = useLocation();
-    
+
     const [isWhiteListUser, setIsWhiteListUser] = useState("");
     //   const [isOpenWalletChecker, setisOpenWalletChecker] = useState(false);
     const [addressChecker, setAddressChecker] = useState("");
@@ -70,41 +71,69 @@ const WalletCheckerPage = () => {
                         </div>
                     </div>
 
-                    {window.innerWidth > WindowSize ?
+                    <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} />
+
+                    {isWhiteListUser === '' ?
                         <>
-                            <div className="wallet-checker-box">
+                            <div className={`video-container`}>
+                                <ReactPlayer className={`jasper-video`} url={WCJasperWave} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} />
+                            </div>
+                            <div className="w-75 mt-5">
+                                <Typewriter
+                                    onInit={(typewriter) => {
+                                        typewriter
+                                            // .pauseFor(400)
+                                            .typeString(" Welcome everyone, Shylock is reaching the climax of rescuing Ken from the SERA Gang.")
+                                            .pauseFor(300)
+                                            .typeString(" To honor your services, we will be rewarding those who helped him in his missions and recruit them as Agents. ")
+                                            .pauseFor(500)
+                                            .typeString(" Print your Agent ID's here by entering your wallet address below. ")
+                                            .start();
+                                    }}
+                                    options={{
+                                        loop: false,
+                                        delay: 40,
+                                        pauseFor: 100000,
+                                    }}
+                                />
+                            </div>
+                            <div className="wallet-checker-box animate__animated animate__fadeInUp">
                                 <div className="w-100">
-                                    {/* <div>WhiteList Checker</div> */}
                                     <div className='d-flex w-100'>
                                         <input type="text" className="input-field me-2" name='whiteListAddress' value={addressChecker} onChange={handleSearchChange} />
-                                        <button className="dapp_btn" onClick={handleCheckAddress}>Check</button>
+                                        <button className="dapp_btn check-btn" onClick={handleCheckAddress}>Check</button>
                                     </div>
-                                    {isWhiteListUser === 'whiteList' ?
-                                        <div className="msg-box glowing-box mt-4">
-                                            <div>
-                                                Congratulations you are whiteListed
-                                            </div>
-                                        </div>
-                                        : isWhiteListUser === 'notWhiteList' ?
-                                            <div className="msg-box glowing-box mt-4">
-                                                <div>
-                                                    Sorry, you are not Whitelisted
-                                                </div>
-                                            </div>
-                                            : ""}
                                 </div>
                             </div>
-                           
-                            {/* <div>
-                                <div className="binary-1">01010101011101100001101010101010101011101</div>
-                                <div className="binary-2">01010101011101100001101010101010101011101</div>
-                                <div className="binary-3">01010101011101100001101010101010101011101</div>
-                                <div className="binary-4">01010101011101100001101010101010101011101</div>
-                            </div> */}
                         </>
-                        :
-                        "<<Use Desktop for better experience>>"
+                        : ""
                     }
+
+                    {isWhiteListUser === 'whiteList' ?
+                        <>
+                            <ReactPlayer className={`wl-video`} url={WLVideo} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} />
+                            <a target='_blank' href="https://twitter.com/intent/tweet?text=Finally%2C%20I%20am%20an%20Agent%20for%20%40shylocknft.%20Our%20journey%20has%20begun.%0a%0a%23SolvewithShylock." rel="noreferrer">
+                                <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Collect >>'}</button>
+                            </a>
+                        </>
+                        // <div className="msg-box glowing-box mt-4">
+                        //     <div>
+                        //         Congratulations you are whiteListed
+                        //     </div>
+                        // </div>
+                        : isWhiteListUser === 'notWhiteList' ?
+                            <>
+                                <a className="animate__animated animate__fadeInUp animate__delay-1s" target='_blank' href="https://twitter.com/intent/tweet?text=True%20Agents%20of%20%40shylocknft%20wouldn't%20back%20down%20from%20a%20challenge.%20I'll%20prove%20my%20worth%20and%20get%20promoted%20to%20Agent.%0a%0a%23SolvewithShylock." rel="noreferrer">
+                                    <button className="dapp_btn">Try again</button>
+                                </a>
+                            </>
+                            // <div className="msg-box glowing-box mt-4">
+                            //     <div>
+                            //         Sorry, you are not Whitelisted
+                            //     </div>
+                            // </div>
+                            : ""}
+
                     <div className='footer'>
                         <button className="twitter-btn">
                             <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">

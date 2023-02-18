@@ -1,4 +1,5 @@
 $color_1: #ff8012;
+$header-btn-width: 140px;
 
 .question-container {
     text-align: center;
@@ -23,7 +24,7 @@ $color_1: #ff8012;
       min-height: 94vh;
       margin: 20px;
       border: 1px solid $color_1;
-	box-shadow: inset 0px 0px 0.3em 0px $color_1, 0px 0px 0.3em 0px $color_1;
+	// box-shadow: inset 0px 0px 0.3em 0px $color_1, 0px 0px 0.3em 0px $color_1;
       /* border: 1px solid #d5a46b; */
       border-radius: 5px;
       position: relative;
@@ -50,7 +51,7 @@ $color_1: #ff8012;
         justify-content: space-between;
         align-items: center;
         .twitter-id {
-          width: 120px;
+          width: $header-btn-width;
         }
         .logo-container {
           z-index: 100;
@@ -62,7 +63,7 @@ $color_1: #ff8012;
         }
         .metakey {
           padding: 8px 0;
-          width: 120px;
+          width: $header-btn-width;
           font-size: 1rem;
           margin-right: 1rem;
           @media (max-width: 478px) {
