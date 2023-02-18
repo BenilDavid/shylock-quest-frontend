@@ -110,7 +110,7 @@ const WalletCheckerPage = () => {
                         <>
                             <ReactPlayer className={`wl-video`} url={WLVideo} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} />
                             <div className="d-flex align-items-center justify-content-center">
-                                <a className="mx-2" target='_blank' href="https://twitter.com/intent/tweet?text=Finally%2C%20I%20am%20an%20Agent%20for%20%40shylocknft.%20Our%20journey%20has%20begun.%0a%0a%23SolvewithShylock%0a&url=https%3A%2F%2Ftwitter.com%2Fi%2Fstatus%2F1622315651716235264" rel="noreferrer">
+                                <a className="mx-2" target='_blank' href="https://twitter.com/intent/tweet?text=Finally%2C%20I've%20become%20an%20Agent%20of%20%40shylocknft.%20Our%20mission%20of%20rescuing%20Ken%20from%20the%20SERA%20Gang%20starts%20now.%0a%0a%23SolvewithShylock&url=https%3A%2F%2Ftwitter.com%2Fi%2Fstatus%2F1622315651716235264" rel="noreferrer">
                                     <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Collect >>'}</button>
                                 </a>
                                 <a className="mx-2" target='_blank' href="https://twitter.com/i/communities/1617125757742116864" rel="noreferrer">
