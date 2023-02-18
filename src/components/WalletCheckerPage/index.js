@@ -5,13 +5,14 @@ import Bgm from '../../Audio/shylock-bgm.mp3';
 import ReactPlayer from 'react-player';
 import Typewriter from 'typewriter-effect';
 import WCJasperWave from '../../Video/wallet-checker-jasper.mp4';
-import WLVideo from '../../Video/rolling.mp4';
-import notWLVideo from '../../Video/notWhitelisted.mp4';
+import WLVideo from '../../Video/whitelist_agent.mp4';
+import notWLVideo from '../../Video/nonWhitelist_agent.mp4';
 import 'animate.css';
 import { useNavigate, useLocation } from "react-router-dom";
 // import axios from 'axios';
 import { motion } from "framer-motion";
 import './WalletCheckerPage.scss';
+import WhitelistAddresses from "../../Data/WLaddress";
 
 const WalletCheckerPage = () => {
     let navigate = useNavigate();
@@ -20,28 +21,15 @@ const WalletCheckerPage = () => {
     const [isWhiteListUser, setIsWhiteListUser] = useState("");
     //   const [isOpenWalletChecker, setisOpenWalletChecker] = useState(false);
     const [addressChecker, setAddressChecker] = useState("");
+    console.log('wl address', WhitelistAddresses.length);
 
-    // All Whitelisted Address
-    let whitelist = [
-        '0x624deBbC5c3Ff951b257cB4E06975Aa82a36E642', // metamask id ben
-        '0xCEa3506e61c9F3f839eB881E4E1e5ebfA19B13F1', // metamask id ben
-        '0xf3f91d957D142703cc26E3C6a70df14036906F27', // metamask id ben
-        '0xf6D14956e5c77390C8367CCDbcb5b845244365dE',
-        '0x4f6Cb155B513c6b917Beab345a01be235a2DB28E',
-        '0xE4C70800F7fBf773A5E18BC96b0eF4135f63f63E',
-        '0x97557dB165c299663Ef134F18E1Fb3F093a1F15e',
-        '0x670f8FE66F551cdeDa29eAF0Bf380A412e404127',
-        '0xb9395AfB1a1a42050fa11562C4c9cA35D1Ec7cF3',
-        '0xB282100108E572c21A199ec9B0B4E9cCA3BB641C',
-        '0x0Ba6D5893166676B18Ab798a865671d36F11b793'
-    ]
 
     const handleSearchChange = (e) => {
         setAddressChecker(e.target.value)
     }
 
     const handleCheckAddress = () => {
-        if (whitelist.includes(addressChecker)) {
+        if (WhitelistAddresses.includes(addressChecker)) {
             setIsWhiteListUser("whiteList");
         } else {
             setIsWhiteListUser("notWhiteList");
@@ -79,10 +67,11 @@ const WalletCheckerPage = () => {
                         </div>
                     </div>
 
-                    <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} />
+
 
                     {isWhiteListUser === '' ?
                         <>
+                            <ReactPlayer className="d-none" url={Bgm} playing={true} controls={false} volume={1} muted={false} loop={true} />
                             <div className={`video-container`}>
                                 <ReactPlayer className={`jasper-video`} url={WCJasperWave} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} />
                             </div>
@@ -120,15 +109,15 @@ const WalletCheckerPage = () => {
                     {isWhiteListUser === 'whiteList' ?
                         <>
                             <ReactPlayer className={`wl-video`} url={WLVideo} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} />
-                           <div className="d-flex align-items-center justify-content-center">
-                           <a className="mx-2" target='_blank' href="https://twitter.com/intent/tweet?text=Finally%2C%20I%20am%20an%20Agent%20for%20%40shylocknft.%20Our%20journey%20has%20begun.%0a%0a%23SolvewithShylock%0a&url=https%3A%2F%2Ftwitter.com%2Fi%2Fstatus%2F1622315651716235264" rel="noreferrer">
-                                <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Collect >>'}</button> 
-                            </a>
-                             <a className="mx-2" target='_blank' href="https://twitter.com/i/communities/1617125757742116864" rel="noreferrer">
-                             <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Join Agents Community >>'}</button>
-                            </a>
-                           </div>
-                            
+                            <div className="d-flex align-items-center justify-content-center">
+                                <a className="mx-2" target='_blank' href="https://twitter.com/intent/tweet?text=Finally%2C%20I%20am%20an%20Agent%20for%20%40shylocknft.%20Our%20journey%20has%20begun.%0a%0a%23SolvewithShylock%0a&url=https%3A%2F%2Ftwitter.com%2Fi%2Fstatus%2F1622315651716235264" rel="noreferrer">
+                                    <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Collect >>'}</button>
+                                </a>
+                                <a className="mx-2" target='_blank' href="https://twitter.com/i/communities/1617125757742116864" rel="noreferrer">
+                                    <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Join Agents Community >>'}</button>
+                                </a>
+                            </div>
+
                         </>
                         // <div className="msg-box glowing-box mt-4">
                         //     <div>
