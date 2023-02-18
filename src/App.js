@@ -176,9 +176,9 @@ function App() {
         <div className="app-container">
           <div className="header d-flex">
             <div className="twitter-id back-btn ms-4">
-            <button className="dapp_btn me-4" onClick={() => navigate('/mint')}>
+            {/* <button className="dapp_btn me-4" onClick={() => navigate('/mint')}>
                 Mint
-              </button>
+              </button> */}
             </div>
             <div className="logo-container cursor-pointer" onClick={() => navigate('/')}>
               <img src={logo} className="shylock-logo" alt="logo" />

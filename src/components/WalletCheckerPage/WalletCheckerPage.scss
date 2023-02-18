@@ -29,14 +29,17 @@ $color_2: rgba(0, 0, 0, 0.8);
 }
 
 .wl-video {
-  width: 70% !important;
-  height: 70% !important;
+  width: 60% !important;
+  height: 60% !important;
   @media (max-width: 600px) {
     width: 100% !important;
     height: 100% !important;
   }
 }
 
+.type-box{
+  min-height: 150px;
+}
 .collect-btn {
   animation-delay: 10s;
 }

@@ -6,6 +6,7 @@ import ReactPlayer from 'react-player';
 import Typewriter from 'typewriter-effect';
 import WCJasperWave from '../../Video/wallet-checker-jasper.mp4';
 import WLVideo from '../../Video/rolling.mp4';
+import notWLVideo from '../../Video/notWhitelisted.mp4';
 import 'animate.css';
 import { useNavigate, useLocation } from "react-router-dom";
 // import axios from 'axios';
@@ -47,6 +48,13 @@ const WalletCheckerPage = () => {
         }
     }
 
+    const handleKeyDown = (event) => {
+        console.log('sdfasfasdfsdfasdf');
+        // if (event.key === "Enter") {
+        //     handleCheckAddress();
+        //   }
+    }
+
     return (
         <>
             <motion.div className="chapter-container"
@@ -78,7 +86,7 @@ const WalletCheckerPage = () => {
                             <div className={`video-container`}>
                                 <ReactPlayer className={`jasper-video`} url={WCJasperWave} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} />
                             </div>
-                            <div className="w-75 mt-5">
+                            <div className="type-box w-75 mt-5">
                                 <Typewriter
                                     onInit={(typewriter) => {
                                         typewriter
@@ -86,7 +94,7 @@ const WalletCheckerPage = () => {
                                             .typeString(" Welcome everyone, Shylock is reaching the climax of rescuing Ken from the SERA Gang.")
                                             .pauseFor(300)
                                             .typeString(" To honor your services, we will be rewarding those who helped him in his missions and recruit them as Agents. ")
-                                            .pauseFor(500)
+                                            .pauseFor(700)
                                             .typeString(" Print your Agent ID's here by entering your wallet address below. ")
                                             .start();
                                     }}
@@ -100,7 +108,7 @@ const WalletCheckerPage = () => {
                             <div className="wallet-checker-box animate__animated animate__fadeInUp">
                                 <div className="w-100">
                                     <div className='d-flex w-100'>
-                                        <input type="text" className="input-field me-2" name='whiteListAddress' value={addressChecker} onChange={handleSearchChange} />
+                                        <input type="text" className="input-field me-2" name='whiteListAddress' value={addressChecker} onChange={handleSearchChange} onkeydown={handleKeyDown} />
                                         <button className="dapp_btn check-btn" onClick={handleCheckAddress}>Check</button>
                                     </div>
                                 </div>
@@ -112,9 +120,15 @@ const WalletCheckerPage = () => {
                     {isWhiteListUser === 'whiteList' ?
                         <>
                             <ReactPlayer className={`wl-video`} url={WLVideo} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} />
-                            <a target='_blank' href="https://twitter.com/intent/tweet?text=Finally%2C%20I%20am%20an%20Agent%20for%20%40shylocknft.%20Our%20journey%20has%20begun.%0a%0a%23SolvewithShylock." rel="noreferrer">
-                                <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Collect >>'}</button>
+                           <div className="d-flex align-items-center justify-content-center">
+                           <a className="mx-2" target='_blank' href="https://twitter.com/intent/tweet?text=Finally%2C%20I%20am%20an%20Agent%20for%20%40shylocknft.%20Our%20journey%20has%20begun.%0a%0a%23SolvewithShylock%0a&url=https%3A%2F%2Ftwitter.com%2Fi%2Fstatus%2F1622315651716235264" rel="noreferrer">
+                                <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Collect >>'}</button> 
                             </a>
+                             <a className="mx-2" target='_blank' href="https://twitter.com/i/communities/1617125757742116864" rel="noreferrer">
+                             <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Join Agents Community >>'}</button>
+                            </a>
+                           </div>
+                            
                         </>
                         // <div className="msg-box glowing-box mt-4">
                         //     <div>
@@ -123,8 +137,9 @@ const WalletCheckerPage = () => {
                         // </div>
                         : isWhiteListUser === 'notWhiteList' ?
                             <>
-                                <a className="animate__animated animate__fadeInUp animate__delay-1s" target='_blank' href="https://twitter.com/intent/tweet?text=True%20Agents%20of%20%40shylocknft%20wouldn't%20back%20down%20from%20a%20challenge.%20I'll%20prove%20my%20worth%20and%20get%20promoted%20to%20Agent.%0a%0a%23SolvewithShylock." rel="noreferrer">
-                                    <button className="dapp_btn">Try again</button>
+                                <ReactPlayer className={`wl-video`} url={notWLVideo} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} />
+                                <a className="animate__animated animate__fadeInUp collect-btn" target='_blank' href="https://twitter.com/intent/tweet?text=True%20Agents%20of%20%40shylocknft%20wouldn't%20back%20down%20from%20a%20challenge.%20I'll%20prove%20my%20worth%20and%20get%20promoted%20to%20Agent.%0a%0a%23SolvewithShylock%0a&url=https%3A%2F%2Ftwitter.com%2Fi%2Fstatus%2F1622315651716235264" rel="noreferrer">
+                                    <button className="dapp_btn mb-3">{'<< Collect >>'}</button>
                                 </a>
                             </>
                             // <div className="msg-box glowing-box mt-4">
