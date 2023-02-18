@@ -89,7 +89,7 @@ $color_1: #ff8012;
       .right-header-links {
         display: flex;
         align-items: center;
-        justify-content: end;
+        justify-content: flex-end;
         width: $header-btn-width;
         // .wallet-checker-btn{
         //   -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em $color_1;
