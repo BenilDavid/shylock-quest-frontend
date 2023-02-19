@@ -73,6 +73,9 @@ $header-btn-width: 140px;
       align-items: center;
       .twitter-id {
         width: $header-btn-width;
+        @media (max-width: 478px) {
+          width: 90px;
+        }
       }
       .logo-container {
         z-index: 100;
