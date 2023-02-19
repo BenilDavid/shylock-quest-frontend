@@ -112,11 +112,11 @@ function App() {
     let date = new Date(ausTime);
     // let utcTime = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
     // let utcDateString = utcTime.toUTCString();
-    
+
     // console.log(utcDateString);
-//     let now = new Date();
-// let date = new Date(now.getTime() + now.getTimezoneOffset() * 60000).toLocaleString();
-// console.log(date);
+    //     let now = new Date();
+    // let date = new Date(now.getTime() + now.getTimezoneOffset() * 60000).toLocaleString();
+    // console.log(date);
 
     setAnalogClockTime(
       {
@@ -176,7 +176,7 @@ function App() {
         <div className="app-container">
           <div className="header d-flex">
             <div className="twitter-id back-btn ms-4">
-            {/* <button className="dapp_btn me-4" onClick={() => navigate('/mint')}>
+              {/* <button className="dapp_btn me-4" onClick={() => navigate('/mint')}>
                 Mint
               </button> */}
             </div>
@@ -184,9 +184,11 @@ function App() {
               <img src={logo} className="shylock-logo" alt="logo" />
             </div>
             <div className="right-header-links">
-              <button className="dapp_btn me-1" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
-                Wallet Checker
-              </button>
+              {window.innerWidth > WindowSize ?
+                <button className="dapp_btn me-1" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
+                  Wallet Checker
+                </button>
+                : ""}
               <div className={`metakey me-1 ${address ? "border-orange" : ""}`}>
                 {address
                   ? address.slice(0, 5) + "..." + address.slice(-5)
@@ -212,7 +214,12 @@ function App() {
               </div>
             </>
             :
-            "<<Use Desktop for better experience>>"
+            <>
+              {"<<Use Desktop for better experience>>"}
+              <button className="dapp_btn my-3" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
+                Wallet Checker
+              </button>
+            </>
           }
 
           <div className='footer'>

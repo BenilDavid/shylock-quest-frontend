@@ -13,6 +13,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import './WalletCheckerPage.scss';
 import WhitelistAddresses from "../../Data/WLaddress";
+import { toast } from 'react-toastify';
 
 const WalletCheckerPage = () => {
     let navigate = useNavigate();
@@ -27,10 +28,19 @@ const WalletCheckerPage = () => {
     }
 
     const handleCheckAddress = () => {
-        if (WhitelistAddresses.includes(addressChecker)) {
-            setIsWhiteListUser("whiteList");
-        } else {
-            setIsWhiteListUser("notWhiteList");
+        if(addressChecker !== '' && addressChecker.length > 30){
+            if (WhitelistAddresses.includes(addressChecker)) {
+                setIsWhiteListUser("whiteList");
+            } else {
+                setIsWhiteListUser("notWhiteList");
+            }
+        }else{
+            toast.error("please provide a valid address", {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                className: 'foo-bar',
+                theme: "dark"
+            })
+            // console.log("please provide a valid address");
         }
     }
 
