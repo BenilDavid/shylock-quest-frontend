@@ -112,7 +112,7 @@ const WalletCheckerPage = () => {
                                     <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Collect >>'}</button>
                                 </a>
                                 <a className="mx-2" target='_blank' href="https://twitter.com/i/communities/1617125757742116864" rel="noreferrer">
-                                    <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Join Agents Community >>'}</button>
+                                    <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Enter Agents Lounge >>'}</button>
                                 </a>
                             </div>
 
