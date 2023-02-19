@@ -21,8 +21,6 @@ const WalletCheckerPage = () => {
     const [isWhiteListUser, setIsWhiteListUser] = useState("");
     //   const [isOpenWalletChecker, setisOpenWalletChecker] = useState(false);
     const [addressChecker, setAddressChecker] = useState("");
-    console.log('wl address', WhitelistAddresses.length);
-
 
     const handleSearchChange = (e) => {
         setAddressChecker(e.target.value)

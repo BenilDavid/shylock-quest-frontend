@@ -184,10 +184,10 @@ function App() {
               <img src={logo} className="shylock-logo" alt="logo" />
             </div>
             <div className="right-header-links">
-              <button className="dapp_btn me-4" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
+              <button className="dapp_btn me-1" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
                 Wallet Checker
               </button>
-              <div className={`metakey me-4 ${address ? "border-orange" : ""}`}>
+              <div className={`metakey me-1 ${address ? "border-orange" : ""}`}>
                 {address
                   ? address.slice(0, 5) + "..." + address.slice(-5)
                   : ""}
