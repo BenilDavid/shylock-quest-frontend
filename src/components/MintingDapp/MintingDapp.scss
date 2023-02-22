@@ -37,6 +37,16 @@ $color_1: #ff8012;
 // .increase-count, .decrease-count{
 // border-radius: 50%;
 // }
+.chapter-container{
+  @media (max-width: 600px) {
+    height: auto !important;
+  }
+  .app-container{
+    @media (max-width: 600px) {
+      min-height: 738px;
+    }
+  }
+}
 
 .main-container {
   background-color: rgba(0, 0, 0);
@@ -48,10 +58,21 @@ $color_1: #ff8012;
   top: 55%;
   left: 51%;
   transform: translate(-50%, -50%);
-  .right-border {
-    height: 200px;
-    border-right: 2px solid $color_1;
+  @media (max-width: 600px) {
+  top: 55%;
+  left: 53%;
+width: 320px ;  
   }
+  .middle-border-box{
+    .right-border {
+      height: 200px;
+      border-right: 2px solid $color_1;
+    }
+    @media (max-width: 600px) {
+      display: none !important;
+    }
+  }
+  
   .top-trapez-effect {
     font-weight: 700;
     border-bottom: 50px solid $color_1;

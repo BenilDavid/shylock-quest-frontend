@@ -15,6 +15,7 @@ import contractABI from '../../abi/contractABI.json';
 import MerkleTree from 'merkletreejs';
 import keccak256 from 'keccak256';
 import { toast } from 'react-toastify';
+import Modal from "../common/Modal";
 
 const contractAddress = "0xF3EA953A975B3b5380Bf8ba0B80c377Fe9BB9111";
 
@@ -26,6 +27,7 @@ const MintingDapp = () => {
     const [hexProof, setHexProof] = useState([]);
     const [signer, setSigner] = useState(null);
     // const [progress, setProgress] = useState(0);
+    const [isMintedPopup, setisMintedPopup] = useState(false);
     const [tokenCount, setTokenCount] = useState('1');
     const [contractDetails, setContractDetails] = useState({
         MAX_SUPPLY: "",
@@ -302,10 +304,10 @@ const MintingDapp = () => {
                                 <div>
                                     <div className='my-3 white-text'>Supply : <span className='orange-text'>{contractDetails.totalMinted ? contractDetails.totalMinted : "XXXX"} / {contractDetails.MAX_SUPPLY ? contractDetails.MAX_SUPPLY : "XXXX"}</span></div>
                                     {isWhiteListUser && contractDetails.isWLMintStarted ?
-                                       <>
-                                        <div className='my-3 white-text'>Whitelist Price : <span className='orange-text'>{contractDetails.presalePrice} ETH</span></div>
-                                        {/* <p className="fs-7">1000 whiteList Minters, 1 free per wallet</p> */}
-                                       </>
+                                        <>
+                                            <div className='my-3 white-text'>Whitelist Price : <span className='orange-text'>{contractDetails.presalePrice} ETH</span></div>
+                                            {/* <p className="fs-7">1000 whiteList Minters, 1 free per wallet</p> */}
+                                        </>
                                         : ""}
                                     <div className='my-3 white-text'>Public Price : <span className='orange-text'>{contractDetails.price} ETH</span></div>
                                     {isWhiteListUser && contractDetails.isWLMintStarted ?
@@ -316,9 +318,9 @@ const MintingDapp = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="col-md-2 d-flex align-items-center justify-content-center">
+                        <div className="middle-border-box col-md-2 d-flex align-items-center justify-content-center">
                             <div className="right-border"></div>
-                        </div> */}
+                        </div>
                         <div className="col-md-5 d-flex flex-column justify-content-center">
                             <div className='minting-box'>
                                 <div>
@@ -333,32 +335,32 @@ const MintingDapp = () => {
                                         <>
                                             <div>
                                                 {
-                                                address && (
-                                                    contractDetails.totalMinted === contractDetails.MAX_SUPPLY && contractDetails.totalMinted !== "" ?
-                                                    <>
-                                                        <div style={{fontSize: "48px"}} className='orange-text'><b>SOLD OUT</b></div>
-                                                        <div></div>
-                                                    </>
-                                                    :
-                                                    <>
-                                                        {
-                                                            address ?
-                                                                <>
-                                                                    <div className='white-text my-2'>Token Count</div>
-                                                                    <div className="token-input-container d-flex justify-content-center align-items-center my-2">
-                                                                        <button className="decrease-count dapp_btn text-white border-white" onClick={handleTokenDecrease}>-</button>
-                                                                        <div className="token-value dapp_btn mx-3">{tokenCount}</div>
-                                                                        <button className="increase-count dapp_btn text-white border-white" onClick={handleTokenIncrease}>+</button>
-                                                                    </div>
-                                                                    <button className='my-2 white-text cursor-pointer dapp_btn' onClick={isWhiteListUser && contractDetails.isWLMintStarted ? () => setTokenCount(contractDetails.maxPerALWallet) : () => setTokenCount(contractDetails.maxPerWallet)}>Max {'('}{isWhiteListUser ?
-                                                                        contractDetails.isWLMintStarted ? contractDetails.maxPerALWallet : contractDetails.maxPerWallet
-                                                                        : contractDetails.maxPerWallet}{')'}
-                                                                    </button>
-                                                                </>
-                                                                : ""
-                                                        }
-                                                    </>
-                                                )}
+                                                    address && (
+                                                        contractDetails.totalMinted === contractDetails.MAX_SUPPLY && contractDetails.totalMinted !== "" ?
+                                                            <>
+                                                                <div style={{ fontSize: "48px" }} className='orange-text'><b>SOLD OUT</b></div>
+                                                                <div></div>
+                                                            </>
+                                                            :
+                                                            <>
+                                                                {
+                                                                    address ?
+                                                                        <>
+                                                                            <div className='white-text my-2'>Token Count</div>
+                                                                            <div className="token-input-container d-flex justify-content-center align-items-center my-2">
+                                                                                <button className="decrease-count dapp_btn text-white border-white" onClick={handleTokenDecrease}>-</button>
+                                                                                <div className="token-value dapp_btn mx-3">{tokenCount}</div>
+                                                                                <button className="increase-count dapp_btn text-white border-white" onClick={handleTokenIncrease}>+</button>
+                                                                            </div>
+                                                                            <button className='my-2 white-text cursor-pointer dapp_btn' onClick={isWhiteListUser && contractDetails.isWLMintStarted ? () => setTokenCount(contractDetails.maxPerALWallet) : () => setTokenCount(contractDetails.maxPerWallet)}>Max {'('}{isWhiteListUser ?
+                                                                                contractDetails.isWLMintStarted ? contractDetails.maxPerALWallet : contractDetails.maxPerWallet
+                                                                                : contractDetails.maxPerWallet}{')'}
+                                                                            </button>
+                                                                        </>
+                                                                        : ""
+                                                                }
+                                                            </>
+                                                    )}
 
                                             </div>
 
@@ -409,6 +411,21 @@ const MintingDapp = () => {
                         {/* <div className="col-md-4"></div> */}
                     </div>
 
+                    <Modal
+                        isOpen={isMintedPopup}
+                        toggle={() => setisMintedPopup(!isMintedPopup)}
+                        size="md"
+                        headTitle=""
+                    >
+                        <div className="orange-text text-center">
+                            <div className="mb-3"> Shylock: The Origins NFT.</div>
+                            <div className="mb-2">
+                                Now, you can join our Discord</div>
+                        </div>
+                        <div className="d-flex justify-content-center align-items-center my-3">
+                            <button className={`enter-btn`}> THE PRISON (SHYLOCK) </button>
+                        </div>
+                    </Modal>
                     {/* <div className='footer dapp_footer'>
                         <button className="twitter-btn">
                             <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
