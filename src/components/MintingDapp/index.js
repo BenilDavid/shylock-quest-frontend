@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import './MintingDapp.scss';
 import circleLoop from '../../Video/loop-circle.mp4';
+import DappBGM from '../../Video/Dapp/dapp-bgm.mp3';
 import { ethers } from "ethers";
 import contractABI from '../../abi/contractABI.json';
 import MerkleTree from 'merkletreejs';
@@ -276,7 +277,7 @@ const MintingDapp = () => {
                 <div className="app-container">
                     <div className="header dapp_header bg-transparent d-flex">
                         <div className="twitter-id back-btn ms-4">
-                            <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => navigate('/')}>
+                            <div className="back-arrow d-flex align-items-center justify-content-center" onClick={() => navigate('/mint')}>
                                 <span>{'<<'}</span>
                             </div>
                         </div>
@@ -291,7 +292,8 @@ const MintingDapp = () => {
                     </div>
 
                     <ReactPlayer className={`circle-loop-video`} url={circleLoop} playing={true} controls={false} volume={1} muted={false} loop={true} playsinline={true} />
-
+                    
+                    <ReactPlayer className="d-none" url={DappBGM} playing={true} controls={false} volume={1} muted={false} loop={true} /> 
                     <div className='row main-container'>
                         <div className="d-flex justify-content-center">
                             <div className="top-trapez-effect">

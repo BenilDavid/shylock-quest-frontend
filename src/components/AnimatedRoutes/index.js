@@ -11,6 +11,7 @@ import MintingDapp from '../MintingDapp';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DappPage from '../Dapp';
+import Mint from '../Mint';
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -20,8 +21,9 @@ const AnimatedRoutes = () => {
             <AnimatePresence>
                 <Routes location={location} key={location.pathname} >
                     <Route exact path="/" element={<App />} />
-                    <Route exact path="/dapp" element={<DappPage />} />
-                    <Route exact path="/mint" element={<MintingDapp />} />
+                    <Route exact path="/mint" element={<Mint />} />
+                    <Route exact path="/tunnel" element={<DappPage />} />
+                    <Route exact path="/minting" element={<MintingDapp />} />
                     <Route exact path="/wallet-checker" element={<WalletCheckerPage />} />
                     <Route exact path="/explore" element={<ChapterPage />} />
                     <Route exact path="/explore/:day" element={<QuestionPage />} />

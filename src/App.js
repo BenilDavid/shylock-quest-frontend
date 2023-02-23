@@ -204,9 +204,9 @@ function App() {
                 <AnalogClock {...analogClockTime} />
               </div>
 
-              <button className="dapp_btn my-3" onClick={() => navigate('/dapp', { state: { metamaskId: address } })}>
+              {/* <button className="dapp_btn my-3" onClick={() => navigate('/dapp', { state: { metamaskId: address } })}>
                 ENTER
-              </button>
+              </button> */}
 
               <div className={`begin-btn animate__animated animate__fadeInUp animate__delay-1s"`}>
                 <button className={`initiate-btn glowing-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>
