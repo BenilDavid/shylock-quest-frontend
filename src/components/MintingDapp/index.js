@@ -18,7 +18,7 @@ import keccak256 from 'keccak256';
 import { toast } from 'react-toastify';
 import Modal from "../common/Modal";
 
-const contractAddress = "0xF3EA953A975B3b5380Bf8ba0B80c377Fe9BB9111";
+const contractAddress = "0x617e94f683368c88B53d533AEA6b2DA1A21a5ad4";
 
 const MintingDapp = () => {
     const address = useAddress();
@@ -200,6 +200,7 @@ const MintingDapp = () => {
                         },
                     );
                 }
+                setisMintedPopup(true);
             } catch (error) {
                 const temp = JSON.parse(JSON.stringify(error));
                 toast.error(temp.error.message, {
