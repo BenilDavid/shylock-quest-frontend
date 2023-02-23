@@ -205,20 +205,20 @@ function App() {
                 <AnalogClock {...analogClockTime} />
               </div>
 
-             <div className="w-50">
-             <Typewriter
-                    onInit={(typewriter) => {
-                      typewriter
-                        .typeString("Welcome everyone, the recruitment has come to a close and things will start to unfold one by one. We have a long journey ahead.")
-                        .start();
-                    }}
-                    options={{
-                      loop: false,
-                      delay: 40,
-                      pauseFor: 100000,
-                    }}
-                  />
-             </div>
+              <div style={{minHeight: '100px'}} className="w-50">
+                <Typewriter
+                  onInit={(typewriter) => {
+                    typewriter
+                      .typeString("Welcome everyone, the recruitment has come to a close and things will start to unfold one by one. We have a long journey ahead.")
+                      .start();
+                  }}
+                  options={{
+                    loop: false,
+                    delay: 40,
+                    pauseFor: 100000,
+                  }}
+                />
+              </div>
               {/* <div className={`begin-btn animate__animated animate__fadeInUp animate__delay-1s"`}>
                 <button className={`initiate-btn glowing-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>
                   <span class='glowing-txt'>E<span class='faulty-letter'>X</span>PLORE</span>
