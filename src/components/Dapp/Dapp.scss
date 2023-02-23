@@ -27,77 +27,42 @@ $header-btn-width: 140px;
     min-height: 94vh;
     margin: 20px;
     border: 1px solid $color_1;
-	// box-shadow: inset 0px 0px 0.3em 0px $color_1, 0px 0px 0.3em 0px $color_1;
+    // box-shadow: inset 0px 0px 0.3em 0px $color_1, 0px 0px 0.3em 0px $color_1;
 
     /* border: 1px solid #d5a46b; */
     border-radius: 5px;
     position: relative;
 
-    .jasper-video {
-      z-index: 1;
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-      width: 120px !important;
-      height: 120px !important;
-      video {
-        border-radius: 50%;
-      }
-      @media (max-width: 978px) {
-        width: 90px !important;
-        height: 90px !important;
-      }
-    }
+    // .dapp-video-container {
+    // width: 100%;
+    // height: 100%;
 
-    .header {
-      margin-top: 15px;
-      width: 100%;
-      justify-content: space-between;
-      align-items: center;
-      .twitter-id {
-        width: $header-btn-width;
-        @media (max-width: 478px) {
-          width: 90px;
-        }
-      }
-      .logo-container {
-        z-index: 100;
-        .shylock-logo {
-          // margin: 20px 0 0 0;
-          height: 12vmin;
-          pointer-events: none;
-        }
-      }
-      .metakey {
-        padding: 8px 0;
-        width: $header-btn-width;
-        font-size: 1rem;
-        @media (max-width: 478px) {
-          font-size: 0.7rem;
-          width: 90px;
-          margin: 0 6px 0 6px;
-        }
-      }
-    }
-.dapp-video-container{
-    display: flex;
-    justify-content: center;
-    padding: 30px;
-    width: 100%;
-    height: 70%;
-    .dapp-video {
-        width: 70% !important;
-        height: 100% !important;
-        // @media (max-width: 600px) {
-        //   width: 100% !important;
-        //   height: 100% !important;
+      // display: flex;
+      // justify-content: center;
+      // width: 100%;
+      // height: 70%;
+      .dapp-video {
+        z-index: -1;
+        width: 100% !important;
+        height: 0 !important;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        position: relative;
+
+          video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          }
+          // @media (max-width: 600px) {
+          //   width: 100% !important;
+          //   height: 100% !important;
+          // }
         // }
-      }  
-}
+    }
   }
 }
-
-
 
 .intent-tweet-link {
   animation-delay: 6s;
