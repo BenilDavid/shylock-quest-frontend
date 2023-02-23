@@ -205,7 +205,7 @@ function App() {
                 <AnalogClock {...analogClockTime} />
               </div>
 
-              <div style={{minHeight: '100px'}} className="w-50">
+              <div style={{ minHeight: '100px' }} className="w-50">
                 <Typewriter
                   onInit={(typewriter) => {
                     typewriter
@@ -218,6 +218,10 @@ function App() {
                     pauseFor: 100000,
                   }}
                 />
+              </div>
+              <div className="mint-time orange-text animate__animated animate__fadeInUp">
+                <div>Mint Date: February 25th</div>
+                <div>Mint Time: 01:00 PM UTC</div>
               </div>
               {/* <div className={`begin-btn animate__animated animate__fadeInUp animate__delay-1s"`}>
                 <button className={`initiate-btn glowing-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>
