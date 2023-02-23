@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import './MintingDapp.scss';
 import circleLoop from '../../Video/Dapp/loop.mp4';
-import DappBGM from '../../Video/Dapp/dapp-bgm.mp3';
+import DappBGM from '../../Video/Dapp/loop-dapp-bgm.mp3';
 import { ethers } from "ethers";
 import contractABI from '../../abi/contractABI.json';
 import MerkleTree from 'merkletreejs';
