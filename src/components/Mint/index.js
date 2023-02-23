@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import './Mint.scss';
 import logo from '../../shylock-logo.png';
-import twitterIcon from '../../twitter.png';
+// import twitterIcon from '../../twitter.png';
 import openseaIcon from '../../Assets/linkIcons/opensea-logo.png';
 import twiterIcon from '../../Assets/linkIcons/twitter.png';
 import etherscanIcon from '../../Assets/linkIcons/etherscans-logo.png';
@@ -93,16 +93,6 @@ function Mint() {
                 <a href="https://discord.gg/MhS5BtgD">
                 <img src={discordIcon} className="link-icons" alt="discord" />
                 </a>
-              {/* {window.innerWidth > WindowSize ?
-                <button className="dapp_btn me-1" onClick={() => navigate('/wallet-checker')}>
-                  Wallet Checker
-                </button>
-                : ""} */}
-              {/* <div className={`metakey me-1 ${address ? "border-orange" : ""}`}>
-                {address
-                  ? address.slice(0, 5) + "..." + address.slice(-5)
-                  : ""}
-              </div> */}
             </div>
 
           </div>
@@ -135,11 +125,11 @@ function Mint() {
           }
 
           <div className='footer'>
-            <button className="twitter-btn">
+            {/* <button className="twitter-btn">
               <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
                 <img src={twitterIcon} className="twitter-logo" alt="twitter" />
               </a>
-            </button>
+            </button> */}
           </div>
         </div>
       </motion.div>
