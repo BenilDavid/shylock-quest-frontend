@@ -66,17 +66,16 @@ const MintingDapp = () => {
     ]
 
     useEffect(() => {
-
-        const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-        const tempSigner = tempProvider.getSigner();
-        setSigner(tempSigner);
-        // setProvider(tempProvider);
-        getContractDetails();
-        findMerkleRoot();
-        findHexProof();
-        // const idx = whitelist.indexOf(address);
-        // console.log(idx);
-
+        // const provider = ((window.ethereum != null) ? new ethers.providers.Web3Provider(window.ethereum) : ethers.providers.getDefaultProvider());
+        if(window.ethereum){
+            const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+            const tempSigner = tempProvider.getSigner();
+            setSigner(tempSigner);
+            getContractDetails();
+            findMerkleRoot();
+            findHexProof();    
+        }
+      
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [address])
 
