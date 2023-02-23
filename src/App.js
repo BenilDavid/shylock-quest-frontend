@@ -7,6 +7,7 @@ import twitterIcon from './twitter.png';
 import tickIcon from './Assets/checked.png';
 import 'animate.css';
 import AnalogClock from 'analog-clock-react';
+import Typewriter from 'typewriter-effect';
 import Modal from "./components/common/Modal";
 // import Popup from "./components/common/Popup";
 import { useNavigate } from "react-router-dom";
@@ -204,14 +205,27 @@ function App() {
                 <AnalogClock {...analogClockTime} />
               </div>
 
-              <div className={`begin-btn animate__animated animate__fadeInUp animate__delay-1s"`}>
+             <div className="w-50">
+             <Typewriter
+                    onInit={(typewriter) => {
+                      typewriter
+                        .typeString("Welcome everyone, the recruitment has come to a close and things will start to unfold one by one. We have a long journey ahead.")
+                        .start();
+                    }}
+                    options={{
+                      loop: false,
+                      delay: 40,
+                      pauseFor: 100000,
+                    }}
+                  />
+             </div>
+              {/* <div className={`begin-btn animate__animated animate__fadeInUp animate__delay-1s"`}>
                 <button className={`initiate-btn glowing-btn`} onClick={() => setisOpenLogin(!isOpenLogin)}>
                   <span class='glowing-txt'>E<span class='faulty-letter'>X</span>PLORE</span>
-                  {/* EXPLORE */}
                 </button>
                 <div className={`fs-7 mt-1 better-experience`}>
                 </div>
-              </div>
+              </div> */}
             </>
             :
             <>
