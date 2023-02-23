@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 // import axios from 'axios';
 import { motion } from "framer-motion";
 import './MintingDapp.scss';
-import circleLoop from '../../Video/Dapp/loop.mp4';
+import circleLoop from '../../Video/loop-circle.mp4';
 import DappBGM from '../../Video/Dapp/dapp-loop-bgm.mp3';
 import { ethers } from "ethers";
 import contractABI from '../../abi/contractABI.json';
