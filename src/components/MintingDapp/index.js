@@ -14,7 +14,7 @@ import etherscanIcon from '../../Assets/linkIcons/etherscans-logo.png';
 import discordIcon from '../../Assets/linkIcons/discord.png';
 import './MintingDapp.scss';
 import circleLoop from '../../Video/loop-circle.mp4';
-import DappBGM from '../../Video/Dapp/dapp-loop-bgm.mp3';
+import DappBGM from '../../Video/Dapp/dapp-bgm.mp3';
 import { ethers } from "ethers";
 import contractABI from '../../abi/contractABI.json';
 import MerkleTree from 'merkletreejs';
@@ -356,7 +356,7 @@ const MintingDapp = () => {
 
                     <ReactPlayer className={`circle-loop-video`} url={circleLoop} playing={true} controls={false} volume={1} muted={false} loop={true} playsinline={true} />
 
-                    <ReactPlayer className="d-none" url={DappBGM} playing={true} controls={false} volume={1} muted={false} loop={true} playsinline={true} />
+                    <ReactPlayer className="d-none" url={DappBGM} playing={true} controls={false} volume={1} muted={false} loop={true} />
                     <div className='row main-container'>
                         <div className="d-flex justify-content-center">
                             <div className="top-trapez-effect">
