@@ -25,6 +25,7 @@ import Modal from "../common/Modal";
 import orangeDiscord from '../../Assets/orange-discord.png';
 
 const contractAddress = "0x8c39A18c4c36bA5eDAe374f421cE260779C6660e";
+const WindowSize = "1000";
 
 const MintingDapp = () => {
     const address = useAddress();
@@ -358,22 +359,22 @@ const MintingDapp = () => {
                                 <div className="my-2 dapp_heading">
                                     {/* {isWhiteListUser && contractDetails.isWLMintStarted ? "AGENT MINT" : "MINT"} */}
                                     {
-                                    address ?
-                                        isWhiteListUser ?
-                                            contractDetails.isWLMintStarted ?
-                                            "AGENT MINT"
-                                                : contractDetails.isPublicMintStarted ?
-                                                "MINT"
-                                                    :
+                                        address ?
+                                            isWhiteListUser ?
+                                                contractDetails.isWLMintStarted ?
                                                     "AGENT MINT"
+                                                    : contractDetails.isPublicMintStarted ?
+                                                        "MINT"
+                                                        :
+                                                        "AGENT MINT"
 
-                                            : contractDetails.isPublicMintStarted ?
-                                            "MINT"
-                                                :
-                                                "MINT"
-                                        : ""
-                                }
-                                    </div>
+                                                : contractDetails.isPublicMintStarted ?
+                                                    "MINT"
+                                                    :
+                                                    "MINT"
+                                            : ""
+                                    }
+                                </div>
                             </div>
                         </div>
                         {/* {console.log(contractDetails.isWLMintStarted)} */}
@@ -410,6 +411,7 @@ const MintingDapp = () => {
                                 <div className="right-border"></div>
                             }
 
+
                         </div>
                         <div className="col-md-5 d-flex flex-column justify-content-center">
                             <div className='minting-box'>
@@ -421,6 +423,15 @@ const MintingDapp = () => {
                                     </div>
                                     :
                                     ""
+                                }
+                                {window.innerWidth > WindowSize ?
+                                    ""
+                                    :
+                                    <div>
+                                        <ConnectWallet
+                                            accentColor="#000"
+                                        />
+                                    </div>
                                 }
                                 {
                                     contractDetails.paused ?

@@ -97,32 +97,28 @@ function Mint() {
 
           </div>
 
-          {window.innerWidth > WindowSize ?
-            <>
+          {/* {window.innerWidth > WindowSize ?
+            <> */}
               <div className="analog-clock my-3">
                 <AnalogClock {...analogClockTime} />
               </div>
 
-              {/* <button className="dapp_btn my-3" onClick={() => navigate('/dapp')}>
-                TUNNEL
-              </button> */}
-
-              <div className={`begin-btn animate__animated animate__fadeInUp animate__delay-1s"`}>
-                <button className={`initiate-btn glowing-btn`} onClick={() => navigate('/tunnel')}>
+              <div className={`animate__animated animate__fadeInUp animate__delay-1s"`}>
+                <button className={`initiate-btn glowing-btn`} onClick={window.innerWidth > WindowSize ? () => navigate('/tunnel') : () => navigate('/minting')}>
                   <span class='glowing-txt'>T<span class='faulty-letter'>U</span>NNEL</span>
                 </button>
                 <div className={`fs-7 mt-1 better-experience`}>
                 </div>
               </div>
-            </>
+            {/* </>
             :
-            <>
-              {"<<Use Desktop for better experience>>"}
-              <button className="dapp_btn my-3" onClick={() => navigate('/wallet-checker')}>
+            <> */}
+              {/* {"<<Use Desktop for better experience>>"} */}
+              {/* <button className="dapp_btn my-3" onClick={() => navigate('/wallet-checker')}>
                 Wallet Checker
-              </button>
-            </>
-          }
+              </button> */}
+            {/* </>
+          } */}
 
           <div className='footer'>
             {/* <button className="twitter-btn">
