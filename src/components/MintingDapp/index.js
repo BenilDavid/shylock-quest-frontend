@@ -8,6 +8,10 @@ import 'animate.css';
 import { useNavigate } from "react-router-dom";
 // import axios from 'axios';
 import { motion } from "framer-motion";
+import openseaIcon from '../../Assets/linkIcons/opensea-logo.png';
+import twiterIcon from '../../Assets/linkIcons/twitter.png';
+import etherscanIcon from '../../Assets/linkIcons/etherscans-logo.png';
+import discordIcon from '../../Assets/linkIcons/discord.png';
 import './MintingDapp.scss';
 import circleLoop from '../../Video/loop-circle.mp4';
 import DappBGM from '../../Video/Dapp/dapp-loop-bgm.mp3';
@@ -17,6 +21,7 @@ import MerkleTree from 'merkletreejs';
 import keccak256 from 'keccak256';
 import { toast } from 'react-toastify';
 import Modal from "../common/Modal";
+import orangeDiscord from '../../Assets/orange-discord.png';
 
 const contractAddress = "0x617e94f683368c88B53d533AEA6b2DA1A21a5ad4";
 
@@ -67,15 +72,14 @@ const MintingDapp = () => {
 
     useEffect(() => {
         // const provider = ((window.ethereum != null) ? new ethers.providers.Web3Provider(window.ethereum) : ethers.providers.getDefaultProvider());
-        if(window.ethereum){
+        if (window.ethereum) {
             const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
             const tempSigner = tempProvider.getSigner();
             setSigner(tempSigner);
             getContractDetails();
             findMerkleRoot();
-            findHexProof();    
+            findHexProof();
         }
-      
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [address])
 
@@ -153,6 +157,9 @@ const MintingDapp = () => {
                     ethers.BigNumber.from(tokenCount), {
                     value: ethers.utils.parseEther((contractDetails.price * tokenCount).toString()),
                 });
+                setTimeout(() => {
+                    setisMintedPopup(true);
+                }, 5000);
 
                 // let tx = await nftMinting.wait();
                 // console.log(tx);
@@ -284,16 +291,30 @@ const MintingDapp = () => {
                         <div className="logo-container cursor-pointer" onClick={() => navigate('/')}>
                             <img src={logo} className="shylock-logo" alt="logo" />
                         </div>
-                        <div className={`metakey me-4 ${address ? "border-orange" : ""}`}>
+                        <div className="right-header-links me-3">
+                            <a target="_blank" href="https://opensea.io/collection/shylock" rel="noreferrer">
+                                <img src={openseaIcon} className="link-icons" alt="opensea" />
+                            </a>
+                            <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
+                                <img src={twiterIcon} className="link-icons" alt="twitter" />
+                            </a>
+                            <a target="_blank" href="https://etherscan.io/address/0x4cef24c26ba75a1aa0dc866e7ba0b1593e8b3265" rel="noreferrer">
+                                <img src={etherscanIcon} className="link-icons" alt="etherscan" />
+                            </a>
+                            <a target="_blank" href="https://discord.gg/MhS5BtgD" rel="noreferrer">
+                                <img src={discordIcon} className="link-icons" alt="discord" />
+                            </a>
+                        </div>
+                        {/* <div className={`metakey me-4 ${address ? "border-orange" : ""}`}>
                             {address
                                 ? address.slice(0, 5) + "..." + address.slice(-5)
                                 : ""}
-                        </div>
+                        </div> */}
                     </div>
 
                     <ReactPlayer className={`circle-loop-video`} url={circleLoop} playing={true} controls={false} volume={1} muted={false} loop={true} playsinline={true} />
-                    
-                    <ReactPlayer className="d-none" url={DappBGM} playing={true} controls={false} volume={1} muted={false} loop={true} /> 
+
+                    <ReactPlayer className="d-none" url={DappBGM} playing={true} controls={false} volume={1} muted={false} loop={true} />
                     <div className='row main-container'>
                         <div className="d-flex justify-content-center">
                             <div className="top-trapez-effect">
@@ -302,34 +323,50 @@ const MintingDapp = () => {
                         </div>
                         {/* {console.log(contractDetails.isWLMintStarted)} */}
                         <div className="col-md-5 d-flex flex-column justify-content-center">
-                            <div className='contract-details'>
-                                <div>
-                                    <div className='my-3 white-text'>Supply : <span className='orange-text'>{contractDetails.totalMinted ? contractDetails.totalMinted : "XXXX"} / {contractDetails.MAX_SUPPLY ? contractDetails.MAX_SUPPLY : "XXXX"}</span></div>
-                                    {isWhiteListUser && contractDetails.isWLMintStarted ?
-                                        <>
-                                            <div className='my-3 white-text'>Whitelist Price : <span className='orange-text'>{contractDetails.presalePrice} ETH</span></div>
-                                            {/* <p className="fs-7">1000 whiteList Minters, 1 free per wallet</p> */}
-                                        </>
-                                        : ""}
-                                    <div className='my-3 white-text'>Public Price : <span className='orange-text'>{contractDetails.price} ETH</span></div>
-                                    {isWhiteListUser && contractDetails.isWLMintStarted ?
-                                        <div className='my-3 white-text'>Max Per Wallet : <span className='orange-text'>{contractDetails.maxPerALWallet}</span></div>
-                                        :
-                                        <div className='my-3 white-text'>Max Per Wallet : <span className='orange-text'>{contractDetails.maxPerWallet}</span></div>
-                                    }
+                            {address ?
+                                <div className='contract-details'>
+                                    <div>
+                                        <div className='my-3 white-text'>Supply : <span className='orange-text'>{contractDetails.totalMinted ? contractDetails.totalMinted : "XXXX"} / {contractDetails.MAX_SUPPLY ? contractDetails.MAX_SUPPLY : "XXXX"}</span></div>
+                                        {isWhiteListUser && contractDetails.isWLMintStarted ?
+                                            <>
+                                                <div className='my-3 white-text'>Whitelist Price : <span className='orange-text'>{contractDetails.presalePrice} ETH</span></div>
+                                                {/* <p className="fs-7">1000 whiteList Minters, 1 free per wallet</p> */}
+                                            </>
+                                            : ""}
+                                        <div className='my-3 white-text'>Public Price : <span className='orange-text'>{contractDetails.price} ETH</span></div>
+                                        {isWhiteListUser && contractDetails.isWLMintStarted ?
+                                            <div className='my-3 white-text'>Max Per Wallet : <span className='orange-text'>{contractDetails.maxPerALWallet}</span></div>
+                                            :
+                                            <div className='my-3 white-text'>Max Per Wallet : <span className='orange-text'>{contractDetails.maxPerWallet}</span></div>
+                                        }
+                                    </div>
                                 </div>
-                            </div>
+                                : ""}
+
                         </div>
                         <div className="middle-border-box col-md-2 d-flex align-items-center justify-content-center">
-                            <div className="right-border"></div>
-                        </div>
-                        <div className="col-md-5 d-flex flex-column justify-content-center">
-                            <div className='minting-box'>
+                            {!address ?
                                 <div>
                                     <ConnectWallet
                                         accentColor="#000"
                                     />
                                 </div>
+                                :
+                                <div className="right-border"></div>
+                            }
+
+                        </div>
+                        <div className="col-md-5 d-flex flex-column justify-content-center">
+                            <div className='minting-box'>
+                                {address ?
+                                    <div>
+                                        <ConnectWallet
+                                            accentColor="#000"
+                                        />
+                                    </div>
+                                    :
+                                    ""
+                                }
                                 {
                                     contractDetails.paused ?
                                         <div>Mint not started</div>
@@ -420,12 +457,23 @@ const MintingDapp = () => {
                         headTitle=""
                     >
                         <div className="orange-text text-center">
-                            <div className="mb-3"> Shylock: The Origins NFT.</div>
+
+                            {/* <div className="mb-2"> You have successfully minted </div> */}
+                            {/* <div className="mb-3"> </div> */}
                             <div className="mb-2">
-                                Now, you can join our Discord</div>
+                                Now, you can join our Holders only Discord (THE PRISON) and verify your suitcase.
+                            </div>
+                            <div className="mb-2">
+                                Thanks for minting Shylock: The Origins.
+                            </div>
                         </div>
                         <div className="d-flex justify-content-center align-items-center my-3">
-                            <button className={`enter-btn`}> THE PRISON (SHYLOCK) </button>
+                            <a target="_blank" href="https://discord.gg/MhS5BtgD" rel="noreferrer">
+                                <button className={`enter-btn`}>
+                                    <img src={orangeDiscord} alt="discord icon" />
+                                    <span> THE PRISON (SHYLOCK)</span>
+                                </button>
+                            </a>
                         </div>
                     </Modal>
                     {/* <div className='footer dapp_footer'>

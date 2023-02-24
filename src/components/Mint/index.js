@@ -51,7 +51,7 @@ function Mint() {
   const updateClock = () => {
     let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
     let date = new Date(ausTime);
-  
+
     setAnalogClockTime(
       {
         ...analogClockTime,
@@ -81,18 +81,18 @@ function Mint() {
               <img src={logo} className="shylock-logo" alt="logo" />
             </div>
             <div className="right-header-links me-3">
-                <a href="https://opensea.io/collection/shylock">
+              <a target="_blank" href="https://opensea.io/collection/shylock" rel="noreferrer">
                 <img src={openseaIcon} className="link-icons" alt="opensea" />
-                </a>
-                <a href="https://twitter.com/shylocknft">
+              </a>
+              <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
                 <img src={twiterIcon} className="link-icons" alt="twitter" />
-                </a>
-                <a href="https://etherscan.io/address/0x4cef24c26ba75a1aa0dc866e7ba0b1593e8b3265">
+              </a>
+              <a target="_blank" href="https://etherscan.io/address/0x4cef24c26ba75a1aa0dc866e7ba0b1593e8b3265" rel="noreferrer">
                 <img src={etherscanIcon} className="link-icons" alt="etherscan" />
-                </a>
-                <a href="https://discord.gg/MhS5BtgD">
+              </a>
+              <a target="_blank" href="https://discord.gg/MhS5BtgD" rel="noreferrer">
                 <img src={discordIcon} className="link-icons" alt="discord" />
-                </a>
+              </a>
             </div>
 
           </div>
@@ -108,7 +108,7 @@ function Mint() {
               </button> */}
 
               <div className={`begin-btn animate__animated animate__fadeInUp animate__delay-1s"`}>
-                <button className={`initiate-btn glowing-btn`}  onClick={() => navigate('/tunnel')}>
+                <button className={`initiate-btn glowing-btn`} onClick={() => navigate('/tunnel')}>
                   <span class='glowing-txt'>T<span class='faulty-letter'>U</span>NNEL</span>
                 </button>
                 <div className={`fs-7 mt-1 better-experience`}>
