@@ -44,13 +44,6 @@ const WalletCheckerPage = () => {
         }
     }
 
-    const handleKeyDown = (event) => {
-        console.log('sdfasfasdfsdfasdf');
-        // if (event.key === "Enter") {
-        //     handleCheckAddress();
-        //   }
-    }
-
     return (
         <>
             <motion.div className="chapter-container"
@@ -105,7 +98,7 @@ const WalletCheckerPage = () => {
                             <div className="wallet-checker-box animate__animated animate__fadeInUp">
                                 <div className="w-100">
                                     <div className='d-flex w-100'>
-                                        <input type="text" className="input-field me-2" name='whiteListAddress' value={addressChecker} onChange={handleSearchChange} onkeydown={handleKeyDown} />
+                                        <input type="text" className="input-field me-2" name='whiteListAddress' value={addressChecker} onChange={handleSearchChange} />
                                         <button className="dapp_btn check-btn" onClick={handleCheckAddress}>Check</button>
                                     </div>
                                 </div>
@@ -118,7 +111,7 @@ const WalletCheckerPage = () => {
                         <>
                             <ReactPlayer className={`wl-video`} url={WLVideo} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} />
                             {/* <div className="d-flex align-items-center justify-content-center"> */}
-                                <a className="mx-2" target='_blank' href="https://twitter.com/intent/tweet?text=Finally%2C%20I've%20become%20an%20Agent%20of%20%40shylocknft.%20Our%20mission%20of%20rescuing%20Ken%20from%20the%20SERA%20Gang%20starts%20on%20February%2025%2C%2001%3A00%20PM%20UTC.%0a%0a%23SolvewithShylock%0a&url=https%3A%2F%2Ftwitter.com%2Fshylocknft%2Fstatus%2F1622315651716235264%3Fs%3D46%26t%3Ddk088ZTY83_CfymyET9esg" rel="noreferrer">
+                                <a className="mx-2" target='_blank' href="https://twitter.com/intent/tweet?text=Finally%2C%20I've%20become%20an%20Agent%20of%20%40shylocknft.%20Our%20mission%20of%20rescuing%20Ken%20from%20the%20SERA%20Gang%20starts%20now.%0a%0a%23SolvewithShylock&url=https%3A%2F%2Ftwitter.com%2Fi%2Fstatus%2F1622315651716235264" rel="noreferrer">
                                     <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Collect >>'}</button>
                                 </a>
                                 <a className="mx-2" target='_blank' href="https://twitter.com/i/communities/1617125757742116864" rel="noreferrer">
@@ -135,7 +128,7 @@ const WalletCheckerPage = () => {
                         : isWhiteListUser === 'notWhiteList' ?
                             <>
                                 <ReactPlayer className={`wl-video`} url={notWLVideo} playing={true} controls={false} volume={1} muted={false} loop={false} playsinline={true} />
-                                <a className="mx-2" target='_blank' href="https://twitter.com/intent/tweet?text=True%20Agents%20of%20%40shylocknft%20wouldn't%20back%20down%20from%20a%20challenge.%20I%20will%20be%20waiting%20for%20a%20call%20from%20Shylock%20on%20February%2025%2C%2001%3A00%20PM%20UTC.%0a%0a%23SolvewithShylock%0a&url=https%3A%2F%2Ftwitter.com%2Fshylocknft%2Fstatus%2F1622315651716235264%3Fs%3D46%26t%3Ddk088ZTY83_CfymyET9esg" rel="noreferrer">
+                                <a className="mx-2" target='_blank' href="https://twitter.com/intent/tweet?text=True%20Agents%20of%20%40shylocknft%20wouldn't%20back%20down%20from%20a%20challenge.%20I'll%20prove%20my%20worth%20and%20get%20promoted%20to%20Agent.%0a%0a%23SolvewithShylock%0a&url=https%3A%2F%2Ftwitter.com%2Fi%2Fstatus%2F1622315651716235264" rel="noreferrer">
                                     <button className="animate__animated animate__fadeInUp collect-btn dapp_btn mb-3">{'<< Collect >>'}</button>
                                 </a>
                                 <a className="mx-2" target='_blank' href="https://alphabot.app/shylocknft" rel="noreferrer">
