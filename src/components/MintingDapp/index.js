@@ -330,18 +330,22 @@ const MintingDapp = () => {
                             <img src={logo} className="shylock-logo" alt="logo" />
                         </div>
                         <div className="right-header-links me-3">
-                            <a target="_blank" href="https://opensea.io/collection/shylock" rel="noreferrer">
-                                <img src={openseaIcon} className="link-icons" alt="opensea" />
-                            </a>
-                            <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
-                                <img src={twiterIcon} className="link-icons" alt="twitter" />
-                            </a>
-                            <a target="_blank" href="https://etherscan.io/address/0x4cef24c26ba75a1aa0dc866e7ba0b1593e8b3265" rel="noreferrer">
-                                <img src={etherscanIcon} className="link-icons" alt="etherscan" />
-                            </a>
-                            <a target="_blank" href="https://discord.gg/MhS5BtgD" rel="noreferrer">
-                                <img src={discordIcon} className="link-icons" alt="discord" />
-                            </a>
+                            {window.innerWidth > WindowSize ?
+                                <div>
+                                    <a target="_blank" href="https://opensea.io/collection/shylock" rel="noreferrer">
+                                        <img src={openseaIcon} className="link-icons" alt="opensea" />
+                                    </a>
+                                    <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
+                                        <img src={twiterIcon} className="link-icons" alt="twitter" />
+                                    </a>
+                                    <a target="_blank" href="https://etherscan.io/address/0x4cef24c26ba75a1aa0dc866e7ba0b1593e8b3265" rel="noreferrer">
+                                        <img src={etherscanIcon} className="link-icons" alt="etherscan" />
+                                    </a>
+                                    <a target="_blank" href="https://discord.gg/MhS5BtgD" rel="noreferrer">
+                                        <img src={discordIcon} className="link-icons" alt="discord" />
+                                    </a>
+                                </div>
+                                : ""}
                         </div>
                         {/* <div className={`metakey me-4 ${address ? "border-orange" : ""}`}>
                             {address
@@ -352,7 +356,7 @@ const MintingDapp = () => {
 
                     <ReactPlayer className={`circle-loop-video`} url={circleLoop} playing={true} controls={false} volume={1} muted={false} loop={true} playsinline={true} />
 
-                    <ReactPlayer className="d-none" url={DappBGM} playing={true} controls={false} volume={1} muted={false} loop={true} />
+                    <ReactPlayer className="d-none" url={DappBGM} playing={true} controls={false} volume={1} muted={false} loop={true} playsinline={true} />
                     <div className='row main-container'>
                         <div className="d-flex justify-content-center">
                             <div className="top-trapez-effect">
@@ -410,8 +414,6 @@ const MintingDapp = () => {
                                 :
                                 <div className="right-border"></div>
                             }
-
-
                         </div>
                         <div className="col-md-5 d-flex flex-column justify-content-center">
                             <div className='minting-box'>
@@ -427,11 +429,13 @@ const MintingDapp = () => {
                                 {window.innerWidth > WindowSize ?
                                     ""
                                     :
-                                    <div>
-                                        <ConnectWallet
-                                            accentColor="#000"
-                                        />
-                                    </div>
+                                    address ?
+                                        ""
+                                        : <div>
+                                            <ConnectWallet
+                                                accentColor="#000"
+                                            />
+                                        </div>
                                 }
                                 {
                                     contractDetails.paused ?
@@ -590,13 +594,29 @@ const MintingDapp = () => {
                             </a>
                         </div>
                     </Modal>
-                    {/* <div className='footer dapp_footer'>
-                        <button className="twitter-btn">
+                    <div className='footer dapp_footer'>
+                    {window.innerWidth < WindowSize ?
+                                <div>
+                                    <a target="_blank" href="https://opensea.io/collection/shylock" rel="noreferrer">
+                                        <img src={openseaIcon} className="link-icons" alt="opensea" />
+                                    </a>
+                                    <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
+                                        <img src={twiterIcon} className="link-icons" alt="twitter" />
+                                    </a>
+                                    <a target="_blank" href="https://etherscan.io/address/0x4cef24c26ba75a1aa0dc866e7ba0b1593e8b3265" rel="noreferrer">
+                                        <img src={etherscanIcon} className="link-icons" alt="etherscan" />
+                                    </a>
+                                    <a target="_blank" href="https://discord.gg/MhS5BtgD" rel="noreferrer">
+                                        <img src={discordIcon} className="link-icons" alt="discord" />
+                                    </a>
+                                </div>
+                                : ""}
+                        {/* <button className="twitter-btn">
                             <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
                                 <img src={twitterIcon} className="twitter-logo" alt="twitter" />
                             </a>
-                        </button>
-                    </div> */}
+                        </button> */}
+                    </div>
                 </div>
 
             </motion.div>

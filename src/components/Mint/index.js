@@ -81,46 +81,65 @@ function Mint() {
               <img src={logo} className="shylock-logo" alt="logo" />
             </div>
             <div className="right-header-links me-3">
-              <a target="_blank" href="https://opensea.io/collection/shylock" rel="noreferrer">
-                <img src={openseaIcon} className="link-icons" alt="opensea" />
-              </a>
-              <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
-                <img src={twiterIcon} className="link-icons" alt="twitter" />
-              </a>
-              <a target="_blank" href="https://etherscan.io/address/0x4cef24c26ba75a1aa0dc866e7ba0b1593e8b3265" rel="noreferrer">
-                <img src={etherscanIcon} className="link-icons" alt="etherscan" />
-              </a>
-              <a target="_blank" href="https://discord.gg/MhS5BtgD" rel="noreferrer">
-                <img src={discordIcon} className="link-icons" alt="discord" />
-              </a>
+              {window.innerWidth > WindowSize ?
+                <div>
+                  <a target="_blank" href="https://opensea.io/collection/shylock" rel="noreferrer">
+                    <img src={openseaIcon} className="link-icons" alt="opensea" />
+                  </a>
+                  <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
+                    <img src={twiterIcon} className="link-icons" alt="twitter" />
+                  </a>
+                  <a target="_blank" href="https://etherscan.io/address/0x4cef24c26ba75a1aa0dc866e7ba0b1593e8b3265" rel="noreferrer">
+                    <img src={etherscanIcon} className="link-icons" alt="etherscan" />
+                  </a>
+                  <a target="_blank" href="https://discord.gg/MhS5BtgD" rel="noreferrer">
+                    <img src={discordIcon} className="link-icons" alt="discord" />
+                  </a>
+                </div>
+                : ""}
             </div>
-
           </div>
 
           {/* {window.innerWidth > WindowSize ?
             <> */}
-              <div className="analog-clock my-3">
-                <AnalogClock {...analogClockTime} />
-              </div>
+          <div className="analog-clock my-3">
+            <AnalogClock {...analogClockTime} />
+          </div>
 
-              <div className={`animate__animated animate__fadeInUp animate__delay-1s"`}>
-                <button className={`initiate-btn glowing-btn`} onClick={window.innerWidth > WindowSize ? () => navigate('/tunnel') : () => navigate('/minting')}>
-                  <span class='glowing-txt'>T<span class='faulty-letter'>U</span>NNEL</span>
-                </button>
-                <div className={`fs-7 mt-1 better-experience`}>
-                </div>
-              </div>
-            {/* </>
+          <div className={`animate__animated animate__fadeInUp animate__delay-1s"`}>
+            <button className={`initiate-btn glowing-btn`} onClick={window.innerWidth > WindowSize ? () => navigate('/tunnel') : () => navigate('/minting')}>
+              <span class='glowing-txt'>T<span class='faulty-letter'>U</span>NNEL</span>
+            </button>
+            <div className={`fs-7 mt-1 better-experience`}>
+            </div>
+          </div>
+          {/* </>
             :
             <> */}
-              {/* {"<<Use Desktop for better experience>>"} */}
-              {/* <button className="dapp_btn my-3" onClick={() => navigate('/wallet-checker')}>
+          {/* {"<<Use Desktop for better experience>>"} */}
+          {/* <button className="dapp_btn my-3" onClick={() => navigate('/wallet-checker')}>
                 Wallet Checker
               </button> */}
-            {/* </>
+          {/* </>
           } */}
 
           <div className='footer'>
+            {window.innerWidth < WindowSize ?
+              <div>
+                <a target="_blank" href="https://opensea.io/collection/shylock" rel="noreferrer">
+                  <img src={openseaIcon} className="link-icons" alt="opensea" />
+                </a>
+                <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
+                  <img src={twiterIcon} className="link-icons" alt="twitter" />
+                </a>
+                <a target="_blank" href="https://etherscan.io/address/0x4cef24c26ba75a1aa0dc866e7ba0b1593e8b3265" rel="noreferrer">
+                  <img src={etherscanIcon} className="link-icons" alt="etherscan" />
+                </a>
+                <a target="_blank" href="https://discord.gg/MhS5BtgD" rel="noreferrer">
+                  <img src={discordIcon} className="link-icons" alt="discord" />
+                </a>
+              </div>
+              : ""}
             {/* <button className="twitter-btn">
               <a target="_blank" href="https://twitter.com/shylocknft" rel="noreferrer">
                 <img src={twitterIcon} className="twitter-logo" alt="twitter" />
