@@ -18,17 +18,19 @@ import DappBGM from '../../Video/Dapp/dapp-loop-bgm.mp3';
 import { ethers } from "ethers";
 import contractABI from '../../abi/contractABI.json';
 import MerkleTree from 'merkletreejs';
+import PulseLoader from "react-spinners/PulseLoader";
 import keccak256 from 'keccak256';
 import { toast } from 'react-toastify';
 import Modal from "../common/Modal";
 import orangeDiscord from '../../Assets/orange-discord.png';
 
-const contractAddress = "0x617e94f683368c88B53d533AEA6b2DA1A21a5ad4";
+const contractAddress = "0x8c39A18c4c36bA5eDAe374f421cE260779C6660e";
 
 const MintingDapp = () => {
     const address = useAddress();
     let navigate = useNavigate();
 
+    let [loading, setLoading] = useState(false);
     const [isWhiteListUser, setIsWhiteListUser] = useState(false);
     const [hexProof, setHexProof] = useState([]);
     const [signer, setSigner] = useState(null);
@@ -152,19 +154,32 @@ const MintingDapp = () => {
                 signer
             );
             try {
-
-                await nftContract.publicMint(
+                setLoading(true);
+                const publicMint = await nftContract.publicMint(
                     ethers.BigNumber.from(tokenCount), {
                     value: ethers.utils.parseEther((contractDetails.price * tokenCount).toString()),
                 });
-                setTimeout(() => {
-                    setisMintedPopup(true);
-                }, 5000);
 
+                let tx = await publicMint.wait();
+                if (tx) {
+                    setisMintedPopup(true);
+                    toast.success("Transaction successful!", {
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                        className: 'foo-bar',
+                        theme: "dark"
+                    })
+                    setLoading(false);
+                }
+                // setTimeout(() => {
+                //     setisMintedPopup(true);
+                // }, 5000);
+                // console.log(publicMint.events.Minted.returnValues.tokenId);
+                // console.log("Transaction successful!");
                 // let tx = await nftMinting.wait();
                 // console.log(tx);
             } catch (error) {
-                toast.error("User rejected transaction", {
+                const temp = JSON.parse(JSON.stringify(error));
+                toast.error(temp.error.message, {
                     position: toast.POSITION.BOTTOM_RIGHT,
                     className: 'foo-bar',
                     theme: "dark"
@@ -172,6 +187,7 @@ const MintingDapp = () => {
                 console.log(error);
             }
         } else {
+
             toast.error("wallet not connected", {
                 position: toast.POSITION.BOTTOM_RIGHT,
                 className: 'foo-bar',
@@ -191,22 +207,43 @@ const MintingDapp = () => {
             );
 
             try {
+                setLoading(true);
                 // console.log(contractDetails.freeMax);
                 if (contractDetails.freeMax < contractDetails.maxWhitelistFreeMint) {
                     // console.log("1 nft free", contractDetails.price * (tokenCount - 1));
-                    await nftContract.whitelistMint(ethers.BigNumber.from(tokenCount), hexProof,
+                    const whitelistMint = await nftContract.whitelistMint(ethers.BigNumber.from(tokenCount), hexProof,
                         {
                             value: ethers.utils.parseEther((contractDetails.presalePrice * (tokenCount - 1)).toString()),
                         },
                     );
+                    let tx = await whitelistMint.wait();
+                    if (tx) {
+                        setisMintedPopup(true);
+                        toast.success("Transaction successful!", {
+                            position: toast.POSITION.BOTTOM_RIGHT,
+                            className: 'foo-bar',
+                            theme: "dark"
+                        })
+                        setLoading(false);
+                    }
                 } else {
-                    await nftContract.whitelistMint(ethers.BigNumber.from(tokenCount), hexProof,
+                    const whitelistMint = await nftContract.whitelistMint(ethers.BigNumber.from(tokenCount), hexProof,
                         {
                             value: ethers.utils.parseEther((contractDetails.presalePrice * tokenCount).toString()),
                         },
                     );
+                    let tx = await whitelistMint.wait();
+                    if (tx) {
+                        setisMintedPopup(true);
+                        toast.success("Transaction successful!", {
+                            position: toast.POSITION.BOTTOM_RIGHT,
+                            className: 'foo-bar',
+                            theme: "dark"
+                        })
+                        setLoading(false);
+                    }
                 }
-                setisMintedPopup(true);
+
             } catch (error) {
                 const temp = JSON.parse(JSON.stringify(error));
                 toast.error(temp.error.message, {
@@ -318,7 +355,25 @@ const MintingDapp = () => {
                     <div className='row main-container'>
                         <div className="d-flex justify-content-center">
                             <div className="top-trapez-effect">
-                                <div className="my-2 dapp_heading">{isWhiteListUser && contractDetails.isWLMintStarted ? "AGENT MINT" : "MINT"}</div>
+                                <div className="my-2 dapp_heading">
+                                    {/* {isWhiteListUser && contractDetails.isWLMintStarted ? "AGENT MINT" : "MINT"} */}
+                                    {
+                                    address ?
+                                        isWhiteListUser ?
+                                            contractDetails.isWLMintStarted ?
+                                            "AGENT MINT"
+                                                : contractDetails.isPublicMintStarted ?
+                                                "MINT"
+                                                    :
+                                                    "AGENT MINT"
+
+                                            : contractDetails.isPublicMintStarted ?
+                                            "MINT"
+                                                :
+                                                "MINT"
+                                        : ""
+                                }
+                                    </div>
                             </div>
                         </div>
                         {/* {console.log(contractDetails.isWLMintStarted)} */}
@@ -400,7 +455,6 @@ const MintingDapp = () => {
                                                                 }
                                                             </>
                                                     )}
-
                                             </div>
 
                                             <div className='text-center d-flex flex-column justify-content-center align-items-center'>
@@ -411,11 +465,59 @@ const MintingDapp = () => {
                                                     address && (
                                                         isWhiteListUser ?
                                                             contractDetails.isWLMintStarted ?
-                                                                <button className='ms-2 my-2 dapp_btn' onClick={whiteListMinting}> Mint</button>
+                                                                <button className='ms-2 my-2 dapp_btn' onClick={whiteListMinting}>
+                                                                    <div className="d-flex">
+                                                                        <span className="me-2">Mint</span>
+                                                                        <PulseLoader
+                                                                            color={"#ff8012"}
+                                                                            loading={loading}
+                                                                            cssOverride={{
+                                                                                display: "block",
+                                                                                margin: "0 auto",
+                                                                                borderColor: "#fff",
+                                                                            }}
+                                                                            size={7}
+                                                                            aria-label="Loading Spinner"
+                                                                            data-testid="loader"
+                                                                        />
+                                                                    </div>
+                                                                </button>
                                                                 :
-                                                                <button className='ms-2 my-2 dapp_btn' onClick={publicMinting}>Mint</button>
+                                                                <button className='ms-2 my-2 dapp_btn' onClick={publicMinting}>
+                                                                    <div className="d-flex">
+                                                                        <span className="me-2">Mint</span>
+                                                                        <PulseLoader
+                                                                            color={"#ff8012"}
+                                                                            loading={loading}
+                                                                            cssOverride={{
+                                                                                display: "block",
+                                                                                margin: "0 auto",
+                                                                                borderColor: "#fff",
+                                                                            }}
+                                                                            size={7}
+                                                                            aria-label="Loading Spinner"
+                                                                            data-testid="loader"
+                                                                        />
+                                                                    </div>
+                                                                </button>
                                                             :
-                                                            <button className='ms-2 my-2 dapp_btn' onClick={publicMinting}>Mint</button>
+                                                            <button className='ms-2 my-2 dapp_btn' onClick={publicMinting}>
+                                                                <div className="d-flex">
+                                                                    <span className="me-2">Mint</span>
+                                                                    <PulseLoader
+                                                                        color={"#ff8012"}
+                                                                        loading={loading}
+                                                                        cssOverride={{
+                                                                            display: "block",
+                                                                            margin: "0 auto",
+                                                                            borderColor: "#fff",
+                                                                        }}
+                                                                        size={7}
+                                                                        aria-label="Loading Spinner"
+                                                                        data-testid="loader"
+                                                                    />
+                                                                </div>
+                                                            </button>
                                                     )
                                                 }
 
@@ -428,7 +530,7 @@ const MintingDapp = () => {
                         <div className="d-flex justify-content-center">
                             <div className="trapez-effect">
                                 {
-                                    address && (
+                                    address ?
                                         isWhiteListUser ?
                                             contractDetails.isWLMintStarted ?
                                                 <div className='my-2'>YOU ARE WHITELISTED</div>
@@ -441,8 +543,7 @@ const MintingDapp = () => {
                                                 <div className='my-2'>PUBLIC MINT</div>
                                                 :
                                                 <div className='my-2'>MINT NOT STARTED</div>
-
-                                    )
+                                        : ""
                                 }
                             </div>
                         </div>
@@ -460,12 +561,14 @@ const MintingDapp = () => {
 
                             {/* <div className="mb-2"> You have successfully minted </div> */}
                             {/* <div className="mb-3"> </div> */}
-                            <div className="mb-2">
-                                Now, you can join our Holders only Discord (THE PRISON) and verify your suitcase.
+                            <div className="mb-3">
+                                <div>You have successfully minted!</div>
+                                <div>Shylock: The Origins NFT.</div>
                             </div>
-                            <div className="mb-2">
+                            <div>Now, you can join our Holders only Discord (THE PRISON) and verify your suitcase.</div>
+                            {/* <div className="mb-2">
                                 Thanks for minting Shylock: The Origins.
-                            </div>
+                            </div> */}
                         </div>
                         <div className="d-flex justify-content-center align-items-center my-3">
                             <a target="_blank" href="https://discord.gg/MhS5BtgD" rel="noreferrer">
