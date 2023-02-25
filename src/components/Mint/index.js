@@ -108,7 +108,7 @@ function Mint() {
 
           <div className={`animate__animated animate__fadeInUp animate__delay-1s"`}>
             <button className={`initiate-btn glowing-btn`} onClick={window.innerWidth > WindowSize ? () => navigate('/tunnel') : () => navigate('/minting')}>
-              <span class='glowing-txt'>T<span class='faulty-letter'>U</span>NNEL</span>
+              <span className='glowing-txt'>T<span className='faulty-letter'>U</span>NNEL</span>
             </button>
             <div className={`fs-7 mt-1 better-experience`}>
             </div>
