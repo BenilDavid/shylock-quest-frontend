@@ -254,15 +254,15 @@ const MintingDapp = () => {
     }
 
     function handleTokenDecrease() {
-        if (isWhiteListUser && contractDetails.isWLMintStarted) {
-            if (tokenCount > 2) {
-                setTokenCount(tokenCount - 1);
-            }
-        } else {
+        // if (isWhiteListUser && contractDetails.isWLMintStarted) {
+        //     if (tokenCount > 2) {
+        //         setTokenCount(tokenCount - 1);
+        //     }
+        // } else {
             if (tokenCount > 1) {
                 setTokenCount(tokenCount - 1);
             }
-        }
+        // }
     }
     const handleTokenIncrease = () => {
         if (isWhiteListUser && contractDetails.isWLMintStarted) {
