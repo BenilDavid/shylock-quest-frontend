@@ -25,7 +25,7 @@ import Modal from "../common/Modal";
 import orangeDiscord from '../../Assets/orange-discord.png';
 import WhitelistAddresses from '../../Data/WLaddress';
 
-const contractAddress = "0x4cef24C26ba75a1AA0dc866e7BA0b1593E8B3265";
+const contractAddress = "0x8c39A18c4c36bA5eDAe374f421cE260779C6660e";
 const WindowSize = "1000";
 
 const MintingDapp = () => {
