@@ -174,15 +174,21 @@ function App() {
             </div>
             <div className="right-header-links">
               {window.innerWidth > WindowSize ?
-                <button className="dapp_btn me-1" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
+                <>
+                <button className="dapp_btn me-2" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
                   Wallet Checker
                 </button>
+                 <button className="dapp_btn me-2" onClick={() => navigate('/mint')}>
+                 Mint
+               </button>
+                </>
                 : ""}
-              <div className={`metakey me-1 ${address ? "border-orange" : ""}`}>
+                
+              {/* <div className={`metakey me-1 ${address ? "border-orange" : ""}`}>
                 {address
                   ? address.slice(0, 5) + "..." + address.slice(-5)
                   : ""}
-              </div>
+              </div> */}
             </div>
 
           </div>
@@ -222,6 +228,9 @@ function App() {
             :
             <>
               {"<<Use Desktop for better experience>>"}
+              <button className="dapp_btn me-2" onClick={() => navigate('/mint')}>
+                 Mint
+               </button>
               <button className="dapp_btn my-3" onClick={() => navigate('/wallet-checker', { state: { metamaskId: address, twitterData: user ? user.providerData : 0, walletAmount: balance } })}>
                 Wallet Checker
               </button>
