@@ -25,7 +25,8 @@ import Modal from "../common/Modal";
 import orangeDiscord from '../../Assets/orange-discord.png';
 import WhitelistAddresses from '../../Data/WLaddress';
 
-const contractAddress = "0x8c39A18c4c36bA5eDAe374f421cE260779C6660e";
+const contractAddress = "0x4cef24C26ba75a1AA0dc866e7BA0b1593E8B3265";
+
 const WindowSize = "1000";
 
 const MintingDapp = () => {
@@ -76,24 +77,16 @@ const MintingDapp = () => {
     // ]
 
     useEffect(() => {
-        console.log("working", WhitelistAddresses);
-        // const provider = ((window.ethereum != null) ? new ethers.providers.Web3Provider(window.ethereum) : ethers.providers.getDefaultProvider());
-        // if (window.ethereum) {
-        // }
         if (window.ethereum) {
             const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
             const tempSigner = tempProvider.getSigner();
             setSigner(tempSigner);
             getContractDetails();
-            findMerkleRoot();
+            // findMerkleRoot();
             findHexProof();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [address])
-
-    // useEffect(() => {
-    //     console.log("token count", tokenCount);
-    // }, [tokenCount])
 
     const getContractDetails = async () => {
         const nftContract = new ethers.Contract(
@@ -117,18 +110,8 @@ const MintingDapp = () => {
                 let maxWhitelistFreeMint = await nftContract.wlMaxMint();
                 let paused = await nftContract.paused();
 
-                // console.log('freemax', freeMax.toNumber());
-
-                // const progressValue = (totalMinted / MAX_SUPPLY) * 100;
-                // setProgress(progressValue);
-                // console.log(isWhiteListUser);
-                // if (isWhiteListUser) {
-                //     setTokenCount(parseInt(maxPerALWallet.toString()));
-                // }
-
                 if (WhitelistAddresses.includes(address)) {
                     setIsWhiteListUser(true);
-                    // console.log(maxPerALWallet.toString());
                     if (isWLMintStarted) {
                         setTokenCount(maxPerALWallet.toString());
                     } else {
@@ -137,9 +120,7 @@ const MintingDapp = () => {
                 } else {
                     setIsWhiteListUser(false);
                     setTokenCount(maxPerWallet.toString());
-
                 }
-
                 setContractDetails((prev) => {
                     return { ...prev, "MAX_SUPPLY": MAX_SUPPLY.toString(), "price": price.toString(), "presalePrice": presalePrice.toString(), "maxPerALWallet": maxPerALWallet.toString(), "maxPerWallet": maxPerWallet.toString(), "totalMinted": totalMinted.toString(), "isWLMintStarted": isWLMintStarted, "isPublicMintStarted": isPublicMintStarted, "freeMax": freeMax.toNumber(), "maxWhitelistFreeMint": maxWhitelistFreeMint.toNumber(), "paused": paused }
                 });
@@ -153,7 +134,6 @@ const MintingDapp = () => {
     const publicMinting = async () => {
 
         if (window.ethereum) {
-
             const nftContract = new ethers.Contract(
                 contractAddress,
                 contractABI,
@@ -165,7 +145,6 @@ const MintingDapp = () => {
                     ethers.BigNumber.from(tokenCount), {
                     value: ethers.utils.parseEther((contractDetails.price * tokenCount).toString()),
                 });
-
                 let tx = await publicMint.wait();
                 if (tx) {
                     setisMintedPopup(true);
@@ -176,13 +155,6 @@ const MintingDapp = () => {
                     })
                     setLoading(false);
                 }
-                // setTimeout(() => {
-                //     setisMintedPopup(true);
-                // }, 5000);
-                // console.log(publicMint.events.Minted.returnValues.tokenId);
-                // console.log("Transaction successful!");
-                // let tx = await nftMinting.wait();
-                // console.log(tx);
             } catch (error) {
                 const temp = JSON.parse(JSON.stringify(error));
                 toast.error(temp.error.message, {
@@ -211,12 +183,9 @@ const MintingDapp = () => {
                 contractABI,
                 signer
             );
-
             try {
                 setLoading(true);
-                // console.log(contractDetails.freeMax);
                 if (contractDetails.freeMax < contractDetails.maxWhitelistFreeMint) {
-                    // console.log("1 nft free", contractDetails.price * (tokenCount - 1));
                     const whitelistMint = await nftContract.whitelistMint(ethers.BigNumber.from(tokenCount), hexProof,
                         {
                             value: ethers.utils.parseEther((contractDetails.presalePrice * (tokenCount - 1)).toString()),
@@ -268,77 +237,20 @@ const MintingDapp = () => {
         }
     };
 
-    const findMerkleRoot = () => {
-        let leafNode = WhitelistAddresses.map(addr => keccak256(addr));
-        const merkleTree = new MerkleTree(leafNode, keccak256, { sortPairs: true });
-        const rootHash = merkleTree.getHexRoot();
-        console.log('roothash', rootHash);
-    }
-
-    // new Hex Proof
-    // const findHexProof = async () => {
-    //     let leafNode = whitelist.map(addr => keccak256(addr));
-    //     // eslint-disable-next-line array-callback-return
-    //     whitelist.map((whiteAddress, index) => {
-    //         // console.log(whiteAddress, index);
-    //         const merkleTree = new MerkleTree(leafNode, keccak256, { sortPairs: true });
-    //         const clamingAddress = leafNode[index];
-    //         const hexProof = merkleTree.getHexProof(clamingAddress);
-    //         const idx = whitelist.indexOf(address);
-    //         if (idx === index) {
-    //             console.log(hexProof, 'hexProof');
-    //             setHexProof(hexProof);
-    //         }
-    //         // return hexProof;
-    //     })
+    // const findMerkleRoot = () => {
+    //     let leafNode = WhitelistAddresses.map(addr => keccak256(addr));
+    //     const merkleTree = new MerkleTree(leafNode, keccak256, { sortPairs: true });
+    //     const rootHash = merkleTree.getHexRoot();
     // }
 
     // new Hex Proof
     const findHexProof = async () => {
-        console.log("inside hex proof");
-        console.log("address", address);
         let leafNode = WhitelistAddresses.map(addr => keccak256(addr));
-        // let leafNode = keccak256(address);
-        // eslint-disable-next-line array-callback-return
-
-        // WhitelistAddresses.map((whiteAddress, index) => {
-        // console.log(whiteAddress, index);
-        // let i = 0;
         const merkleTree = new MerkleTree(leafNode, keccak256, { sortPairs: true });
         const idx = WhitelistAddresses.indexOf(address);
         const clamingAddress = leafNode[idx];
         const hexProof = merkleTree.getHexProof(clamingAddress);
-        console.log(hexProof, 'hexProof', address);
-        // console.log(leafNode[0]);
-        // WhitelistAddresses.map((whiteAddress, index) => {
-        //     // console.log(whiteAddress, index);
-
-        //     // if (idx === index) {
-        //     i = i + 1;
-        //     console.log(hexProof, 'hexProof', clamingAddress, i);
-
-            setHexProof(hexProof);
-        //     // }
-        //     // return hexProof;
-        // })
-
-        // if (ethers.utils.isAddress(address)) {
-        //     const merkleTree = new MerkleTree(leafNode, keccak256, { sortPairs: true });
-        //     // const clamingAddress = leafNode;
-        //     const hexProof = merkleTree.getHexProof(address);
-        //     // const idx = WhitelistAddresses.indexOf(address);
-        //     // if (idx === index) {
-        //     //     console.log(hexProof, 'hexProof');
-        //     //     setHexProof(hexProof);
-        //     // }
-        //         // setHexProof(hexProof);
-        //         console.log(hexProof, 'hexProof');
-
-        // }else{
-        //   console.log(address);  
-        // }
-        // return hexProof;
-        // })
+        setHexProof(hexProof);
     }
 
     function handleTokenDecrease() {
@@ -434,7 +346,6 @@ const MintingDapp = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* {console.log(contractDetails.isWLMintStarted)} */}
                         <div className="col-md-5 d-flex flex-column justify-content-center">
                             {address ?
                                 <div className='contract-details'>

@@ -59,7 +59,6 @@ function App() {
     if (window.innerWidth < WindowSize) {
       getRedirectResult(authentication)
         .then((result) => {
-          // console.log(result);
           if (result) {
             setUser(result.user);
           }
@@ -105,18 +104,8 @@ function App() {
   }
 
   const updateClock = () => {
-    // let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
-    // let date = new Date(ausTime);
-
     let ausTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
     let date = new Date(ausTime);
-    // let utcTime = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
-    // let utcDateString = utcTime.toUTCString();
-
-    // console.log(utcDateString);
-    //     let now = new Date();
-    // let date = new Date(now.getTime() + now.getTimezoneOffset() * 60000).toLocaleString();
-    // console.log(date);
 
     setAnalogClockTime(
       {
@@ -271,28 +260,6 @@ function App() {
               <button className={`enter-btn ${shake ? "animate__animated animate__shakeX" : ""}`} onClick={enterDarkRoom}> THE JOURNEY </button>
             </div>
           </Modal>
-
-          {/* <Modal
-            isOpen={isOpenWalletChecker}
-            toggle={() => setisOpenWalletChecker(!isOpenWalletChecker)}
-            size="md"
-            headTitle="WHITELIST CHECKER"
-          >
-            <div className='d-flex'>
-              <input type="text" className="input-field me-2" name='whiteListAddress' value={addressChecker} onChange={handleSearchChange} />
-              <button className="dapp_btn" onClick={handleCheckAddress}>Check</button>
-            </div>
-            <div className={`mt-2 ${isWhiteListUser === 'whiteList' ? "green-text" : isWhiteListUser === 'notWhiteList' ? "red-text" : ""}`}>
-              {isWhiteListUser === 'whiteList' ? "Congratulations you are whiteListed" : isWhiteListUser === 'notWhiteList' ? "Sorry, you are not Whitelisted" : ""}
-            </div>
-          </Modal> */}
-          {/* <Popup
-            isOpen={isOpenLogin}
-            toggle={() => setisOpenLogin(!isOpenLogin)}
-            size="md"
-            headTitle="CONNECT"
-          >
-          </Popup> */}
         </div>
 
       </motion.div>
