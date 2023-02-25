@@ -317,7 +317,7 @@ const MintingDapp = () => {
         //     i = i + 1;
         //     console.log(hexProof, 'hexProof', clamingAddress, i);
 
-        //     setHexProof(hexProof);
+            setHexProof(hexProof);
         //     // }
         //     // return hexProof;
         // })
